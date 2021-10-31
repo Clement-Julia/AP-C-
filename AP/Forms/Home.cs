@@ -28,7 +28,7 @@ namespace AP.Forms
         public Home()
         {
             InitializeComponent();
-            accueilCustomControl1.BringToFront();
+            // accueilCustomControl1.BringToFront();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             PnlNav.Height = BtnAccueil.Height;
             PnlNav.Top = BtnAccueil.Top;
@@ -45,33 +45,29 @@ namespace AP.Forms
 
         private void BtnAccueil_Click(object sender, EventArgs e)
         {
-            PnlNav.Height = BtnAccueil.Height;
-            PnlNav.Top = BtnAccueil.Top;
-            PnlNav.Left = BtnAccueil.Left;
-            BtnAccueil.BackColor = Color.FromArgb(235, 247, 249);
-            accueilCustomControl1.BringToFront();
+            //PnlNav.Height = BtnAccueil.Height;
+            //PnlNav.Top = BtnAccueil.Top;
+            //PnlNav.Left = BtnAccueil.Left;
+            //BtnAccueil.BackColor = Color.FromArgb(235, 247, 249);
+            //accueilCustomControl1.BringToFront();
         }
 
         private void BtnHebergements_Click(object sender, EventArgs e)
         {
-            PnlNav.Height = BtnHebergements.Height;
-            PnlNav.Top = BtnHebergements.Top;
-            BtnHebergements.BackColor = Color.FromArgb(235, 247, 249);
-            hebergementsCustumControl1.BringToFront();
+            //PnlNav.Height = BtnHebergements.Height;
+            //PnlNav.Top = BtnHebergements.Top;
+            //BtnHebergements.BackColor = Color.FromArgb(235, 247, 249);
+            //hebergementsCustumControl1.BringToFront();
         }
 
         private void BtnFiscalite_Click(object sender, EventArgs e)
         {
-            PnlNav.Height = BtnFiscalite.Height;
-            PnlNav.Top = BtnFiscalite.Top;
-            BtnFiscalite.BackColor = Color.FromArgb(235, 247, 249);
+            openChildForm(new Test1());
         }
 
         private void BtnOptions_Click(object sender, EventArgs e)
         {
-            PnlNav.Height = BtnOptions.Height;
-            PnlNav.Top = BtnOptions.Top;
-            BtnOptions.BackColor = Color.FromArgb(235, 247, 249);
+            openChildForm(new test2());
         }
 
         private void BtnAccueil_Leave(object sender, EventArgs e)
@@ -93,5 +89,20 @@ namespace AP.Forms
         {
             BtnOptions.BackColor = Color.FromArgb(215, 228, 242);
         }
+        private Form activeForm = null;
+        private void openChildForm(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            PanelAccueil.Controls.Add(childForm);
+            PanelAccueil.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
     }
 }

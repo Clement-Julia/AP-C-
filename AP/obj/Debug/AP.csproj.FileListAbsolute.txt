@@ -23,3 +23,6 @@ C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\AP.pdb
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.csproj.CopyComplete
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.AccueilCustomControl.resources
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.HebergementsCustumControl.resources
+C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.Test1.resources
+C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.test2.resources
+C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.UserControl1.resources

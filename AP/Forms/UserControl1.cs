@@ -10,16 +10,15 @@ using System.Windows.Forms;
 
 namespace AP.Forms
 {
-    public partial class HebergementsCustumControl : UserControl
+    public partial class UserControl1 : UserControl
     {
-        public HebergementsCustumControl()
+
+        private string numero;
+        public UserControl1(string numero)
         {
             InitializeComponent();
-        }
-
-        private void HebergementsCustumControl_Load(object sender, EventArgs e)
-        {
-
+            this.numero = numero;
+            label1.Text = this.numero;
         }
     }
 }
