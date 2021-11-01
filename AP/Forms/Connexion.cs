@@ -43,9 +43,10 @@ namespace AP.Forms
                 {
                     bddMDP = reader.GetString(0);
                 }
+
                 conn.Close();
 
-                if(BCrypt.Net.BCrypt.Verify(MotDePasse, bddMDP))
+                if(bddMDP != null && BCrypt.Net.BCrypt.Verify(MotDePasse, bddMDP))
                 {
                     new Home().Show();
                     this.Hide();
