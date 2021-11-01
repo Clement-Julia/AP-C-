@@ -26,3 +26,15 @@ C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.HebergementsCus
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.Test1.resources
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.test2.resources
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.UserControl1.resources
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Buffers.dll
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Memory.dll
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Buffers.xml
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Memory.xml
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.Connexion.resources
+C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.Inscription.resources

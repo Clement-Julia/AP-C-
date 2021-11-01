@@ -33,11 +33,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.2.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.2\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\..\..\..\..\..\Users\kirit\OneDrive\Documents\Coursdistanciel\2ème année\Dev\C#\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +70,18 @@
     </Compile>
     <Compile Include="Forms\AccueilCustomControl.Designer.cs">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Connexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Connexion.Designer.cs">
+      <DependentUpon>Connexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inscription.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inscription.Designer.cs">
+      <DependentUpon>Inscription.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\HebergementsCustumControl.cs">
       <SubType>UserControl</SubType>
@@ -96,6 +124,12 @@
     <EmbeddedResource Include="Forms\AccueilCustomControl.resx">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Connexion.resx">
+      <DependentUpon>Connexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inscription.resx">
+      <DependentUpon>Inscription.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\HebergementsCustumControl.resx">
       <DependentUpon>HebergementsCustumControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +157,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -135,6 +170,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Model\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

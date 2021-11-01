@@ -45,28 +45,32 @@ namespace AP.Forms
 
         private void BtnAccueil_Click(object sender, EventArgs e)
         {
-            //PnlNav.Height = BtnAccueil.Height;
-            //PnlNav.Top = BtnAccueil.Top;
-            //PnlNav.Left = BtnAccueil.Left;
+            PnlNav.Height = BtnAccueil.Height;
+            PnlNav.Top = BtnAccueil.Top;
+            PnlNav.Left = BtnAccueil.Left;
             //BtnAccueil.BackColor = Color.FromArgb(235, 247, 249);
             //accueilCustomControl1.BringToFront();
         }
 
         private void BtnHebergements_Click(object sender, EventArgs e)
         {
-            //PnlNav.Height = BtnHebergements.Height;
-            //PnlNav.Top = BtnHebergements.Top;
+            PnlNav.Height = BtnHebergements.Height;
+            PnlNav.Top = BtnHebergements.Top;
             //BtnHebergements.BackColor = Color.FromArgb(235, 247, 249);
             //hebergementsCustumControl1.BringToFront();
         }
 
         private void BtnFiscalite_Click(object sender, EventArgs e)
         {
+            PnlNav.Height = BtnFiscalite.Height;
+            PnlNav.Top = BtnFiscalite.Top;
             openChildForm(new Test1());
         }
 
         private void BtnOptions_Click(object sender, EventArgs e)
         {
+            PnlNav.Height = BtnOptions.Height;
+            PnlNav.Top = BtnOptions.Top;
             openChildForm(new test2());
         }
 
