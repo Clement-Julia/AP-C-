@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,14 +34,31 @@ namespace AP.Forms
             PnlNav.Height = BtnAccueil.Height;
             PnlNav.Top = BtnAccueil.Top;
             PnlNav.Left = BtnAccueil.Left;
-            BtnAccueil.BackColor = Color.FromArgb(235, 247, 249);
+            BtnAccueil.BackColor = Color.FromArgb(32, 178, 170);
         }
 
         
 
         private void Home_Load(object sender, EventArgs e)
         {
+            CPBhebergements.Value = 0;
+            CPBhebergements.Minimum = 0;
+            
+        }
 
+        private void Home_Shown(object sender, EventArgs e)
+        {
+            int donnee = 3;
+            CPBhebergements.Maximum = donnee + 2;
+            for (int i = 0; i <= donnee; i++)
+            {
+                Thread.Sleep(5);
+                CPBhebergements.Value = i;
+                CPBhebergements.Update();
+            }
+            CPBhebergements.Text = donnee + " Hébergement";
+            if (donnee > 1)
+                CPBhebergements.Text += "s";
         }
 
         private void BtnAccueil_Click(object sender, EventArgs e)
@@ -76,22 +94,22 @@ namespace AP.Forms
 
         private void BtnAccueil_Leave(object sender, EventArgs e)
         {
-            BtnAccueil.BackColor = Color.FromArgb(215, 228, 242);
+            BtnAccueil.BackColor = Color.FromArgb(32, 178, 170);
         }
 
         private void BtnHebergements_Leave(object sender, EventArgs e)
         {
-            BtnHebergements.BackColor = Color.FromArgb(215, 228, 242);
+            BtnHebergements.BackColor = Color.FromArgb(32, 178, 170);
         }
 
         private void BtnFiscalite_Leave(object sender, EventArgs e)
         {
-            BtnFiscalite.BackColor = Color.FromArgb(215, 228, 242);
+            BtnFiscalite.BackColor = Color.FromArgb(32, 178, 170);
         }
 
         private void BtnOptions_Leave(object sender, EventArgs e)
         {
-            BtnOptions.BackColor = Color.FromArgb(215, 228, 242);
+            BtnOptions.BackColor = Color.FromArgb(32, 178, 170);
         }
         private Form activeForm = null;
         private void openChildForm(Form childForm)
@@ -108,5 +126,22 @@ namespace AP.Forms
             childForm.Show();
         }
 
+        private void panel10_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.LightSeaGreen, 15),
+                            this.DisplayRectangle);
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.LightSeaGreen, 15),
+                            this.DisplayRectangle);
+        }
+
+        private void panel9_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.LightSeaGreen, 15),
+                            this.DisplayRectangle);
+        }
     }
 }
