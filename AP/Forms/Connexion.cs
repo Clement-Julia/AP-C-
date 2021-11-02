@@ -76,5 +76,13 @@ namespace AP.Forms
             new Inscription().Show();
             this.Hide();
         }
+
+        private void TextBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                BtnConnexion.PerformClick();
+            }
+        }
     }
 }

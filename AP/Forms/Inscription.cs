@@ -19,12 +19,16 @@ namespace AP.Forms
         private string ConfirmationMotDePasse;
         private string Nom;
         private string Prenom;
+        private string DoB;
         private int Age;
         private int IdRole = 3;
         private bool AcceptRGPD;
         public Inscription()
         {
             InitializeComponent();
+            DateTime today = DateTime.Now;
+            dateTimePicker1.Value = today.AddYears(-18);
+            
         }
 
         private void CheckBoxShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -54,15 +58,6 @@ namespace AP.Forms
             ConfirmationMotDePasse = TextBoxConfirmation.Text;
             Nom = TextBoxNom.Text;
             Prenom = TextBoxPrenom.Text;
-            try
-            {
-                Age = Int32.Parse(TextBoxAge.Text);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine($"Unable to parse '{Age}'");
-                MessageBox.Show("Erreur avec l'âge", "Inscription échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             AcceptRGPD = CheckBoxRgpd.Checked;
 
 
@@ -92,8 +87,8 @@ namespace AP.Forms
                         command.Parameters.AddWithValue("@age", Age);
                         command.Parameters.AddWithValue("@idRole", IdRole);
                         command.Parameters.AddWithValue("@acceptRGPD", 1);
-                        command.CommandText = "INSERT INTO utilisateurs (email, mdp, nom, prenom, age, idRole, acceptRGPD, dateAcceptRGPD) VALUES (@email , @mdp , @nom , @prenom, @age , @idRole , @acceptRGPD , now())";
-                        MySqlDataReader reader = command.ExecuteReader();
+                        command.Parameters.AddWithValue("@DoB", DoB);
+                        command.CommandText = "INSERT INTO utilisateurs (email, mdp, nom, prenom, age, idRole, acceptRGPD, dateAcceptRGPD, DoB) VALUES (@email , @mdp , @nom , @prenom, @age , @idRole , @acceptRGPD , now(), @DoB)";
 
                         if (command.ExecuteNonQuery() > 0)
                         {
@@ -102,7 +97,6 @@ namespace AP.Forms
                             TextBoxConfirmation.Text = "";
                             TextBoxNom.Text = "";
                             TextBoxPrenom.Text = "";
-                            TextBoxAge.Text = "";
                             CheckBoxRgpd.Checked = true;
                             MessageBox.Show("Inscription réussie", "Inscription réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -123,6 +117,16 @@ namespace AP.Forms
                     MessageBox.Show("Les mots de passe saisi ne sont pas identique", "Inscription échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void dateTimePicker1_CloseUp(object sender, EventArgs e)
+        {
+            this.DoB = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+
+            DateTime thisDay = DateTime.Now;
+            DateTime dob = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day);
+            this.Age = (thisDay - dob).Days / 365;
+
         }
     }
 }

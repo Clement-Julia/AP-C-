@@ -9,7 +9,6 @@ C:\wamp64\www\Projet\AP\AP\AP\obj\Debug\AP.exe
 C:\wamp64\www\Projet\AP\AP\AP\obj\Debug\AP.pdb
 C:\wamp64\www\Projet\AP\AP\AP\bin\Debug\MySql.Data.dll
 C:\wamp64\www\Projet\AP\AP\AP\obj\Debug\AP.modifHebergement.resources
-C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.csproj.AssemblyReference.cache
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.Home.resources
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.modifHebergement.resources
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Properties.Resources.resources
@@ -38,3 +37,4 @@ C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Numerics.Vectors.
 C:\Users\mrtre\Source\Repos\AP-application\AP\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.Connexion.resources
 C:\Users\mrtre\Source\Repos\AP-application\AP\obj\Debug\AP.Forms.Inscription.resources
+C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.csproj.AssemblyReference.cache
