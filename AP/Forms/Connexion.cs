@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using AP.Model;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace AP.Forms
 {
     public partial class Connexion : Form
     {
-        private string Identifiant;
+        private string Email;
         private string MotDePasse;
         public Connexion()
         {
@@ -29,26 +30,14 @@ namespace AP.Forms
             }
             else
             {
-                Identifiant = TextBoxUsername.Text;
+                Email = TextBoxUsername.Text;
                 MotDePasse = TextBoxPassword.Text;
-                string bddMDP = null;
 
-                MySqlConnection conn = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
-                conn.Open();
-                MySqlCommand command = conn.CreateCommand();
-                command.Parameters.AddWithValue("@email", Identifiant);
-                command.CommandText = "SELECT mdp FROM utilisateurs WHERE email = @email";
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                Utilisateur utilisateur = new Utilisateur(Email);
+
+                if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
                 {
-                    bddMDP = reader.GetString(0);
-                }
-
-                conn.Close();
-
-                if(bddMDP != null && BCrypt.Net.BCrypt.Verify(MotDePasse, bddMDP))
-                {
-                    new Home().Show();
+                    new Home(utilisateur).Show();
                     this.Hide();
                 }
                 else

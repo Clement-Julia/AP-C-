@@ -120,6 +120,10 @@
     <Compile Include="Forms\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Hebergement.cs" />
+    <Compile Include="Model\Http.cs" />
+    <Compile Include="Model\Utilisateur.cs" />
+    <Compile Include="Services\Session.cs" />
     <Compile Include="modifHebergement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,10 +182,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Model\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

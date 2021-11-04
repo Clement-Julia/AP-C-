@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using AP.Model;
 
 namespace AP.Forms
 {
@@ -26,7 +27,10 @@ namespace AP.Forms
             int nHeightEllipse
         );
 
-        public Home()
+        private Utilisateur _utilisateur;
+        public Utilisateur Utilisateur { get { return _utilisateur; } set { _utilisateur = value} }
+
+        public Home(Utilisateur utilisateur)
         {
             InitializeComponent();
             // accueilCustomControl1.BringToFront();
@@ -35,6 +39,7 @@ namespace AP.Forms
             PnlNav.Top = BtnAccueil.Top;
             PnlNav.Left = BtnAccueil.Left;
             BtnAccueil.BackColor = Color.FromArgb(32, 178, 170);
+            this.Utilisateur = utilisateur;
         }
 
         

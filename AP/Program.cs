@@ -33,8 +33,8 @@ namespace From
             SetProcessDpiAwareness((int)DpiAwareness.PerMonitorAware);
 
             // Application.Run(new AP.modifHebergement());
-            Application.Run(new Home());
-            // Application.Run(new Connexion());
+            // Application.Run(new Home());
+            Application.Run(new Connexion());
         }
     }
 }
