@@ -48,7 +48,6 @@ namespace AP.Forms
         {
             CPBhebergements.Value = 0;
             CPBhebergements.Minimum = 0;
-            
         }
 
         private void Home_Shown(object sender, EventArgs e)

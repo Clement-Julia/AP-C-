@@ -96,11 +96,24 @@ namespace AP.Model
             this.DateOfBirth = dateOfBirth;
         }
 
-        public void GetAllHebergements()
+        public List<Hebergement> GetAllHebergements()
         {
+
+            List<Hebergement> Hebergements = new List<Hebergement>();
+
             _http.Open();
             MySqlCommand query = _http.CreateCommand();
             query.CommandText = "SELECT * FROM hebergement WHERE idUtilisateur = @idUtilisateur";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                Hebergement Hebergement = new Hebergement();
+                Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetString(7), reader.GetInt32(8));
+                Hebergements.Add(Hebergement);
+            }
+
+            return Hebergements;
         }
 
     }

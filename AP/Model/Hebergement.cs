@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AP.Model
 {
-    class Hebergement : Http
+    public class Hebergement : Http
     {
 
         private int _idHebergement;
@@ -73,6 +73,31 @@ namespace AP.Model
             this.Prix = prix;
             this.Uuid = uuid;
             this.IdUtilisateur = idUtilisateur;
+        }
+
+        public bool UpdateHebergement()
+        {
+            _http.Open();
+            MySqlCommand query = _http.CreateCommand();
+            query.CommandText = "UPDATE hebergements SET idHebergement = @idHebergement, libelle = @libelle, description = @description, idVille = @idVille, latitude = @latitude, longitude = @longitude, prix = @prix, uudi = @uuid, idUtilisateur = @idUtilisateur WHERE idHebergement = @idHebergement";
+            query.Parameters.AddWithValue("@idHebergement", IdHebergement);
+            query.Parameters.AddWithValue("@libelle", Libelle);
+            query.Parameters.AddWithValue("@description", Description);
+            query.Parameters.AddWithValue("@idVille", IdVille);
+            query.Parameters.AddWithValue("@latitude", Latitude);
+            query.Parameters.AddWithValue("@longitude", Longitude);
+            query.Parameters.AddWithValue("@prix", Prix);
+            query.Parameters.AddWithValue("@uuid", Uuid);
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            if (query.ExecuteNonQuery() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
     }
