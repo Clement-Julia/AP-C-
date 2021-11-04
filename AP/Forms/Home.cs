@@ -28,7 +28,9 @@ namespace AP.Forms
         );
 
         private Utilisateur _utilisateur;
-        public Utilisateur Utilisateur { get { return _utilisateur; } set { _utilisateur = value} }
+        public Utilisateur Utilisateur { get { return _utilisateur; } set { _utilisateur = value ;} }
+
+        private Form activeForm = null;
 
         public Home(Utilisateur utilisateur)
         {
@@ -78,6 +80,7 @@ namespace AP.Forms
         {
             PnlNav.Height = BtnHebergements.Height;
             PnlNav.Top = BtnHebergements.Top;
+            openChildForm(new FormHebergements(Utilisateur));
             //BtnHebergements.BackColor = Color.FromArgb(235, 247, 249);
             //hebergementsCustumControl1.BringToFront();
         }
@@ -115,7 +118,6 @@ namespace AP.Forms
         {
             BtnOptions.BackColor = Color.FromArgb(32, 178, 170);
         }
-        private Form activeForm = null;
         private void openChildForm(Form childForm)
         {
             if (activeForm != null)

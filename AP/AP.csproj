@@ -84,6 +84,12 @@
     <Compile Include="Forms\Connexion.Designer.cs">
       <DependentUpon>Connexion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormHebergements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormHebergements.Designer.cs">
+      <DependentUpon>FormHebergements.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inscription.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,7 +127,7 @@
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Hebergement.cs" />
-    <Compile Include="Model\Http.cs" />
+    <Compile Include="Model\Bdd.cs" />
     <Compile Include="Model\Utilisateur.cs" />
     <Compile Include="Services\Session.cs" />
     <Compile Include="modifHebergement.cs">
@@ -137,6 +143,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Connexion.resx">
       <DependentUpon>Connexion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHebergements.resx">
+      <DependentUpon>FormHebergements.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inscription.resx">
       <DependentUpon>Inscription.cs</DependentUpon>

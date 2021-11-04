@@ -234,7 +234,7 @@ namespace AP.Forms
             this.PanelAccueil.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelAccueil.Location = new System.Drawing.Point(200, 0);
             this.PanelAccueil.Name = "PanelAccueil";
-            this.PanelAccueil.Size = new System.Drawing.Size(700, 500);
+            this.PanelAccueil.Size = new System.Drawing.Size(750, 500);
             this.PanelAccueil.TabIndex = 3;
             // 
             // panel10
@@ -242,7 +242,7 @@ namespace AP.Forms
             this.panel10.BackColor = System.Drawing.Color.White;
             this.panel10.Controls.Add(this.label9);
             this.panel10.Controls.Add(this.pictureBox6);
-            this.panel10.Location = new System.Drawing.Point(16, 252);
+            this.panel10.Location = new System.Drawing.Point(38, 252);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(672, 75);
             this.panel10.TabIndex = 5;
@@ -277,7 +277,7 @@ namespace AP.Forms
             this.panel9.BackColor = System.Drawing.Color.White;
             this.panel9.Controls.Add(this.label8);
             this.panel9.Controls.Add(this.pictureBox5);
-            this.panel9.Location = new System.Drawing.Point(16, 414);
+            this.panel9.Location = new System.Drawing.Point(38, 414);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(672, 75);
             this.panel9.TabIndex = 5;
@@ -309,7 +309,7 @@ namespace AP.Forms
             this.panel8.BackColor = System.Drawing.Color.White;
             this.panel8.Controls.Add(this.label7);
             this.panel8.Controls.Add(this.pictureBox4);
-            this.panel8.Location = new System.Drawing.Point(16, 333);
+            this.panel8.Location = new System.Drawing.Point(38, 333);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(672, 75);
             this.panel8.TabIndex = 4;
@@ -347,7 +347,7 @@ namespace AP.Forms
             this.panel6.Controls.Add(this.label4);
             this.panel6.Controls.Add(this.pictureBox3);
             this.panel6.Controls.Add(this.panel7);
-            this.panel6.Location = new System.Drawing.Point(222, 130);
+            this.panel6.Location = new System.Drawing.Point(244, 130);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(466, 99);
             this.panel6.TabIndex = 3;
@@ -404,7 +404,7 @@ namespace AP.Forms
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.pictureBox2);
             this.panel4.Controls.Add(this.panel5);
-            this.panel4.Location = new System.Drawing.Point(222, 29);
+            this.panel4.Location = new System.Drawing.Point(244, 29);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(466, 99);
             this.panel4.TabIndex = 1;
@@ -457,7 +457,7 @@ namespace AP.Forms
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panel3.Controls.Add(this.CPBhebergements);
-            this.panel3.Location = new System.Drawing.Point(16, 29);
+            this.panel3.Location = new System.Drawing.Point(38, 29);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 200);
             this.panel3.TabIndex = 0;
@@ -497,6 +497,7 @@ namespace AP.Forms
             // 
             // hebergementsCustumControl1
             // 
+            this.hebergementsCustumControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hebergementsCustumControl1.Location = new System.Drawing.Point(200, 0);
             this.hebergementsCustumControl1.Name = "hebergementsCustumControl1";
             this.hebergementsCustumControl1.Size = new System.Drawing.Size(700, 500);
@@ -514,7 +515,7 @@ namespace AP.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(900, 500);
+            this.ClientSize = new System.Drawing.Size(950, 500);
             this.Controls.Add(this.PanelAccueil);
             this.Controls.Add(this.hebergementsCustumControl1);
             this.Controls.Add(this.accueilCustomControl1);

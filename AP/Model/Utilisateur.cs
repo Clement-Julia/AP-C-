@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AP.Model
 {
-    public class Utilisateur : Http
+    public class Utilisateur : Bdd
     {
         private int _idUtilisateur;
         public int IdUtilisateur { get { return _idUtilisateur; } set { _idUtilisateur = value; } }
@@ -40,8 +40,8 @@ namespace AP.Model
         {
             if(IdUtilisateur != 0)
             {
-                _http.Open();
-                MySqlCommand query = _http.CreateCommand();
+                _bdd.Open();
+                MySqlCommand query = _bdd.CreateCommand();
                 query.CommandText = "SELECT * FROM utilisateurs WHERE idUtilisateur = @idUtilisateur";
                 query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
                 MySqlDataReader reader = query.ExecuteReader();
@@ -57,14 +57,14 @@ namespace AP.Model
                     this.DateAcceptRGPD = reader.GetString(7);
                     this.DateOfBirth = reader.GetString(8);
                 }
-                _http.Close();
+                _bdd.Close();
             }
         }
 
         public Utilisateur(string email)
         {
-            _http.Open();
-            MySqlCommand query = _http.CreateCommand();
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
             query.CommandText = "SELECT * FROM utilisateurs WHERE email = @email";
             query.Parameters.AddWithValue("@email", email);
             MySqlDataReader reader = query.ExecuteReader();
@@ -80,7 +80,7 @@ namespace AP.Model
                 this.DateAcceptRGPD = reader.GetString(7);
                 this.DateOfBirth = reader.GetString(8);
             }
-            _http.Close();
+            _bdd.Close();
         }
 
         public void InitialisationUtilisateur(int id, string email, string mdp, string nom, string prenom, int idRole, bool acceptRGPD, string dateAcceptRGPD, string dateOfBirth)
@@ -101,8 +101,8 @@ namespace AP.Model
 
             List<Hebergement> Hebergements = new List<Hebergement>();
 
-            _http.Open();
-            MySqlCommand query = _http.CreateCommand();
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
             query.CommandText = "SELECT * FROM hebergement WHERE idUtilisateur = @idUtilisateur";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
             MySqlDataReader reader = query.ExecuteReader();
@@ -112,6 +112,7 @@ namespace AP.Model
                 Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetString(7), reader.GetInt32(8));
                 Hebergements.Add(Hebergement);
             }
+            _bdd.Close();
 
             return Hebergements;
         }

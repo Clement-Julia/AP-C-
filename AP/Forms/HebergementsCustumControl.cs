@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AP.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,21 @@ namespace AP.Forms
 {
     public partial class HebergementsCustumControl : UserControl
     {
+        public Hebergement Hebergement { get; set; }
+        public HebergementsCustumControl(Hebergement hebergement)
+        {
+            InitializeComponent();
+            this.Hebergement = hebergement;
+            LabelNomHebergement.Text = Hebergement.Libelle;
+            LabelNbReservationEnCours.Text = Hebergement.GetNombreReservationEnCours();
+            LabelNbReservationAVenir.Text = Hebergement.GetNombreReservationAVenir();
+        }
+
         public HebergementsCustumControl()
         {
             InitializeComponent();
         }
+
 
         private void HebergementsCustumControl_Load(object sender, EventArgs e)
         {

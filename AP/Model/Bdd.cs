@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AP.Model
 {
-    public class Http
+    public class Bdd
     {
 
-        protected MySqlConnection _http = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
+        protected MySqlConnection _bdd = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
 
     }
 }
