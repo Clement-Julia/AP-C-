@@ -130,10 +130,10 @@
     <Compile Include="Model\Bdd.cs" />
     <Compile Include="Model\Utilisateur.cs" />
     <Compile Include="Services\Session.cs" />
-    <Compile Include="modifHebergement.cs">
+    <Compile Include="Forms\modifHebergement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modifHebergement.Designer.cs">
+    <Compile Include="Forms\modifHebergement.Designer.cs">
       <DependentUpon>modifHebergement.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -167,7 +167,7 @@
     <EmbeddedResource Include="Forms\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="modifHebergement.resx">
+    <EmbeddedResource Include="Forms\modifHebergement.resx">
       <DependentUpon>modifHebergement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
