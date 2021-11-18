@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AP.Forms;
 
 namespace AP.Model
 {
@@ -148,6 +149,67 @@ namespace AP.Model
             {
                 _bdd.Close();
                 return "1 réservation";
+            }
+        }
+
+        public List<Option> GetAllOptionsByHebergement(int id)
+        {
+            _bdd.Open();
+            List<Option> Options = new List<Option>();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", id);
+            query.CommandText = "SELECT * FROM options_by_hebergement where idHebergement = @idHebergement";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                Options.Add(new Option(reader.GetInt32(1)));
+            }
+            _bdd.Close();
+            return Options;
+        }
+
+        public void UpdateOption(int id, int option, List<string> name)
+        {
+            string req = "";
+
+            _bdd.Open();
+            MySqlCommand supOption = _bdd.CreateCommand();
+            supOption.Parameters.AddWithValue("@idHebergement", id);
+            supOption.CommandText = "delete from options_by_hebergement where idHebergement = @idHebergement";
+            supOption.ExecuteNonQuery();
+            if (supOption.ExecuteNonQuery() > 0)
+            {
+                MessageBox.Show("Suppression effectuée !");
+            }
+
+            _bdd.Close();
+            if(name.Count != 0)
+            {
+                _bdd.Open();
+                MySqlCommand ajoutOption = _bdd.CreateCommand();
+                ajoutOption.Parameters.AddWithValue("@idHebergement", id);
+                for (int i = 0; i < name.Count(); i++)
+                {
+                    ajoutOption.Parameters.AddWithValue("@idOption" + i, name[i]);
+                    req += "(@idHebergement, @idOption" + i + "),";
+                }
+                //req.Substring(0, req.Length - 1);
+                req = req.TrimEnd(',');
+                ajoutOption.CommandText = "insert into options_by_hebergement(idHebergement, idOption) values" + req;
+                MessageBox.Show(ajoutOption.CommandText);
+                if (ajoutOption.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Modification effectuée !");
+                }
+                else
+                {
+                    MessageBox.Show("Un problème est apparu veuillez recommencer");
+                }
+                _bdd.Close();
+            }
+            else
+            {
+                MessageBox.Show("Modification effectuée !");
             }
         }
 

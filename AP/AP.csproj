@@ -150,15 +150,30 @@
     <Compile Include="Forms\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OptionHebergement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionHebergement.Designer.cs">
+      <DependentUpon>OptionHebergement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AvisHebergement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AvisHebergement.Designer.cs">
+      <DependentUpon>AvisHebergement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Avis.cs" />
+    <Compile Include="Model\OptionByHebergement.cs" />
+    <Compile Include="Model\Option.cs" />
     <Compile Include="Model\Hebergement.cs" />
     <Compile Include="Model\Bdd.cs" />
     <Compile Include="Model\ReservationHebergement.cs" />
     <Compile Include="Model\Utilisateur.cs" />
     <Compile Include="Services\Session.cs" />
-    <Compile Include="modifHebergement.cs">
+    <Compile Include="Forms\modifHebergement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modifHebergement.Designer.cs">
+    <Compile Include="Forms\modifHebergement.Designer.cs">
       <DependentUpon>modifHebergement.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -171,6 +186,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\AccueilCustomControl.resx">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AvisHebergement.resx">
+      <DependentUpon>AvisHebergement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Connexion.resx">
       <DependentUpon>Connexion.cs</DependentUpon>
@@ -195,11 +213,16 @@
     <EmbeddedResource Include="Forms\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Forms\Justificatif.resx">
       <DependentUpon>Justificatif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrevisualisationPDF.resx">
       <DependentUpon>PrevisualisationPDF.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Forms\OptionHebergement.resx">
+      <DependentUpon>OptionHebergement.cs</DependentUpon>
+>>>>>>> Clément
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test1.resx">
       <DependentUpon>Test1.cs</DependentUpon>
@@ -210,7 +233,7 @@
     <EmbeddedResource Include="Forms\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="modifHebergement.resx">
+    <EmbeddedResource Include="Forms\modifHebergement.resx">
       <DependentUpon>modifHebergement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
