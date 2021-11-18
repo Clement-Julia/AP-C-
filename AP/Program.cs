@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using AP.Forms;
 
 namespace From
 {
@@ -32,6 +33,8 @@ namespace From
             SetProcessDpiAwareness((int)DpiAwareness.PerMonitorAware);
 
             Application.Run(new AP.modifHebergement());
+            // Application.Run(new Home());
+            // Application.Run(new Connexion());
         }
     }
 }
