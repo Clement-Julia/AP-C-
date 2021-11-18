@@ -93,7 +93,7 @@ namespace AP
 
             foreach (Avis avis in allAvis)
             {
-                AvisHebergement customControl = new AvisHebergement(avis);
+                AvisHebergement customControl = new AvisHebergement(avis, this);
                 flow_avis.Controls.Add(customControl);
             }
 

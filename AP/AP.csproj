@@ -138,6 +138,13 @@
     <Compile Include="Forms\AvisHebergement.Designer.cs">
       <DependentUpon>AvisHebergement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ResponseHebergement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ResponseHebergement.Designer.cs">
+      <DependentUpon>ResponseHebergement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Response.cs" />
     <Compile Include="Model\Avis.cs" />
     <Compile Include="Model\OptionByHebergement.cs" />
     <Compile Include="Model\Option.cs" />
@@ -178,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionHebergement.resx">
       <DependentUpon>OptionHebergement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ResponseHebergement.resx">
+      <DependentUpon>ResponseHebergement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test1.resx">
       <DependentUpon>Test1.cs</DependentUpon>

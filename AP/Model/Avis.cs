@@ -41,7 +41,7 @@ namespace AP.Model
             {
                 _bdd.Open();
                 MySqlCommand query = _bdd.CreateCommand();
-                query.CommandText = "SELECT * FROM options WHERE idAvis = @idAvis";
+                query.CommandText = "SELECT * FROM avis WHERE idAvis = @idAvis";
                 query.Parameters.AddWithValue("@idAvis", IdAvis);
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
