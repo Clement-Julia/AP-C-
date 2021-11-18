@@ -126,6 +126,21 @@
     <Compile Include="Forms\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OptionHebergement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionHebergement.Designer.cs">
+      <DependentUpon>OptionHebergement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AvisHebergement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AvisHebergement.Designer.cs">
+      <DependentUpon>AvisHebergement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Avis.cs" />
+    <Compile Include="Model\OptionByHebergement.cs" />
+    <Compile Include="Model\Option.cs" />
     <Compile Include="Model\Hebergement.cs" />
     <Compile Include="Model\Bdd.cs" />
     <Compile Include="Model\Utilisateur.cs" />
@@ -140,6 +155,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AccueilCustomControl.resx">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AvisHebergement.resx">
+      <DependentUpon>AvisHebergement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Connexion.resx">
       <DependentUpon>Connexion.cs</DependentUpon>
@@ -157,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionHebergement.resx">
+      <DependentUpon>OptionHebergement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test1.resx">
       <DependentUpon>Test1.cs</DependentUpon>

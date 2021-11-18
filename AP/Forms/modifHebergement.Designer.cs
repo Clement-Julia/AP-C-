@@ -50,24 +50,16 @@ namespace AP
             this.tab_options = new System.Windows.Forms.TabPage();
             this.modif2 = new System.Windows.Forms.Button();
             this.float_options = new System.Windows.Forms.FlowLayoutPanel();
-            this.tab_images = new System.Windows.Forms.TabPage();
             this.tab_avis = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.flow_avis = new System.Windows.Forms.FlowLayoutPanel();
+            this.tab_images = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.flow_avis = new System.Windows.Forms.FlowLayoutPanel();
             this.tab_all.SuspendLayout();
             this.tab_généraux.SuspendLayout();
             this.tab_options.SuspendLayout();
             this.tab_avis.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -286,20 +278,11 @@ namespace AP
             // 
             // float_options
             // 
+            this.float_options.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.float_options.Location = new System.Drawing.Point(3, 3);
             this.float_options.Name = "float_options";
             this.float_options.Size = new System.Drawing.Size(433, 557);
             this.float_options.TabIndex = 17;
-            // 
-            // tab_images
-            // 
-            this.tab_images.Location = new System.Drawing.Point(4, 25);
-            this.tab_images.Name = "tab_images";
-            this.tab_images.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_images.Size = new System.Drawing.Size(439, 618);
-            this.tab_images.TabIndex = 3;
-            this.tab_images.Text = "Images";
-            this.tab_images.UseVisualStyleBackColor = true;
             // 
             // tab_avis
             // 
@@ -312,75 +295,34 @@ namespace AP
             this.tab_avis.Text = "Avis";
             this.tab_avis.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // flow_avis
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(798, 85);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(328, 97);
-            this.panel1.TabIndex = 19;
+            this.flow_avis.AutoScroll = true;
+            this.flow_avis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flow_avis.Location = new System.Drawing.Point(3, 3);
+            this.flow_avis.Name = "flow_avis";
+            this.flow_avis.Size = new System.Drawing.Size(433, 612);
+            this.flow_avis.TabIndex = 18;
             // 
-            // label1
+            // tab_images
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Pseudo";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(82, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 17);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "rating";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(123, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 17);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 22;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(120, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 17);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Contenu avis";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(246, 13);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(79, 17);
-            this.linkLabel1.TabIndex = 23;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Y répondre";
+            this.tab_images.Location = new System.Drawing.Point(4, 25);
+            this.tab_images.Name = "tab_images";
+            this.tab_images.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_images.Size = new System.Drawing.Size(439, 618);
+            this.tab_images.TabIndex = 3;
+            this.tab_images.Text = "Images";
+            this.tab_images.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Location = new System.Drawing.Point(883, 206);
+            this.panel2.Location = new System.Drawing.Point(844, 307);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(328, 97);
-            this.panel2.TabIndex = 20;
+            this.panel2.TabIndex = 23;
             // 
             // label4
             // 
@@ -400,15 +342,6 @@ namespace AP
             this.label6.TabIndex = 20;
             this.label6.Text = "Nom du proprio";
             // 
-            // flow_avis
-            // 
-            this.flow_avis.AutoScroll = true;
-            this.flow_avis.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flow_avis.Location = new System.Drawing.Point(3, 3);
-            this.flow_avis.Name = "flow_avis";
-            this.flow_avis.Size = new System.Drawing.Size(433, 612);
-            this.flow_avis.TabIndex = 18;
-            // 
             // modifHebergement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -416,7 +349,6 @@ namespace AP
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1237, 752);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tab_all);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "modifHebergement";
@@ -427,9 +359,6 @@ namespace AP
             this.tab_généraux.PerformLayout();
             this.tab_options.ResumeLayout(false);
             this.tab_avis.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -460,16 +389,10 @@ namespace AP
         private System.Windows.Forms.Button modif2;
         private System.Windows.Forms.TabPage tab_images;
         private System.Windows.Forms.TabPage tab_avis;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FlowLayoutPanel flow_avis;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.FlowLayoutPanel flow_avis;
     }
 }
 
