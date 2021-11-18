@@ -42,29 +42,10 @@ namespace AP.Forms
             PnlNav.Left = BtnAccueil.Left;
             BtnAccueil.BackColor = Color.FromArgb(32, 178, 170);
             this.Utilisateur = utilisateur;
-        }
+            LabelUserName.Text = Utilisateur.Nom + " " + Utilisateur.Prenom;
+            LabelMembreDepuis.Text = "Membre depuis " + Utilisateur.DateAcceptRGPD.ToString("dd-MM-yyyy");
 
-        
-
-        private void Home_Load(object sender, EventArgs e)
-        {
-            CPBhebergements.Value = 0;
-            CPBhebergements.Minimum = 0;
-        }
-
-        private void Home_Shown(object sender, EventArgs e)
-        {
-            int donnee = 3;
-            CPBhebergements.Maximum = donnee + 2;
-            for (int i = 0; i <= donnee; i++)
-            {
-                Thread.Sleep(5);
-                CPBhebergements.Value = i;
-                CPBhebergements.Update();
-            }
-            CPBhebergements.Text = donnee + " Hébergement";
-            if (donnee > 1)
-                CPBhebergements.Text += "s";
+            openChildForm(new FormAccueil(utilisateur));
         }
 
         private void BtnAccueil_Click(object sender, EventArgs e)
@@ -72,8 +53,8 @@ namespace AP.Forms
             PnlNav.Height = BtnAccueil.Height;
             PnlNav.Top = BtnAccueil.Top;
             PnlNav.Left = BtnAccueil.Left;
-            //BtnAccueil.BackColor = Color.FromArgb(235, 247, 249);
-            //accueilCustomControl1.BringToFront();
+            openChildForm(new FormAccueil(Utilisateur));
+
         }
 
         private void BtnHebergements_Click(object sender, EventArgs e)
@@ -81,15 +62,14 @@ namespace AP.Forms
             PnlNav.Height = BtnHebergements.Height;
             PnlNav.Top = BtnHebergements.Top;
             openChildForm(new FormHebergements(Utilisateur));
-            //BtnHebergements.BackColor = Color.FromArgb(235, 247, 249);
-            //hebergementsCustumControl1.BringToFront();
+
         }
 
         private void BtnFiscalite_Click(object sender, EventArgs e)
         {
             PnlNav.Height = BtnFiscalite.Height;
             PnlNav.Top = BtnFiscalite.Top;
-            openChildForm(new Test1());
+            openChildForm(new Justificatif(Utilisateur));
         }
 
         private void BtnOptions_Click(object sender, EventArgs e)
@@ -132,22 +112,6 @@ namespace AP.Forms
             childForm.Show();
         }
 
-        private void panel10_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(new Pen(Color.LightSeaGreen, 15),
-                            this.DisplayRectangle);
-        }
-
-        private void panel8_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(new Pen(Color.LightSeaGreen, 15),
-                            this.DisplayRectangle);
-        }
-
-        private void panel9_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(new Pen(Color.LightSeaGreen, 15),
-                            this.DisplayRectangle);
-        }
     }
 }
+

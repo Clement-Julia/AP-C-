@@ -15,6 +15,7 @@ namespace AP.Forms
     {
         public Utilisateur Utilisateur;
         public List<Hebergement> Hebergements;
+
         public FormHebergements(Utilisateur utilisateur)
         {
             InitializeComponent();
@@ -27,7 +28,9 @@ namespace AP.Forms
 
             foreach (Hebergement hebergement in Hebergements)
             {
-                PanelHebergements.Controls.Add(new HebergementsCustumControl(hebergement));
+                HebergementsCustumControl Cs = new HebergementsCustumControl(hebergement, this);
+                PanelHebergements.Controls.Add(Cs);
+                Cs.FormHeber = this;
             }
         }
     }

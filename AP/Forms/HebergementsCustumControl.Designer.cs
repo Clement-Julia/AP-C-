@@ -36,24 +36,24 @@ namespace AP.Forms
             this.BtnModification = new System.Windows.Forms.Button();
             this.LabelNomHebergement = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.LabelNbReservationAVenir = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.LabelNbReservationEnCours = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.LabelNbReservationAVenir = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.LabelNbReservationEnCours = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -90,6 +90,7 @@ namespace AP.Forms
             this.BtnInfos.TabIndex = 2;
             this.BtnInfos.Text = "Infos";
             this.BtnInfos.UseVisualStyleBackColor = false;
+            this.BtnInfos.Click += new System.EventHandler(this.BtnInfos_Click);
             // 
             // BtnModification
             // 
@@ -128,6 +129,28 @@ namespace AP.Forms
             this.panel1.Size = new System.Drawing.Size(251, 108);
             this.panel1.TabIndex = 5;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(149, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 24);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "à venir";
+            // 
+            // LabelNbReservationAVenir
+            // 
+            this.LabelNbReservationAVenir.AutoSize = true;
+            this.LabelNbReservationAVenir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelNbReservationAVenir.ForeColor = System.Drawing.Color.Black;
+            this.LabelNbReservationAVenir.Location = new System.Drawing.Point(115, 35);
+            this.LabelNbReservationAVenir.Name = "LabelNbReservationAVenir";
+            this.LabelNbReservationAVenir.Size = new System.Drawing.Size(136, 24);
+            this.LabelNbReservationAVenir.TabIndex = 5;
+            this.LabelNbReservationAVenir.Text = "10 réservations";
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
@@ -160,17 +183,6 @@ namespace AP.Forms
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "En cours";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.tabPage2.Controls.Add(this.panel1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(257, 114);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "A venir";
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -183,27 +195,6 @@ namespace AP.Forms
             this.panel2.Size = new System.Drawing.Size(251, 108);
             this.panel2.TabIndex = 6;
             // 
-            // LabelNbReservationEnCours
-            // 
-            this.LabelNbReservationEnCours.AutoSize = true;
-            this.LabelNbReservationEnCours.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelNbReservationEnCours.ForeColor = System.Drawing.Color.Black;
-            this.LabelNbReservationEnCours.Location = new System.Drawing.Point(122, 35);
-            this.LabelNbReservationEnCours.Name = "LabelNbReservationEnCours";
-            this.LabelNbReservationEnCours.Size = new System.Drawing.Size(117, 24);
-            this.LabelNbReservationEnCours.TabIndex = 1;
-            this.LabelNbReservationEnCours.Text = "1 réservation";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(113, 102);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -215,27 +206,37 @@ namespace AP.Forms
             this.label5.TabIndex = 4;
             this.label5.Text = "en cours";
             // 
-            // label3
+            // pictureBox3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(149, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 24);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "à venir";
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(113, 102);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 3;
+            this.pictureBox3.TabStop = false;
             // 
-            // LabelNbReservationAVenir
+            // LabelNbReservationEnCours
             // 
-            this.LabelNbReservationAVenir.AutoSize = true;
-            this.LabelNbReservationAVenir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelNbReservationAVenir.ForeColor = System.Drawing.Color.Black;
-            this.LabelNbReservationAVenir.Location = new System.Drawing.Point(115, 35);
-            this.LabelNbReservationAVenir.Name = "LabelNbReservationAVenir";
-            this.LabelNbReservationAVenir.Size = new System.Drawing.Size(136, 24);
-            this.LabelNbReservationAVenir.TabIndex = 5;
-            this.LabelNbReservationAVenir.Text = "10 réservations";
+            this.LabelNbReservationEnCours.AutoSize = true;
+            this.LabelNbReservationEnCours.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelNbReservationEnCours.ForeColor = System.Drawing.Color.Black;
+            this.LabelNbReservationEnCours.Location = new System.Drawing.Point(122, 35);
+            this.LabelNbReservationEnCours.Name = "LabelNbReservationEnCours";
+            this.LabelNbReservationEnCours.Size = new System.Drawing.Size(117, 24);
+            this.LabelNbReservationEnCours.TabIndex = 1;
+            this.LabelNbReservationEnCours.Text = "1 réservation";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.tabPage2.Controls.Add(this.panel1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(257, 114);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "A venir";
             // 
             // HebergementsCustumControl
             // 
@@ -260,10 +261,10 @@ namespace AP.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

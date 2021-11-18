@@ -30,8 +30,8 @@ namespace AP.Model
         private bool _acceptRGPD;
         public bool AcceptRGPD { get { return _acceptRGPD; } set { _acceptRGPD = value; } }
 
-        private string _dateAcceptRGPD;
-        public string DateAcceptRGPD { get { return _dateAcceptRGPD; } set { _dateAcceptRGPD = value; } }
+        private DateTime _dateAcceptRGPD;
+        public DateTime DateAcceptRGPD { get { return _dateAcceptRGPD; } set { _dateAcceptRGPD = value; } }
 
         private string _dateOfBirth;
         public string DateOfBirth { get { return _dateOfBirth; } set { _dateOfBirth = value; } }
@@ -54,7 +54,7 @@ namespace AP.Model
                     this.Prenom = reader.GetString(4);
                     this.IdRole = reader.GetInt32(5);
                     this.AcceptRGPD = reader.GetBoolean(6);
-                    this.DateAcceptRGPD = reader.GetString(7);
+                    this.DateAcceptRGPD = reader.GetDateTime(7);
                     this.DateOfBirth = reader.GetString(8);
                 }
                 _bdd.Close();
@@ -77,13 +77,13 @@ namespace AP.Model
                 this.Prenom = reader.GetString(4);
                 this.IdRole = reader.GetInt32(5);
                 this.AcceptRGPD = reader.GetBoolean(6);
-                this.DateAcceptRGPD = reader.GetString(7);
+                this.DateAcceptRGPD = reader.GetDateTime(7);
                 this.DateOfBirth = reader.GetString(8);
             }
             _bdd.Close();
         }
 
-        public void InitialisationUtilisateur(int id, string email, string mdp, string nom, string prenom, int idRole, bool acceptRGPD, string dateAcceptRGPD, string dateOfBirth)
+        public void InitialisationUtilisateur(int id, string email, string mdp, string nom, string prenom, int idRole, bool acceptRGPD, DateTime dateAcceptRGPD, string dateOfBirth)
         {
             this.IdUtilisateur = id;
             this.Email = email;
@@ -116,6 +116,112 @@ namespace AP.Model
 
             return Hebergements;
         }
+
+        public int GetNbHebergements()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT COUNT(idHebergement) FROM hebergement WHERE idUtilisateur = @idUtilisateur";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            int quantite = 0;
+            while (reader.Read())
+            {
+                quantite = reader.GetInt32(0);
+            }
+            _bdd.Close();
+
+            return quantite;
+        }
+
+        public int GetNbTotalReservations()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT COUNT(idReservationHebergement) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) WHERE hebergement.idUtilisateur = @idUtilisateur";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            int quantite = 0;
+            while (reader.Read())
+            {
+                quantite = reader.GetInt32(0);
+            }
+            _bdd.Close();
+
+            return quantite;
+            
+        }
+        
+        public int GetNbTotalReservationsEnCours()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT COUNT(idReservationHebergement) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() BETWEEN dateDebut AND dateFin";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            int quantite = 0;
+            while (reader.Read())
+            {
+                quantite = reader.GetInt32(0);
+            }
+            _bdd.Close();
+
+            return quantite;
+            
+        }
+        
+        public int GetNbTotalReservationsAVenir()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT COUNT(idReservationHebergement) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() < dateDebut";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            int quantite = 0;
+            while (reader.Read())
+            {
+                quantite = reader.GetInt32(0);
+            }
+            _bdd.Close();
+
+            return quantite;
+            
+        }
+
+        public int GetGainsTotal()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() > dateFin";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            int Gains = 0;
+            while (reader.Read())
+            {
+                Gains = reader.GetInt32(0);
+            }
+            _bdd.Close();
+
+            return Gains;
+        }
+
+        public int GetGainsPrevisionel()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() < dateFin";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            int GainsPrevisionnels = 0;
+            while (reader.Read())
+            {
+                GainsPrevisionnels = reader.GetInt32(0);
+            }
+            _bdd.Close();
+
+            return GainsPrevisionnels;
+        }
+
 
     }
 }

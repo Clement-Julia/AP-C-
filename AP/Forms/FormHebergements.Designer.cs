@@ -59,6 +59,6 @@ namespace AP.Forms
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel PanelHebergements;
+        public System.Windows.Forms.FlowLayoutPanel PanelHebergements;
     }
 }
