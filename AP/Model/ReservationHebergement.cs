@@ -74,5 +74,25 @@ namespace AP.Model
             this.IdHebergement = idHebergement;
         }
 
+        public List<ReservationHebergement> GetReservationAVenir(int idHebergement)
+        {
+            List<ReservationHebergement> reservationHebergements = new List<ReservationHebergement>();
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT * FROM reservations_hebergement WHERE idHebergement = @idHebergement AND dateDebut > NOW()";
+            query.Parameters.AddWithValue("@idHebergement", idHebergement);
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                ReservationHebergement reservationHebergement = new ReservationHebergement();
+                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                reservationHebergements.Add(reservationHebergement);
+            }
+            _bdd.Close();
+
+            return reservationHebergements;
+        }
+
     }
 }

@@ -52,7 +52,7 @@ namespace AP.Forms
             //MyForm.BringToFront();
             //MyForm.Show();
 
-            HebergementInfos Panel = new HebergementInfos();
+            HebergementInfos Panel = new HebergementInfos(Hebergement);
             Panel.TopLevel = false;
             Panel.FormBorderStyle = FormBorderStyle.None;
             Panel.AutoScroll = true;

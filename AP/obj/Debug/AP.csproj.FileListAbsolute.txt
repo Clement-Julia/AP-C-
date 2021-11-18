@@ -46,3 +46,4 @@ C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.csproj.AssemblyRefere
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.HebergementInfos.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Justificatif.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.PrevisualisationPDF.resources
+C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.UserControls.LigneReservationHebergement.resources
