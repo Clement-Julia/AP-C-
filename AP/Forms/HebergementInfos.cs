@@ -37,6 +37,27 @@ namespace AP.Forms
                     flowLayoutPanelReservAVenir.Controls.Add(new LigneReservationHebergement(_reservationHebergements[i], utilisateur, true));
                 }
             }
+
+            Avis Avis = new Avis();
+            List<Avis> listAvis = Avis.GetAllAvisHebergement(_hebergement.IdHebergement);
+
+            for (int i = 0; i < listAvis.Count; i++)
+            {
+                Utilisateur User = new Utilisateur(listAvis[i].IdUtilisateur);
+                if (i % 2 == 0)
+                {
+                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(listAvis[i], User, false));
+                }
+                else
+                {
+                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(listAvis[i], User, true));
+                }
+            }
+
+            labelReservCetteAnnee.Text = _hebergement.NbReservationsCetteAnnee().ToString();
+            labelTOYear.Text = _hebergement.GetTOYear().ToString();
+            labelReservAll.Text = _hebergement.NbReservationsAll().ToString();
+
         }
 
         private void button1_Click(object sender, EventArgs e)

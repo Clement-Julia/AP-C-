@@ -213,5 +213,70 @@ namespace AP.Model
             }
         }
 
+        public int NbReservationsCetteAnnee()
+        {
+
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            int resultat = 0;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.Parameters.AddWithValue("@date", firstDay);
+            query.CommandText = "SELECT COUNT(*) FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage where idHebergement = @idHebergement  AND is_building = 0 AND dateFin BETWEEN @date AND NOW() ";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                resultat = reader.GetInt32(0);
+            }
+            _bdd.Close();
+            return resultat;
+        }
+        
+        public int NbReservationsAll()
+        {
+            int resultat = 0;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.CommandText = "SELECT COUNT(*) FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage where idHebergement = @idHebergement  AND is_building = 0 AND dateFin < NOW() ";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                resultat = reader.GetInt32(0);
+            }
+            _bdd.Close();
+            return resultat;
+        }
+        
+        public int GetTOYear()
+        {
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            int resultat = 0;
+            int nbJours = 0;
+            DateTime minDate = DateTime.Now;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.Parameters.AddWithValue("@date", firstDay);
+            query.CommandText = "SELECT SUM(nbJours) as sum, MIN(dateDebut) as min FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage where idHebergement = @idHebergement  AND is_building = 0 AND dateFin BETWEEN @date AND NOW()";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                nbJours = reader.GetInt32(0);
+                minDate = reader.GetDateTime(1);
+            }
+            _bdd.Close();
+
+            int totalJours = DateTime.Now.Subtract(minDate).Days;
+            resultat = (nbJours * 100) / totalJours;
+
+            return resultat;
+        }
+
     }
 }
