@@ -270,7 +270,12 @@ namespace AP.Model
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
             query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.CommandText = "SELECT SUM(nbJours) as sum, hebergement.dateEnregistrement, COUNT(*) FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage INNER JOIN hebergement USING(idHebergement) where idHebergement = @idHebergement  AND is_building = 0 AND dateFin BETWEEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) AND NOW()";
+            query.CommandText = "SELECT SUM(nbJours) as sum, hebergement.dateEnregistrement, COUNT(*) FROM reservations_hebergement " +
+                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
+                "INNER JOIN hebergement USING(idHebergement) " +
+                "where idHebergement = @idHebergement  " +
+                "AND is_building = 0 " +
+                "AND dateFin BETWEEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) AND NOW()";
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
@@ -285,6 +290,75 @@ namespace AP.Model
             int[] resultat = new int[4] { nbTotalJours, nuitees, tauxOccupation, nbReservations };
 
             return resultat;
+        }
+
+        public int[] GetInfosGains()
+        {
+
+            DateTime now = DateTime.Now;
+            DateTime thisMounth = new DateTime(now.Year, now.Month, 1);
+            DateTime threeMounth = new DateTime(now.Year, now.AddMonths(-3).Month, 1);
+            DateTime sixMounth = new DateTime(now.Year, now.AddMonths(-6).Month, 1);
+            DateTime oneYear = new DateTime(now.AddYears(-1).Year, now.Month, 1);
+
+            int gainDuMois = 0;
+            int gainDuTrimestre = 0;
+            int gainDuSemestre = 0;
+            int gainAnnee = 0;
+            int gainAll = 0;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.Parameters.AddWithValue("@thisMounth", thisMounth);
+            query.Parameters.AddWithValue("@threeMounth", threeMounth);
+            query.Parameters.AddWithValue("@sixMounth", sixMounth);
+            query.Parameters.AddWithValue("@oneYear", oneYear);
+            query.CommandText = "SELECT " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @thisMounth " +
+                    "AND dateFin < NOW() ) as gainsDuMois, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @threeMounth " +
+                    "AND dateFin < NOW() ) as gainsDuTrimestre, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @sixMounth " +
+                    "AND dateFin < NOW() ) as gainsDuSemestre, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @oneYear " +
+                    "AND dateFin < NOW() ) as gainsAnnee, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateFin < NOW() ) as gainsALL " +
+                "FROM hebergement WHERE idHebergement = @idHebergement";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsDuMois"))) { gainDuMois = reader.GetInt32(0); } else { gainDuMois = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsDuTrimestre"))) { gainDuTrimestre = reader.GetInt32(1); } else { gainDuTrimestre = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsDuSemestre"))) { gainDuSemestre = reader.GetInt32(2); } else { gainDuSemestre = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsAnnee"))) { gainAnnee = reader.GetInt32(3); } else { gainAnnee = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsALL"))) { gainAll = reader.GetInt32(4); } else { gainAll = 0; }
+            }
+            _bdd.Close();
+
+            int[] resultat = new int[5] { gainDuMois, gainDuTrimestre, gainDuSemestre, gainAnnee, gainAll };
+            return resultat;
+
         }
 
     }

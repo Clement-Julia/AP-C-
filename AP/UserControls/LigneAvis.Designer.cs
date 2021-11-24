@@ -60,7 +60,7 @@
             // 
             this.flowLayoutPanelEtoiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelEtoiles.Location = new System.Drawing.Point(530, 35);
+            this.flowLayoutPanelEtoiles.Location = new System.Drawing.Point(507, 32);
             this.flowLayoutPanelEtoiles.Name = "flowLayoutPanelEtoiles";
             this.flowLayoutPanelEtoiles.Padding = new System.Windows.Forms.Padding(3, 10, 3, 10);
             this.flowLayoutPanelEtoiles.Size = new System.Drawing.Size(190, 50);
@@ -71,7 +71,7 @@
             this.labelCommentaire.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCommentaire.Location = new System.Drawing.Point(137, 4);
             this.labelCommentaire.Name = "labelCommentaire";
-            this.labelCommentaire.Size = new System.Drawing.Size(387, 110);
+            this.labelCommentaire.Size = new System.Drawing.Size(374, 110);
             this.labelCommentaire.TabIndex = 33;
             this.labelCommentaire.Text = resources.GetString("labelCommentaire.Text");
             this.labelCommentaire.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -97,7 +97,7 @@
             this.Controls.Add(this.labelCommentaire);
             this.Controls.Add(this.labelNom);
             this.Name = "LigneAvis";
-            this.Size = new System.Drawing.Size(723, 120);
+            this.Size = new System.Drawing.Size(700, 120);
             this.ResumeLayout(false);
 
         }

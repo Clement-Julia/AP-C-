@@ -134,7 +134,7 @@ namespace AP.Forms
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(149, 59);
+            this.label3.Location = new System.Drawing.Point(121, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 24);
             this.label3.TabIndex = 6;
@@ -145,7 +145,7 @@ namespace AP.Forms
             this.LabelNbReservationAVenir.AutoSize = true;
             this.LabelNbReservationAVenir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelNbReservationAVenir.ForeColor = System.Drawing.Color.Black;
-            this.LabelNbReservationAVenir.Location = new System.Drawing.Point(115, 35);
+            this.LabelNbReservationAVenir.Location = new System.Drawing.Point(87, 35);
             this.LabelNbReservationAVenir.Name = "LabelNbReservationAVenir";
             this.LabelNbReservationAVenir.Size = new System.Drawing.Size(136, 24);
             this.LabelNbReservationAVenir.TabIndex = 5;
@@ -154,9 +154,9 @@ namespace AP.Forms
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 24);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(113, 102);
+            this.pictureBox2.Size = new System.Drawing.Size(60, 60);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -200,7 +200,7 @@ namespace AP.Forms
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(141, 59);
+            this.label5.Location = new System.Drawing.Point(107, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 24);
             this.label5.TabIndex = 4;
@@ -209,9 +209,9 @@ namespace AP.Forms
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox3.Location = new System.Drawing.Point(12, 24);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(113, 102);
+            this.pictureBox3.Size = new System.Drawing.Size(60, 60);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
@@ -221,7 +221,7 @@ namespace AP.Forms
             this.LabelNbReservationEnCours.AutoSize = true;
             this.LabelNbReservationEnCours.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelNbReservationEnCours.ForeColor = System.Drawing.Color.Black;
-            this.LabelNbReservationEnCours.Location = new System.Drawing.Point(122, 35);
+            this.LabelNbReservationEnCours.Location = new System.Drawing.Point(87, 35);
             this.LabelNbReservationEnCours.Name = "LabelNbReservationEnCours";
             this.LabelNbReservationEnCours.Size = new System.Drawing.Size(117, 24);
             this.LabelNbReservationEnCours.TabIndex = 1;

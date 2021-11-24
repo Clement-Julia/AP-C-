@@ -38,9 +38,9 @@ namespace AP.UserControls
             // labelPrix
             // 
             this.labelPrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPrix.Location = new System.Drawing.Point(623, 0);
+            this.labelPrix.Location = new System.Drawing.Point(598, 0);
             this.labelPrix.Name = "labelPrix";
-            this.labelPrix.Size = new System.Drawing.Size(101, 40);
+            this.labelPrix.Size = new System.Drawing.Size(102, 40);
             this.labelPrix.TabIndex = 22;
             this.labelPrix.Text = "Prix";
             this.labelPrix.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -50,7 +50,7 @@ namespace AP.UserControls
             this.labelCodeReservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCodeReservation.Location = new System.Drawing.Point(461, 0);
             this.labelCodeReservation.Name = "labelCodeReservation";
-            this.labelCodeReservation.Size = new System.Drawing.Size(156, 40);
+            this.labelCodeReservation.Size = new System.Drawing.Size(131, 40);
             this.labelCodeReservation.TabIndex = 21;
             this.labelCodeReservation.Text = "Code Reserv";
             this.labelCodeReservation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,7 +84,7 @@ namespace AP.UserControls
             this.Controls.Add(this.labelUsername);
             this.Controls.Add(this.labelPeriode);
             this.Name = "LigneReservationHebergement";
-            this.Size = new System.Drawing.Size(723, 40);
+            this.Size = new System.Drawing.Size(700, 40);
             this.ResumeLayout(false);
 
         }
