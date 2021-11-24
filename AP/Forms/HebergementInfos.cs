@@ -53,10 +53,18 @@ namespace AP.Forms
                     flowLayoutPanelAvis.Controls.Add(new LigneAvis(listAvis[i], User, true));
                 }
             }
+            int[] infosTOYear = _hebergement.GetInfosAboutTOYear();
+            int[] infosTOAll = _hebergement.GetInfosAboutTOAll();
 
-            labelReservCetteAnnee.Text = _hebergement.NbReservationsCetteAnnee().ToString();
-            labelTOYear.Text = _hebergement.GetTOYear().ToString();
-            labelReservAll.Text = _hebergement.NbReservationsAll().ToString();
+            labelTotalNuitsYear.Text = infosTOYear[0].ToString();
+            labelNuitsReserveesYear.Text = infosTOYear[1].ToString();
+            labelTOYear.Text = infosTOYear[2].ToString() + "%";
+            labelReservCetteAnnee.Text = infosTOYear[3].ToString();
+            
+            labelTotalNuitsAll.Text = infosTOAll[0].ToString();
+            labelNuitsReserveesAll.Text = infosTOAll[1].ToString();
+            labelTOAll.Text = infosTOAll[2].ToString() + "%";
+            labelReservAll.Text = infosTOAll[3].ToString();
 
         }
 

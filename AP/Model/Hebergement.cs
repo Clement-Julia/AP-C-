@@ -212,68 +212,77 @@ namespace AP.Model
                 MessageBox.Show("Modification effectuée !");
             }
         }
-
-        public int NbReservationsCetteAnnee()
-        {
-
-            int year = DateTime.Now.Year;
-            DateTime firstDay = new DateTime(year, 1, 1);
-            int resultat = 0;
-
-            _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.Parameters.AddWithValue("@date", firstDay);
-            query.CommandText = "SELECT COUNT(*) FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage where idHebergement = @idHebergement  AND is_building = 0 AND dateFin BETWEEN @date AND NOW() ";
-            MySqlDataReader reader = query.ExecuteReader();
-            while (reader.Read())
-            {
-                resultat = reader.GetInt32(0);
-            }
-            _bdd.Close();
-            return resultat;
-        }
         
-        public int NbReservationsAll()
-        {
-            int resultat = 0;
-
-            _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.CommandText = "SELECT COUNT(*) FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage where idHebergement = @idHebergement  AND is_building = 0 AND dateFin < NOW() ";
-            MySqlDataReader reader = query.ExecuteReader();
-            while (reader.Read())
-            {
-                resultat = reader.GetInt32(0);
-            }
-            _bdd.Close();
-            return resultat;
-        }
-        
-        public int GetTOYear()
+        public int[] GetInfosAboutTOYear()
         {
             int year = DateTime.Now.Year;
             DateTime firstDay = new DateTime(year, 1, 1);
-            int resultat = 0;
-            int nbJours = 0;
+            int tauxOccupation = 0;
+            int nuitees = 0;
+            int nbReservations = 0;
             DateTime minDate = DateTime.Now;
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
             query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
             query.Parameters.AddWithValue("@date", firstDay);
-            query.CommandText = "SELECT SUM(nbJours) as sum, MIN(dateDebut) as min FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage where idHebergement = @idHebergement  AND is_building = 0 AND dateFin BETWEEN @date AND NOW()";
+            query.CommandText = "SELECT SUM(nbJours), hebergement.dateEnregistrement, COUNT(*) FROM reservations_hebergement " +
+                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
+                "INNER JOIN hebergement USING(idHebergement) " +
+                "where idHebergement = @idHebergement  " +
+                "AND is_building = 0 " +
+                "AND dateFin BETWEEN " +
+                "(CASE " +
+                "WHEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) < @date THEN @date " +
+                "ELSE (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) " +
+                "END)" +
+                "AND NOW()";
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                nbJours = reader.GetInt32(0);
+                nuitees = reader.GetInt32(0);
                 minDate = reader.GetDateTime(1);
+                nbReservations = reader.GetInt32(2);
             }
             _bdd.Close();
 
-            int totalJours = DateTime.Now.Subtract(minDate).Days;
-            resultat = (nbJours * 100) / totalJours;
+            int nbTotalJours = 0;
+            if (minDate < firstDay)
+                nbTotalJours = DateTime.Now.Subtract(firstDay).Days;
+            else
+                nbTotalJours = DateTime.Now.Subtract(minDate).Days;
+
+            tauxOccupation = (nuitees * 100) / nbTotalJours;
+            int[] resultat = new int[4] { nbTotalJours, nuitees, tauxOccupation, nbReservations };
+
+            return resultat;
+        }
+        
+        public int[] GetInfosAboutTOAll()
+        {
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            int tauxOccupation = 0;
+            int nuitees = 0;
+            int nbReservations = 0;
+            DateTime dateEnregistrementHebergement = DateTime.Now;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.CommandText = "SELECT SUM(nbJours) as sum, hebergement.dateEnregistrement, COUNT(*) FROM reservations_hebergement INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage INNER JOIN hebergement USING(idHebergement) where idHebergement = @idHebergement  AND is_building = 0 AND dateFin BETWEEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) AND NOW()";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                nuitees = reader.GetInt32(0);
+                dateEnregistrementHebergement = reader.GetDateTime(1);
+                nbReservations = reader.GetInt32(2);
+            }
+            _bdd.Close();
+
+            int nbTotalJours = DateTime.Now.Subtract(dateEnregistrementHebergement).Days;
+            tauxOccupation = (nuitees * 100) / nbTotalJours;
+            int[] resultat = new int[4] { nbTotalJours, nuitees, tauxOccupation, nbReservations };
 
             return resultat;
         }
