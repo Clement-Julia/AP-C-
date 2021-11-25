@@ -30,6 +30,11 @@ namespace AP.Forms
         private void InitializeComponent()
         {
             this.panelGiant = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.labelDescriptionPrix = new System.Windows.Forms.Label();
+            this.labelDescriptionAdresse = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.labelDescription = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelGainAll = new System.Windows.Forms.Label();
             this.labelGain1A = new System.Windows.Forms.Label();
@@ -78,12 +83,8 @@ namespace AP.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.labelReservCetteAnnee = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.labelDescription = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.labelDescriptionAdresse = new System.Windows.Forms.Label();
-            this.labelDescriptionPrix = new System.Windows.Forms.Label();
             this.panelGiant.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelAvis.SuspendLayout();
             this.panelReservationAVenir.SuspendLayout();
@@ -91,7 +92,6 @@ namespace AP.Forms
             this.panelPasDeReservEnCours.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelGiant
@@ -110,6 +110,63 @@ namespace AP.Forms
             this.panelGiant.Name = "panelGiant";
             this.panelGiant.Size = new System.Drawing.Size(750, 1255);
             this.panelGiant.TabIndex = 0;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.labelDescriptionPrix);
+            this.panel5.Controls.Add(this.labelDescriptionAdresse);
+            this.panel5.Controls.Add(this.label29);
+            this.panel5.Controls.Add(this.labelDescription);
+            this.panel5.Location = new System.Drawing.Point(12, 93);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(725, 144);
+            this.panel5.TabIndex = 31;
+            // 
+            // labelDescriptionPrix
+            // 
+            this.labelDescriptionPrix.BackColor = System.Drawing.Color.White;
+            this.labelDescriptionPrix.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescriptionPrix.Location = new System.Drawing.Point(-1, 40);
+            this.labelDescriptionPrix.Name = "labelDescriptionPrix";
+            this.labelDescriptionPrix.Size = new System.Drawing.Size(288, 39);
+            this.labelDescriptionPrix.TabIndex = 27;
+            this.labelDescriptionPrix.Text = "Prix : 37 € / nuit ";
+            this.labelDescriptionPrix.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelDescriptionAdresse
+            // 
+            this.labelDescriptionAdresse.BackColor = System.Drawing.Color.White;
+            this.labelDescriptionAdresse.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescriptionAdresse.Location = new System.Drawing.Point(-1, 79);
+            this.labelDescriptionAdresse.Name = "labelDescriptionAdresse";
+            this.labelDescriptionAdresse.Size = new System.Drawing.Size(291, 63);
+            this.labelDescriptionAdresse.TabIndex = 27;
+            this.labelDescriptionAdresse.Text = "Adresse : ";
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.label29.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(0, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(723, 40);
+            this.label29.TabIndex = 27;
+            this.label29.Text = "Votre Hébergement";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelDescription
+            // 
+            this.labelDescription.BackColor = System.Drawing.Color.White;
+            this.labelDescription.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescription.Location = new System.Drawing.Point(296, 40);
+            this.labelDescription.Name = "labelDescription";
+            this.labelDescription.Size = new System.Drawing.Size(428, 102);
+            this.labelDescription.TabIndex = 3;
+            this.labelDescription.Text = "Nombre de réservations : ";
+            this.labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel2
             // 
@@ -660,63 +717,6 @@ namespace AP.Forms
             this.label3.Text = "Nombre de réservations : ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.White;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.labelDescriptionPrix);
-            this.panel5.Controls.Add(this.labelDescriptionAdresse);
-            this.panel5.Controls.Add(this.label29);
-            this.panel5.Controls.Add(this.labelDescription);
-            this.panel5.Location = new System.Drawing.Point(12, 93);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(725, 144);
-            this.panel5.TabIndex = 31;
-            // 
-            // labelDescription
-            // 
-            this.labelDescription.BackColor = System.Drawing.Color.White;
-            this.labelDescription.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescription.Location = new System.Drawing.Point(296, 40);
-            this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(428, 102);
-            this.labelDescription.TabIndex = 3;
-            this.labelDescription.Text = "Nombre de réservations : ";
-            this.labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label29
-            // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.label29.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(0, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(723, 40);
-            this.label29.TabIndex = 27;
-            this.label29.Text = "Votre Hébergement";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelDescriptionAdresse
-            // 
-            this.labelDescriptionAdresse.BackColor = System.Drawing.Color.White;
-            this.labelDescriptionAdresse.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescriptionAdresse.Location = new System.Drawing.Point(-1, 79);
-            this.labelDescriptionAdresse.Name = "labelDescriptionAdresse";
-            this.labelDescriptionAdresse.Size = new System.Drawing.Size(291, 63);
-            this.labelDescriptionAdresse.TabIndex = 27;
-            this.labelDescriptionAdresse.Text = "Adresse : ";
-            // 
-            // labelDescriptionPrix
-            // 
-            this.labelDescriptionPrix.BackColor = System.Drawing.Color.White;
-            this.labelDescriptionPrix.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescriptionPrix.Location = new System.Drawing.Point(-1, 40);
-            this.labelDescriptionPrix.Name = "labelDescriptionPrix";
-            this.labelDescriptionPrix.Size = new System.Drawing.Size(288, 39);
-            this.labelDescriptionPrix.TabIndex = 27;
-            this.labelDescriptionPrix.Text = "Prix : 37 € / nuit ";
-            this.labelDescriptionPrix.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // HebergementInfos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -729,6 +729,7 @@ namespace AP.Forms
             this.Text = "HebergementInfos";
             this.Load += new System.EventHandler(this.HebergementInfos_Load);
             this.panelGiant.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panelAvis.ResumeLayout(false);
             this.panelReservationAVenir.ResumeLayout(false);
@@ -736,7 +737,6 @@ namespace AP.Forms
             this.panelPasDeReservEnCours.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

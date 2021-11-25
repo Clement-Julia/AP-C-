@@ -45,7 +45,7 @@ namespace AP.Model
             {
                 _bdd.Open();
                 MySqlCommand query = _bdd.CreateCommand();
-                query.CommandText = "SELECT * FROM hebergements WHERE idHebergement = @idHebergement";
+                query.CommandText = "SELECT * FROM hebergement WHERE idHebergement = @idHebergement";
                 query.Parameters.AddWithValue("@idHebergement", IdHebergement);
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())

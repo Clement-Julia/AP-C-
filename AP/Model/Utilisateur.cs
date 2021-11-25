@@ -222,6 +222,27 @@ namespace AP.Model
             return GainsPrevisionnels;
         }
 
+        public List<ReservationHebergement> GetReservationsBetween(DateTime one, DateTime two)
+        {
+            List<ReservationHebergement> reservationHebergements = new List<ReservationHebergement>();
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT reservations_hebergement.* FROM hebergement INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND dateFin BETWEEN @date1 AND @date2";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            query.Parameters.AddWithValue("@date1", one.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@date2", two.ToString("yyyy-MM-dd"));
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                ReservationHebergement reservationHebergement = new ReservationHebergement();
+                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                reservationHebergements.Add(reservationHebergement);
+            }
+            _bdd.Close();
+
+            return reservationHebergements;
+        }
 
     }
 }
