@@ -62,7 +62,7 @@ namespace AP.Forms
             {
                 string folder = folderBrowserDialog1.SelectedPath;
 
-                GeneratePDF generatePDF = new GeneratePDF(labelNom.Text, labelPrenom.Text, labelUserId.Text, labelPeriode.Text, _reservationsHebergement, folder);
+                GeneratePDF generatePDF = new GeneratePDF(labelNom.Text, labelPrenom.Text, labelUserId.Text, labelPeriode.Text, _reservationsHebergement, folder, _du, _au);
                 generatePDF.Pdf();
 
             }
