@@ -15,7 +15,11 @@ namespace AP
 {
     public partial class modifHebergement : Form
     {
+<<<<<<< HEAD
         int idHebergement = 0;
+=======
+        public int idHebergement = 0;
+>>>>>>> new_main
         int idVille = 0;
         int open = 0;
         List<Option> allOptions;
@@ -93,7 +97,11 @@ namespace AP
 
             foreach (Avis avis in allAvis)
             {
+<<<<<<< HEAD
                 AvisHebergement customControl = new AvisHebergement(avis, this);
+=======
+                AvisHebergement customControl = new AvisHebergement(avis, this, idHebergement);
+>>>>>>> new_main
                 flow_avis.Controls.Add(customControl);
             }
 
@@ -171,7 +179,11 @@ namespace AP
             conn.Close();
         }
         
+<<<<<<< HEAD
         private void modif2_Click(object sender, EventArgs e)
+=======
+        private void modif2_Click_1(object sender, EventArgs e)
+>>>>>>> new_main
         {
             List<string> checkid = new List<string>();
 
@@ -182,7 +194,10 @@ namespace AP
                     checkid.Add(checkbox.checkBox1.Name);
                 }
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> new_main
             if (open != 1)
             {
                 Hebergement Hebergement = new Hebergement();
@@ -194,7 +209,11 @@ namespace AP
             }
         }
 
+<<<<<<< HEAD
         private void sup_Click(object sender, EventArgs e)
+=======
+        private void sup_Click_1(object sender, EventArgs e)
+>>>>>>> new_main
         {
             MySqlConnection conn = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
             conn.Open();

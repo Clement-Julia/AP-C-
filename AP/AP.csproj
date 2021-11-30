@@ -78,6 +78,15 @@
     <Compile Include="Forms\AccueilCustomControl.Designer.cs">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Forms\AjouterResponse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AjouterResponse.Designer.cs">
+      <DependentUpon>AjouterResponse.cs</DependentUpon>
+    </Compile>
+>>>>>>> new_main
     <Compile Include="Forms\Connexion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +117,21 @@
     <Compile Include="Forms\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Forms\RetourAvis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\RetourAvis.Designer.cs">
+      <DependentUpon>RetourAvis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SupprimerResponse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\SupprimerResponse.Designer.cs">
+      <DependentUpon>SupprimerResponse.cs</DependentUpon>
+    </Compile>
+>>>>>>> new_main
     <Compile Include="Forms\Test1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +144,15 @@
     <Compile Include="Forms\test2.Designer.cs">
       <DependentUpon>test2.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Forms\TextResponse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\TextResponse.Designer.cs">
+      <DependentUpon>TextResponse.cs</DependentUpon>
+    </Compile>
+>>>>>>> new_main
     <Compile Include="Forms\UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,6 +196,12 @@
     <EmbeddedResource Include="Forms\AccueilCustomControl.resx">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
+    <EmbeddedResource Include="Forms\AjouterResponse.resx">
+      <DependentUpon>AjouterResponse.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> new_main
     <EmbeddedResource Include="Forms\AvisHebergement.resx">
       <DependentUpon>AvisHebergement.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,12 +228,27 @@
     <EmbeddedResource Include="Forms\ResponseHebergement.resx">
       <DependentUpon>ResponseHebergement.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
+    <EmbeddedResource Include="Forms\RetourAvis.resx">
+      <DependentUpon>RetourAvis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SupprimerResponse.resx">
+      <DependentUpon>SupprimerResponse.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> new_main
     <EmbeddedResource Include="Forms\Test1.resx">
       <DependentUpon>Test1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\test2.resx">
       <DependentUpon>test2.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
+    <EmbeddedResource Include="Forms\TextResponse.resx">
+      <DependentUpon>TextResponse.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> new_main
     <EmbeddedResource Include="Forms\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>

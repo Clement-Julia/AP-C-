@@ -54,8 +54,14 @@ namespace AP.Model
             }
         }
 
+<<<<<<< HEAD
         public void InitialisationResponse(int id, DateTime date, int idUtilisateur, string Reponses, string nom, string prénom)
         {
+=======
+        public void InitialisationResponse(int response, int id, DateTime date, int idUtilisateur, string Reponses, string nom, string prénom)
+        {
+            this.IdResponse = response;
+>>>>>>> new_main
             this.IdAvis = id;
             this.IdUtilisateur = idUtilisateur;
             this.Reponse = Reponses;
@@ -70,12 +76,20 @@ namespace AP.Model
             List<Response> Responses = new List<Response>();
             MySqlCommand query = _bdd.CreateCommand();
             query.Parameters.AddWithValue("@idAvis", id);
+<<<<<<< HEAD
             query.CommandText = "SELECT idAvis, avis_response.idUtilisateur, reponse, date, nom, prenom FROM avis_response inner Join utilisateurs USING(idUtilisateur) where avis_response.idAvis =  @idAvis";
+=======
+            query.CommandText = "SELECT idResponse, idAvis, avis_response.idUtilisateur, reponse, date, nom, prenom FROM avis_response inner Join utilisateurs USING(idUtilisateur) where avis_response.idAvis = @idAvis";
+>>>>>>> new_main
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
                 Response Response = new Response();
+<<<<<<< HEAD
                 Response.InitialisationResponse(reader.GetInt32(0), reader.GetDateTime(3), reader.GetInt32(1), reader.GetString(2), reader.GetString(4), reader.GetString(5));
+=======
+                Response.InitialisationResponse(reader.GetInt32(0), reader.GetInt32(1), reader.GetDateTime(4), reader.GetInt32(2), reader.GetString(3), reader.GetString(5), reader.GetString(6));
+>>>>>>> new_main
                 Responses.Add(Response);
             }
             _bdd.Close();

@@ -196,7 +196,10 @@ namespace AP.Model
                 //req.Substring(0, req.Length - 1);
                 req = req.TrimEnd(',');
                 ajoutOption.CommandText = "insert into options_by_hebergement(idHebergement, idOption) values" + req;
+<<<<<<< HEAD
                 MessageBox.Show(ajoutOption.CommandText);
+=======
+>>>>>>> new_main
                 if (ajoutOption.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Modification effectuée !");

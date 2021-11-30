@@ -86,5 +86,64 @@ namespace AP.Model
             _bdd.Close();
             return Avis;
         }
+<<<<<<< HEAD
+=======
+
+        public string AjoutResponse(int avis, int idHebergement, string text)
+        {
+            int idUser = 0;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", idHebergement);
+
+            query.CommandText = "SELECT idUtilisateur from hebergement where idHebergement = @idHebergement";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                idUser = reader.GetInt32(0);
+            }
+            _bdd.Close();
+
+            _bdd.Open();
+            MySqlCommand query2 = _bdd.CreateCommand();
+            query2.Parameters.AddWithValue("@idAvis", avis);
+            query2.Parameters.AddWithValue("@idUtilisateur", idUser);
+            query2.Parameters.AddWithValue("@reponse", text);
+
+            query2.CommandText = "insert into avis_response(idAvis, idUtilisateur, reponse, date) values(@idAvis, @idUtilisateur, @reponse, now())";
+            if (query2.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return "Ajout réussi !";
+            }
+            else
+            {
+                _bdd.Close();
+                return "Echec";
+            }
+        }
+
+        public string UpdateResponse(int response, string text)
+        {
+            _bdd.Open();
+
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idResponse", response);
+            query.Parameters.AddWithValue("@reponse", text);
+
+            query.CommandText = "update avis_response set reponse = @reponse where idResponse = @idResponse";
+            if (query.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return "Ajout réussi !";
+            }
+            else
+            {
+                _bdd.Close();
+                return "Echec";
+            }
+        }
+>>>>>>> new_main
     }
 }

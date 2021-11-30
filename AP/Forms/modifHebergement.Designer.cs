@@ -116,6 +116,10 @@ namespace AP
             this.sup.TabIndex = 15;
             this.sup.Text = "Supprimer";
             this.sup.UseVisualStyleBackColor = false;
+<<<<<<< HEAD
+=======
+            this.sup.Click += new System.EventHandler(this.sup_Click_1);
+>>>>>>> new_main
             // 
             // nom
             // 
@@ -178,6 +182,10 @@ namespace AP
             this.modif.TabIndex = 12;
             this.modif.Text = "Modifier";
             this.modif.UseVisualStyleBackColor = false;
+<<<<<<< HEAD
+=======
+            this.modif.Click += new System.EventHandler(this.modif_Click);
+>>>>>>> new_main
             // 
             // labeldesc
             // 
@@ -267,6 +275,10 @@ namespace AP
             this.modif2.TabIndex = 0;
             this.modif2.Text = "Modifier";
             this.modif2.UseVisualStyleBackColor = true;
+<<<<<<< HEAD
+=======
+            this.modif2.Click += new System.EventHandler(this.modif2_Click_1);
+>>>>>>> new_main
             // 
             // float_options
             // 

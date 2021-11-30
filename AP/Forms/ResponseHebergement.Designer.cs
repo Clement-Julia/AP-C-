@@ -42,9 +42,15 @@ namespace AP.Forms
             this.panel2.Controls.Add(this.prenom);
             this.panel2.Controls.Add(this.reponse);
             this.panel2.Controls.Add(this.nom);
+<<<<<<< HEAD
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(328, 97);
+=======
+            this.panel2.Location = new System.Drawing.Point(59, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(341, 97);
+>>>>>>> new_main
             this.panel2.TabIndex = 24;
             // 
             // prenom
@@ -80,7 +86,11 @@ namespace AP.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel2);
             this.Name = "ResponseHebergement";
+<<<<<<< HEAD
             this.Size = new System.Drawing.Size(337, 103);
+=======
+            this.Size = new System.Drawing.Size(402, 103);
+>>>>>>> new_main
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
