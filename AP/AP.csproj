@@ -231,7 +231,9 @@
     <Compile Include="Forms\AccueilCustomControl.Designer.cs">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AjouterResponse.cs" />
+    <Compile Include="Forms\AjouterResponse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\AjouterResponse.Designer.cs">
       <DependentUpon>AjouterResponse.cs</DependentUpon>
     </Compile>
@@ -399,14 +401,8 @@
     <EmbeddedResource Include="Forms\AccueilCustomControl.resx">
       <DependentUpon>AccueilCustomControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AjouterResponse.resx">
-      <DependentUpon>AjouterResponse.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AjoutHebergement.resx">
       <DependentUpon>AjoutHebergement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AjouterResponse.resx">
-      <DependentUpon>AjouterResponse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AvisHebergement.resx">
       <DependentUpon>AvisHebergement.cs</DependentUpon>

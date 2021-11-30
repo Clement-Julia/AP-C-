@@ -1,5 +1,4 @@
-﻿
-namespace AP.Forms
+﻿namespace AP.Forms
 {
     partial class AvisHebergement
     {
@@ -52,11 +51,7 @@ namespace AP.Forms
             this.panel1.Controls.Add(this.nom);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-<<<<<<< HEAD
-            this.panel1.Size = new System.Drawing.Size(400, 97);
-=======
             this.panel1.Size = new System.Drawing.Size(396, 97);
->>>>>>> new_main
             this.panel1.TabIndex = 22;
             // 
             // prénom
@@ -122,11 +117,7 @@ namespace AP.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Name = "AvisHebergement";
-<<<<<<< HEAD
-            this.Size = new System.Drawing.Size(409, 104);
-=======
             this.Size = new System.Drawing.Size(401, 104);
->>>>>>> new_main
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

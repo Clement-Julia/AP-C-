@@ -86,9 +86,7 @@ namespace AP.Model
             _bdd.Close();
             return Avis;
         }
-<<<<<<< HEAD
-=======
-
+        
         public string AjoutResponse(int avis, int idHebergement, string text)
         {
             int idUser = 0;
@@ -144,6 +142,5 @@ namespace AP.Model
                 return "Echec";
             }
         }
->>>>>>> new_main
     }
 }
