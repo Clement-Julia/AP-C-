@@ -1,7 +1,7 @@
 ﻿
 namespace AP.Forms
 {
-    partial class AjouterResponse
+    partial class AjoutResponse
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
