@@ -226,7 +226,7 @@ namespace AP.Model
             MySqlCommand query = _bdd.CreateCommand();
             query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
             query.Parameters.AddWithValue("@date", firstDay);
-            query.CommandText = "SELECT SUM(nbJours), hebergement.dateEnregistrement, COUNT(*) FROM reservations_hebergement " +
+            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
                 "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
                 "INNER JOIN hebergement USING(idHebergement) " +
                 "where idHebergement = @idHebergement  " +
@@ -240,9 +240,9 @@ namespace AP.Model
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                nuitees = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
                 minDate = reader.GetDateTime(1);
-                nbReservations = reader.GetInt32(2);
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
             }
             _bdd.Close();
 
@@ -270,7 +270,7 @@ namespace AP.Model
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
             query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.CommandText = "SELECT SUM(nbJours) as sum, hebergement.dateEnregistrement, COUNT(*) FROM reservations_hebergement " +
+            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
                 "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
                 "INNER JOIN hebergement USING(idHebergement) " +
                 "where idHebergement = @idHebergement  " +
@@ -279,9 +279,9 @@ namespace AP.Model
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                nuitees = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
                 dateEnregistrementHebergement = reader.GetDateTime(1);
-                nbReservations = reader.GetInt32(2);
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
             }
             _bdd.Close();
 

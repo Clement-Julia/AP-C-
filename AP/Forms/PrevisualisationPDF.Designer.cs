@@ -35,15 +35,15 @@ namespace AP.Forms
             this.labelPeriode = new System.Windows.Forms.Label();
             this.flowLayoutPanelDonnees = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelGains = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelHebergement = new System.Windows.Forms.Label();
-            this.labelVille = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.labelHebergement = new System.Windows.Forms.Label();
             this.labelIdReservation = new System.Windows.Forms.Label();
+            this.labelVille = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.labelGains = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -111,48 +111,8 @@ namespace AP.Forms
             this.panel1.Controls.Add(this.labelUserId);
             this.panel1.Location = new System.Drawing.Point(0, -1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(750, 700);
+            this.panel1.Size = new System.Drawing.Size(723, 700);
             this.panel1.TabIndex = 5;
-            // 
-            // labelGains
-            // 
-            this.labelGains.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGains.Location = new System.Drawing.Point(553, 617);
-            this.labelGains.Name = "labelGains";
-            this.labelGains.Size = new System.Drawing.Size(172, 51);
-            this.labelGains.TabIndex = 5;
-            this.labelGains.Text = "Gains : ";
-            this.labelGains.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(27, 626);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(174, 35);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "Retour";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(207, 626);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(174, 35);
-            this.button2.TabIndex = 27;
-            this.button2.Text = "Générer le PDF";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel2
             // 
@@ -179,28 +139,6 @@ namespace AP.Forms
             this.label1.Text = "Gains";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelHebergement
-            // 
-            this.labelHebergement.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHebergement.ForeColor = System.Drawing.Color.White;
-            this.labelHebergement.Location = new System.Drawing.Point(452, -1);
-            this.labelHebergement.Name = "labelHebergement";
-            this.labelHebergement.Size = new System.Drawing.Size(188, 50);
-            this.labelHebergement.TabIndex = 32;
-            this.labelHebergement.Text = "Hébergement";
-            this.labelHebergement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelVille
-            // 
-            this.labelVille.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVille.ForeColor = System.Drawing.Color.White;
-            this.labelVille.Location = new System.Drawing.Point(305, -1);
-            this.labelVille.Name = "labelVille";
-            this.labelVille.Size = new System.Drawing.Size(141, 50);
-            this.labelVille.TabIndex = 31;
-            this.labelVille.Text = "Ville";
-            this.labelVille.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -211,6 +149,17 @@ namespace AP.Forms
             this.label2.TabIndex = 30;
             this.label2.Text = "Période";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelHebergement
+            // 
+            this.labelHebergement.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHebergement.ForeColor = System.Drawing.Color.White;
+            this.labelHebergement.Location = new System.Drawing.Point(452, -1);
+            this.labelHebergement.Name = "labelHebergement";
+            this.labelHebergement.Size = new System.Drawing.Size(188, 50);
+            this.labelHebergement.TabIndex = 32;
+            this.labelHebergement.Text = "Hébergement";
+            this.labelHebergement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelIdReservation
             // 
@@ -223,12 +172,63 @@ namespace AP.Forms
             this.labelIdReservation.Text = "Id";
             this.labelIdReservation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // labelVille
+            // 
+            this.labelVille.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVille.ForeColor = System.Drawing.Color.White;
+            this.labelVille.Location = new System.Drawing.Point(305, -1);
+            this.labelVille.Name = "labelVille";
+            this.labelVille.Size = new System.Drawing.Size(141, 50);
+            this.labelVille.TabIndex = 31;
+            this.labelVille.Text = "Ville";
+            this.labelVille.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(207, 626);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(174, 35);
+            this.button2.TabIndex = 27;
+            this.button2.Text = "Générer le PDF";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(27, 626);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(174, 35);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "Retour";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // labelGains
+            // 
+            this.labelGains.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGains.Location = new System.Drawing.Point(553, 617);
+            this.labelGains.Name = "labelGains";
+            this.labelGains.Size = new System.Drawing.Size(172, 51);
+            this.labelGains.TabIndex = 5;
+            this.labelGains.Text = "Gains : ";
+            this.labelGains.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // PrevisualisationPDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(750, 700);
+            this.ClientSize = new System.Drawing.Size(723, 700);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PrevisualisationPDF";

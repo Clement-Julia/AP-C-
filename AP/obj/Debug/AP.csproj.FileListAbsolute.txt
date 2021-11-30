@@ -142,3 +142,8 @@ C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\Microsoft.Net.Http.Heade
 C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\Newtonsoft.Json.xml
 C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.csproj.AssemblyReference.cache
+C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Text.Json.dll
+C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Text.Json.xml
+C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.AjoutHebergement.resources
+C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Net.Http.Json.dll
+C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Net.Http.Json.xml
