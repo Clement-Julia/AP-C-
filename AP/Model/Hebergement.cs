@@ -45,7 +45,7 @@ namespace AP.Model
             {
                 _bdd.Open();
                 MySqlCommand query = _bdd.CreateCommand();
-                query.CommandText = "SELECT * FROM hebergements WHERE idHebergement = @idHebergement";
+                query.CommandText = "SELECT * FROM hebergement WHERE idHebergement = @idHebergement";
                 query.Parameters.AddWithValue("@idHebergement", IdHebergement);
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
@@ -214,6 +214,154 @@ namespace AP.Model
             {
                 MessageBox.Show("Modification effectuée !");
             }
+        }
+        
+        public int[] GetInfosAboutTOYear()
+        {
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            int tauxOccupation = 0;
+            int nuitees = 0;
+            int nbReservations = 0;
+            DateTime minDate = DateTime.Now;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.Parameters.AddWithValue("@date", firstDay);
+            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
+                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
+                "INNER JOIN hebergement USING(idHebergement) " +
+                "where idHebergement = @idHebergement  " +
+                "AND is_building = 0 " +
+                "AND dateFin BETWEEN " +
+                "(CASE " +
+                "WHEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) < @date THEN @date " +
+                "ELSE (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) " +
+                "END)" +
+                "AND NOW()";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
+                minDate = reader.GetDateTime(1);
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
+            }
+            _bdd.Close();
+
+            int nbTotalJours = 0;
+            if (minDate < firstDay)
+                nbTotalJours = DateTime.Now.Subtract(firstDay).Days;
+            else
+                nbTotalJours = DateTime.Now.Subtract(minDate).Days;
+
+            tauxOccupation = (nuitees * 100) / nbTotalJours;
+            int[] resultat = new int[4] { nbTotalJours, nuitees, tauxOccupation, nbReservations };
+
+            return resultat;
+        }
+        
+        public int[] GetInfosAboutTOAll()
+        {
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            int tauxOccupation = 0;
+            int nuitees = 0;
+            int nbReservations = 0;
+            DateTime dateEnregistrementHebergement = DateTime.Now;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
+                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
+                "INNER JOIN hebergement USING(idHebergement) " +
+                "where idHebergement = @idHebergement  " +
+                "AND is_building = 0 " +
+                "AND dateFin BETWEEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) AND NOW()";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
+                dateEnregistrementHebergement = reader.GetDateTime(1);
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
+            }
+            _bdd.Close();
+
+            int nbTotalJours = DateTime.Now.Subtract(dateEnregistrementHebergement).Days;
+            tauxOccupation = (nuitees * 100) / nbTotalJours;
+            int[] resultat = new int[4] { nbTotalJours, nuitees, tauxOccupation, nbReservations };
+
+            return resultat;
+        }
+
+        public int[] GetInfosGains()
+        {
+
+            DateTime now = DateTime.Now;
+            DateTime thisMounth = new DateTime(now.Year, now.Month, 1);
+            DateTime threeMounth = new DateTime(now.Year, now.AddMonths(-3).Month, 1);
+            DateTime sixMounth = new DateTime(now.Year, now.AddMonths(-6).Month, 1);
+            DateTime oneYear = new DateTime(now.AddYears(-1).Year, now.Month, 1);
+
+            int gainDuMois = 0;
+            int gainDuTrimestre = 0;
+            int gainDuSemestre = 0;
+            int gainAnnee = 0;
+            int gainAll = 0;
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
+            query.Parameters.AddWithValue("@thisMounth", thisMounth);
+            query.Parameters.AddWithValue("@threeMounth", threeMounth);
+            query.Parameters.AddWithValue("@sixMounth", sixMounth);
+            query.Parameters.AddWithValue("@oneYear", oneYear);
+            query.CommandText = "SELECT " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @thisMounth " +
+                    "AND dateFin < NOW() ) as gainsDuMois, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @threeMounth " +
+                    "AND dateFin < NOW() ) as gainsDuTrimestre, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @sixMounth " +
+                    "AND dateFin < NOW() ) as gainsDuSemestre, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateDebut > @oneYear " +
+                    "AND dateFin < NOW() ) as gainsAnnee, " +
+                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
+                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
+                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
+                    "AND is_building = 0 " +
+                    "AND dateFin < NOW() ) as gainsALL " +
+                "FROM hebergement WHERE idHebergement = @idHebergement";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsDuMois"))) { gainDuMois = reader.GetInt32(0); } else { gainDuMois = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsDuTrimestre"))) { gainDuTrimestre = reader.GetInt32(1); } else { gainDuTrimestre = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsDuSemestre"))) { gainDuSemestre = reader.GetInt32(2); } else { gainDuSemestre = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsAnnee"))) { gainAnnee = reader.GetInt32(3); } else { gainAnnee = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsALL"))) { gainAll = reader.GetInt32(4); } else { gainAll = 0; }
+            }
+            _bdd.Close();
+
+            int[] resultat = new int[5] { gainDuMois, gainDuTrimestre, gainDuSemestre, gainAnnee, gainAll };
+            return resultat;
+
         }
 
     }
