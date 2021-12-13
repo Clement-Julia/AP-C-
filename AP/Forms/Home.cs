@@ -112,6 +112,12 @@ namespace AP.Forms
             childForm.Show();
         }
 
+        private void BtnTest_Click(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnTest.Height;
+            PnlNav.Top = BtnTest.Top;
+            openChildForm(new AjoutHebergement(Utilisateur));
+        }
     }
 }
 

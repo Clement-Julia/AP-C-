@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AP.Forms;
+using System.Data;
 
 namespace AP.Model
 {
@@ -223,26 +224,22 @@ namespace AP.Model
             DateTime minDate = DateTime.Now;
 
             _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.Parameters.AddWithValue("@date", firstDay);
-            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
-                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
-                "INNER JOIN hebergement USING(idHebergement) " +
-                "where idHebergement = @idHebergement  " +
-                "AND is_building = 0 " +
-                "AND dateFin BETWEEN " +
-                "(CASE " +
-                "WHEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) < @date THEN @date " +
-                "ELSE (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) " +
-                "END)" +
-                "AND NOW()";
+
+            MySqlCommand query = new MySqlCommand("get_infos_about_to_year", _bdd);
+            query.CommandType = CommandType.StoredProcedure;
+
+            query.Parameters.AddWithValue("p_id_hebergement", this._idHebergement);
+            query.Parameters["p_id_hebergement"].Direction = ParameterDirection.Input;
+            
+            query.Parameters.AddWithValue("p_date", firstDay);
+            query.Parameters["p_date"].Direction = ParameterDirection.Input;
+
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
                 if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
                 minDate = reader.GetDateTime(1);
-                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nbReservations = reader.GetInt32(2); } else { nbReservations = 0; }
             }
             _bdd.Close();
 
@@ -268,20 +265,18 @@ namespace AP.Model
             DateTime dateEnregistrementHebergement = DateTime.Now;
 
             _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
-                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
-                "INNER JOIN hebergement USING(idHebergement) " +
-                "where idHebergement = @idHebergement  " +
-                "AND is_building = 0 " +
-                "AND dateFin BETWEEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) AND NOW()";
+            MySqlCommand query = new MySqlCommand("get_infos_about_to_all", _bdd);
+            query.CommandType = CommandType.StoredProcedure;
+
+            query.Parameters.AddWithValue("p_id_hebergement", this._idHebergement);
+            query.Parameters["p_id_hebergement"].Direction = ParameterDirection.Input;
+
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
                 if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
                 dateEnregistrementHebergement = reader.GetDateTime(1);
-                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nbReservations = reader.GetInt32(2); } else { nbReservations = 0; }
             }
             _bdd.Close();
 
@@ -308,43 +303,21 @@ namespace AP.Model
             int gainAll = 0;
 
             _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.Parameters.AddWithValue("@thisMounth", thisMounth);
-            query.Parameters.AddWithValue("@threeMounth", threeMounth);
-            query.Parameters.AddWithValue("@sixMounth", sixMounth);
-            query.Parameters.AddWithValue("@oneYear", oneYear);
-            query.CommandText = "SELECT " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @thisMounth " +
-                    "AND dateFin < NOW() ) as gainsDuMois, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @threeMounth " +
-                    "AND dateFin < NOW() ) as gainsDuTrimestre, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @sixMounth " +
-                    "AND dateFin < NOW() ) as gainsDuSemestre, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @oneYear " +
-                    "AND dateFin < NOW() ) as gainsAnnee, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateFin < NOW() ) as gainsALL " +
-                "FROM hebergement WHERE idHebergement = @idHebergement";
+            // Oui oui, c'est une procédure stockée :)
+            MySqlCommand query = new MySqlCommand("obtenir_infos_gains", _bdd);
+            query.CommandType = CommandType.StoredProcedure;
+
+            query.Parameters.AddWithValue("p_id_hebergement", this._idHebergement);
+            query.Parameters["p_id_hebergement"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_1_mois", thisMounth);
+            query.Parameters["p_1_mois"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_3_mois", threeMounth);
+            query.Parameters["p_3_mois"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_6_mois", sixMounth);
+            query.Parameters["p_6_mois"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_1_an", oneYear);
+            query.Parameters["p_1_an"].Direction = ParameterDirection.Input;
+
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {

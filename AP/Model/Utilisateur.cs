@@ -127,7 +127,7 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
@@ -144,7 +144,7 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
@@ -162,7 +162,7 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
@@ -180,7 +180,7 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
@@ -192,13 +192,13 @@ namespace AP.Model
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() > dateFin";
+            query.CommandText = "SELECT SUM(reservations_hebergement.prix) as gains FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() > dateFin";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
             MySqlDataReader reader = query.ExecuteReader();
             int Gains = 0;
             while (reader.Read())
             {
-                Gains = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("gains"))) { Gains = reader.GetInt32(0); } else { Gains = 0; }
             }
             _bdd.Close();
 
@@ -209,13 +209,13 @@ namespace AP.Model
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() < dateFin";
+            query.CommandText = "SELECT SUM(reservations_hebergement.prix) as gainsPrevisionnels FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() < dateFin";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
             MySqlDataReader reader = query.ExecuteReader();
             int GainsPrevisionnels = 0;
             while (reader.Read())
             {
-                GainsPrevisionnels = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsPrevisionnels"))) { GainsPrevisionnels = reader.GetInt32(0); } else { GainsPrevisionnels = 0; }
             }
             _bdd.Close();
 

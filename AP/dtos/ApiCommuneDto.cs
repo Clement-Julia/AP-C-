@@ -11,6 +11,8 @@ namespace AP.dtos
     {
         public string nom { get; set; }
 
+        public string code { get; set; }
+
         public List<string> codesPostaux { get; set; }
 
         public string codeRegion { get; set; }

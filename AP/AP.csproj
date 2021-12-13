@@ -224,6 +224,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dtos\ApiCommuneDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesFeatureDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesGeometryDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesPropertiesDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesRootDto.cs" />
     <Compile Include="dtos\ApiRegionDto.cs" />
     <Compile Include="Forms\AccueilCustomControl.cs">
       <SubType>UserControl</SubType>
@@ -267,6 +271,7 @@
     <Compile Include="Forms\Inscription.Designer.cs">
       <DependentUpon>Inscription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AdminValidHebergement.cs" />
     <Compile Include="Services\ApiGouvCommunes.cs" />
     <Compile Include="Services\GeneratePDF.cs" />
     <Compile Include="UserControls\HebergementsCustumControl.cs">

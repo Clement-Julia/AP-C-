@@ -44,6 +44,7 @@ namespace AP.Forms
             this.PanelAccueil = new System.Windows.Forms.Panel();
             this.hebergementsCustumControl1 = new AP.Forms.HebergementsCustumControl();
             this.accueilCustomControl1 = new AP.Forms.AccueilCustomControl();
+            this.BtnTest = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -52,6 +53,7 @@ namespace AP.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panel1.Controls.Add(this.BtnTest);
             this.panel1.Controls.Add(this.PnlNav);
             this.panel1.Controls.Add(this.BtnOptions);
             this.panel1.Controls.Add(this.BtnFiscalite);
@@ -218,6 +220,7 @@ namespace AP.Forms
             // 
             this.hebergementsCustumControl1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.hebergementsCustumControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.hebergementsCustumControl1.FormHeber = null;
             this.hebergementsCustumControl1.Hebergement = null;
             this.hebergementsCustumControl1.Location = new System.Drawing.Point(200, 0);
             this.hebergementsCustumControl1.Margin = new System.Windows.Forms.Padding(25, 10, 25, 10);
@@ -232,6 +235,26 @@ namespace AP.Forms
             this.accueilCustomControl1.Name = "accueilCustomControl1";
             this.accueilCustomControl1.Size = new System.Drawing.Size(700, 500);
             this.accueilCustomControl1.TabIndex = 1;
+            // 
+            // BtnTest
+            // 
+            this.BtnTest.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnTest.FlatAppearance.BorderSize = 0;
+            this.BtnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTest.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTest.ForeColor = System.Drawing.Color.White;
+            this.BtnTest.Image = ((System.Drawing.Image)(resources.GetObject("BtnTest.Image")));
+            this.BtnTest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnTest.Location = new System.Drawing.Point(0, 263);
+            this.BtnTest.Name = "BtnTest";
+            this.BtnTest.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.BtnTest.Size = new System.Drawing.Size(200, 45);
+            this.BtnTest.TabIndex = 8;
+            this.BtnTest.Text = "+ Hébergement";
+            this.BtnTest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnTest.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BtnTest.UseVisualStyleBackColor = true;
+            this.BtnTest.Click += new System.EventHandler(this.BtnTest_Click);
             // 
             // Home
             // 
@@ -269,5 +292,6 @@ namespace AP.Forms
         private System.Windows.Forms.Panel PanelAccueil;
         private System.Windows.Forms.Label LabelMembreDepuis;
         private System.Windows.Forms.Label LabelUserName;
+        private System.Windows.Forms.Button BtnTest;
     }
 }
