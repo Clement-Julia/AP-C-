@@ -21,7 +21,7 @@ namespace AP.Forms
         {
             InitializeComponent();
             TextBoxUsername.Text = "mrtreflestremy@outlook.com";
-            TextBoxPassword.Text = "Kempatchou%1234";
+            TextBoxPassword.Text = "Kdo%test89T";
         }
 
         private void BtnConnexion_Click(object sender, EventArgs e)

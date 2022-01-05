@@ -244,5 +244,76 @@ namespace AP.Model
             return reservationHebergements;
         }
 
+        public string GetAge()
+        {
+            string[] infos = DateOfBirth.Substring(0,10).Split('/');
+            DateTime DoB = new DateTime(Convert.ToInt32(infos[2]), Convert.ToInt32(infos[1]), Convert.ToInt32(infos[0]));
+            DateTime Now = DateTime.Now;
+
+            return (Now.Subtract(DoB).Days / 365).ToString();
+        }
+
+        public bool UpdateMDP(string OldMotDePasse, string NewMotDePasse)
+        {
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT mdp FROM utilisateurs WHERE idUtilisateur = @idUtilisateur";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            string mdp = "";
+            while (reader.Read())
+            {
+                mdp = reader.GetString(0);
+            }
+            _bdd.Close();
+
+            if (OldMotDePasse != null && BCrypt.Net.BCrypt.Verify(OldMotDePasse, mdp))
+            {
+                _bdd.Open();
+                query = _bdd.CreateCommand();
+                query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+                query.Parameters.AddWithValue("@mdp", BCrypt.Net.BCrypt.HashPassword(NewMotDePasse));
+                query.CommandText = "UPDATE utilisateurs SET mdp = @mdp WHERE idUtilisateur = @idUtilisateur";
+
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    _bdd.Close();
+                    return true;
+                }
+                else
+                {
+                    _bdd.Close();
+                    return false;
+                }
+            } else
+            {
+                return false;
+            }
+
+        }
+
+        public bool UpdateUser(string nom, string prenom, string email)
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            query.Parameters.AddWithValue("@nom", nom);
+            query.Parameters.AddWithValue("@prenom", prenom);
+            query.Parameters.AddWithValue("@email", email);
+            query.CommandText = "UPDATE utilisateurs SET nom = @nom, prenom = @prenom, email = @email WHERE idUtilisateur = @idUtilisateur";
+            if (query.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return true;
+            }
+            else
+            {
+                _bdd.Close();
+                return false;
+            }
+        }
+
+
     }
 }
