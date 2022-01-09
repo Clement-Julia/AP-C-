@@ -247,6 +247,12 @@
     <Compile Include="Forms\Connexion.Designer.cs">
       <DependentUpon>Connexion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Conseils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Conseils.Designer.cs">
+      <DependentUpon>Conseils.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormAccueil.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -369,6 +375,9 @@
     <EmbeddedResource Include="Forms\Connexion.resx">
       <DependentUpon>Connexion.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Conseils.resx">
+      <DependentUpon>Conseils.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAccueil.resx">
       <DependentUpon>FormAccueil.cs</DependentUpon>

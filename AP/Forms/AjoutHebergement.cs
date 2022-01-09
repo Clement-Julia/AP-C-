@@ -290,7 +290,8 @@ namespace AP.Forms
             Regex codePostal = new Regex(@"\b\d{5}\b", RegexOptions.IgnoreCase);
             Regex allBeforeCP = new Regex(@".+?(?=\b\d{5}\b)", RegexOptions.IgnoreCase);
             this._adresse = allBeforeCP.Match(richTextBoxAdresse.Text).ToString().Trim();
-            this._cp = Convert.ToInt32(codePostal.Match(richTextBoxAdresse.Text).ToString());
+            if (codePostal.Match(richTextBoxAdresse.Text).ToString() != "")
+                this._cp = Convert.ToInt32(codePostal.Match(richTextBoxAdresse.Text).ToString());
 
             if (nomHebergement != "" &&
                 description != "" &&

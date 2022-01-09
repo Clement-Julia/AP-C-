@@ -145,3 +145,4 @@ C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.AjoutHebergemen
 C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Net.Http.Json.dll
 C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Net.Http.Json.xml
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Options.resources
+C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Conseils.resources

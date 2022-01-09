@@ -69,6 +69,8 @@ namespace AP.Forms
 
         private void BtnFiscalite_Click(object sender, EventArgs e)
         {
+            PnlNav.Height = BtnFiscalite.Height;
+            PnlNav.Top = BtnFiscalite.Top;
             openChildForm(new Justificatif(Utilisateur));
         }
 
@@ -115,8 +117,8 @@ namespace AP.Forms
 
         private void BtnTest_Click(object sender, EventArgs e)
         {
-            PnlNav.Height = BtnVoirHebergement.Height;
-            PnlNav.Top = BtnVoirHebergement.Top;
+            PnlNav.Height = BtnHebergements.Height;
+            PnlNav.Top = BtnHebergements.Top;
             openChildForm(new AjoutHebergement(Utilisateur));
         }
 
@@ -155,7 +157,12 @@ namespace AP.Forms
                 submenu.Visible = false;
         }
 
-
+        private void BtnConseils_Click(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnFiscalite.Height;
+            PnlNav.Top = BtnFiscalite.Top;
+            openChildForm(new Conseils());
+        }
     }
 }
 
