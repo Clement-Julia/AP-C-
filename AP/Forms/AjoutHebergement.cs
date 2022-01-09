@@ -28,6 +28,9 @@ namespace AP.Forms
         private int _cp;
         private string _adresse;
         private string _commune;
+        private double _latVille;
+        private double _longVille;
+        private string _nomRegion;
 
         public AjoutHebergement(Utilisateur utilisateur)
         {
@@ -47,12 +50,6 @@ namespace AP.Forms
             comboBoxCommune.Items.Clear();
             _listeCommunes.Clear();
 
-            //var cancellationTokenSource = new CancellationTokenSource();
-
-            //if (this.number != 2)
-            //    cancellationTokenSource.Cancel();
-            //await Task.Delay(1000).ContinueWith((task) => { this.number--; });
-
             if (int.TryParse(inputCommune.Text, out int number))
             {
                 if (number.ToString().Length == 5)
@@ -60,10 +57,6 @@ namespace AP.Forms
                     _listeCommunes = await _apiGouvCommunes.ListeCommunes(number);
 
                     noDuplicatedCodeComboBoxItem();
-                    //this.number = 2;
-                } else
-                {
-                    // si le code fait pas 5 chiffres on fait rien
                 }
             }
             else
@@ -71,7 +64,6 @@ namespace AP.Forms
                 _listeCommunes = await _apiGouvCommunes.ListeCommunes(inputCommune.Text);
 
                 noDuplicatedCodeComboBoxItem();
-                //this.number = 2;
             }
 
         }
@@ -84,7 +76,6 @@ namespace AP.Forms
             }
 
             string adresseInput = richTextBoxAdresse.Text;
-            // string t = @"\b\d{5}\b";
             Regex codePostal = new Regex(@"\b\d{5}\b", RegexOptions.IgnoreCase);
             Regex allBeforeCP = new Regex(@".+?(?=\b\d{5}\b)", RegexOptions.IgnoreCase);
             Regex allAfterCP = new Regex(@"[^\b\d{5}\b]+$", RegexOptions.IgnoreCase);
@@ -111,6 +102,7 @@ namespace AP.Forms
                 {
                     // Veuillez remplir le champ de la ville avant d'entrer l'adresse
                     List<ApiCommuneDto> temporaire = new List<ApiCommuneDto>();
+                    // Si on a pas l'information de la commune, alors on utilise le code postal
                     if (this._commune != "")
                     {
                         temporaire = await _apiGouvCommunes.ListeCommunes(this._commune);
@@ -128,11 +120,12 @@ namespace AP.Forms
                             _listeCommunes.Add(item);
                         }
                     }
-                   // _listeCommunes = communesDansNosRegions;
 
                     if (_listeCommunes.Count() == 0)
                     {
+
                         // Affichage erreur
+
                     } else if (_listeCommunes.Count() == 1)
                     {
                         this._codeVille = _listeCommunes.Select(s => s.code).FirstOrDefault();
@@ -142,7 +135,7 @@ namespace AP.Forms
                         comboBoxCommune.SelectedItem = _listeCommunes[0].nom;
                     } else
                     {
-                        // on met en place nouveau panel pour choix des villes trouvées
+                        // on met en place nouveau panel pour choix des villes trouvées car elles sont plusieurs
 
                         flowLayoutPanelChoixVille.Controls.Clear();
                         flowLayoutPanelChoixVille.WrapContents = false;
@@ -159,7 +152,7 @@ namespace AP.Forms
                     }
 
                 }
-               // }
+
             }
         }
 
@@ -192,6 +185,7 @@ namespace AP.Forms
         private void comboBoxCommune_SelectedIndexChanged(object sender, EventArgs e)
         {
             this._codeVille = _listeCommunes.Where(w => w.nom.Equals(comboBoxCommune.Text)).Select(s => s.code).FirstOrDefault();
+            this._commune = comboBoxCommune.SelectedItem.ToString();
         }
 
         // bouton de retour quand il existe plusieurs adresse et qu'un panel spécial est affiché (cela voudra dire que l'utilisateur n'a pas trouvé l'adresse qu'il souhaitait)
@@ -209,8 +203,8 @@ namespace AP.Forms
             if(checkedButton != null)
             {
                 int index = _allMatch.features.IndexOf(_allMatch.features.Where(w => w.properties.label.Equals(checkedButton.Text)).FirstOrDefault());
-                richTextBoxLatitude.Text = _allMatch.features[index].geometry.coordinates[0].ToString();
-                richTextBoxLongitude.Text = _allMatch.features[index].geometry.coordinates[1].ToString();
+                richTextBoxLatitude.Text = _allMatch.features[index].geometry.coordinates[1].ToString();
+                richTextBoxLongitude.Text = _allMatch.features[index].geometry.coordinates[0].ToString();
                 richTextBoxAdresse.Text = _allMatch.features[index].properties.label;
                 panelChoixAdresse.Hide();
                 BtnRechercherCoordonnees.Show();
@@ -241,15 +235,16 @@ namespace AP.Forms
                 panelChoixAdresse.Show();
 
             }
-            else
+            else if (_allMatch.features.Count == 1)
             {
-                richTextBoxLatitude.Text = _allMatch.features[0].geometry.coordinates[0].ToString();
-                richTextBoxLongitude.Text = _allMatch.features[0].geometry.coordinates[1].ToString();
+                richTextBoxLatitude.Text = _allMatch.features[0].geometry.coordinates[1].ToString();
+                richTextBoxLongitude.Text = _allMatch.features[0].geometry.coordinates[0].ToString();
                 richTextBoxAdresse.Text = _allMatch.features[0].properties.label;
             }
         }
 
         // fonction pour éviter la duplication de code (comboxBox avec méthode string ou int)
+        // Permet d'ajouter dans le select les villes correspondantes à une de nos régions
         private void noDuplicatedCodeComboBoxItem()
         {
             List<ApiCommuneDto> communesDansNosRegions = _listeCommunes.Where(w => this._idsRegion.Contains(w.codeRegion)).ToList();
@@ -275,7 +270,7 @@ namespace AP.Forms
             this.Close();
         }
 
-        private void BtnValidHebergement_Click(object sender, EventArgs e)
+        private async void BtnValidHebergement_Click(object sender, EventArgs e)
         {
 
             BtnValidAjoutHebergement.Enabled = false;
@@ -292,15 +287,47 @@ namespace AP.Forms
             decimal prix;
             Decimal.TryParse(richTextBoxPrix.Text, out prix);
 
+            Regex codePostal = new Regex(@"\b\d{5}\b", RegexOptions.IgnoreCase);
+            Regex allBeforeCP = new Regex(@".+?(?=\b\d{5}\b)", RegexOptions.IgnoreCase);
+            this._adresse = allBeforeCP.Match(richTextBoxAdresse.Text).ToString().Trim();
+            this._cp = Convert.ToInt32(codePostal.Match(richTextBoxAdresse.Text).ToString());
+
             if (nomHebergement != "" &&
                 description != "" &&
                 ville != "" &&
                 richTextBoxLatitude.Text != "" &&
                 richTextBoxLongitude.Text != "" &&
-                prix > 0)
+                prix > 0 &&
+                _commune != "" &&
+                _cp.ToString() != "" &&
+                _adresse != "" )
             {
+
+                // On test si la ville existe en base de donnée
+                Ville Ville = new Ville();
+
+                ApiCoordonneesRootDto coordonnees = await _apiGouvCommunes.GetCoordonneesVille(_commune, richTextBoxLatitude.Text, richTextBoxLongitude.Text);
+
+                // on récupère le nom de la région (JSON type data --> "context": "28, Eure-et-Loir, Centre-Val de Loire")
+                string nomRegion = coordonnees.features[0].properties.context;
+                string[] tempsTab = nomRegion.Split(',');
+                nomRegion = tempsTab[2].Trim();
+
+                int idRegion = Ville.GetIdRegion(nomRegion);
+
+                Boolean result = false;
                 AdminValidHebergement adminValidHebergement = new AdminValidHebergement();
-                Boolean result = adminValidHebergement.InsertAdminValidHebergement(nomHebergement, description, ville, latitude, longitude, prix, this._utilisateur.IdUtilisateur);
+                bool villeExiste = Ville.IsThisTownExist(_commune);
+                if (!villeExiste)
+                {
+                    _latVille = coordonnees.features[0].geometry.coordinates[1];
+                    _longVille = coordonnees.features[0].geometry.coordinates[0];
+                    result = adminValidHebergement.InsertAdminValidHebergement(nomHebergement, description, ville, _cp.ToString(), _adresse, latitude, longitude, prix, this._utilisateur.IdUtilisateur, idRegion, _latVille, _longVille);
+                } else
+                {
+                    result = adminValidHebergement.InsertAdminValidHebergement(nomHebergement, description, ville, _cp.ToString(), _adresse, latitude, longitude, prix, this._utilisateur.IdUtilisateur, idRegion);
+                }
+
 
                 if (result)
                 {

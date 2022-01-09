@@ -28,7 +28,6 @@ namespace AP.Forms
 
         private void btnDeconnexion_Click(object sender, EventArgs e)
         {
-            // il faudra tout fermer (ce form plus le home)
             _utilisateur = null;
             _home.Close();
             this.Close();
@@ -38,6 +37,11 @@ namespace AP.Forms
         private void btnDesinscription_Click(object sender, EventArgs e)
         {
             // Simulation de désinscription
+            DialogResult dresult = MessageBox.Show("Vous êtes sur le point de vous désinscrire du site, votre compte sera mis inactif et vos données seront conservées 30 jours. Après ce laps de temps, il serait impossible de récupérer votre compte. Nous conserverons néanmoins les avis que vous avez déjà postés. Êtes-vous sur de vouloir faire cela ?", "Attention", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dresult == DialogResult.OK)
+            {
+
+            }
         }
 
         private void pictureBoxValidNewMdp_Click(object sender, EventArgs e)
@@ -81,9 +85,6 @@ namespace AP.Forms
                     }
                     else
                         MessageBox.Show("Modification des informations échouée", "Modification échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } else
-                {
-                    MessageBox.Show("Modification des informations échouée. Erreur Interne", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } else
             {

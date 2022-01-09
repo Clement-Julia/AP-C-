@@ -167,7 +167,6 @@ namespace AP.Model
             _bdd.Close();
 
             return quantite;
-            
         }
         
         public int GetNbTotalReservationsAVenir()

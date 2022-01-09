@@ -13,5 +13,6 @@ namespace AP.dtos
         public string postcode { get; set; }
         public string citycode { get; set; }
         public string city { get; set; }
+        public string context { get; set; }
     }
 }

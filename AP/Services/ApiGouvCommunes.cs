@@ -42,11 +42,14 @@ namespace AP.Services
             return await _http.GetFromJsonAsync<List<ApiCommuneDto>>("https://geo.api.gouv.fr/communes?codePostal=" + code_postal + "&nom=" + commune + "&fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre");
         }
 
-
-
         public async Task<ApiCoordonneesRootDto> GetCoordonnees(string adresse, string citycode)
         {
             return await _http.GetFromJsonAsync<ApiCoordonneesRootDto>("https://api-adresse.data.gouv.fr/search/?q=" + adresse + "&citycode=" + citycode);
+        }
+
+        public async Task<ApiCoordonneesRootDto> GetCoordonneesVille(string ville, string lat, string lng)
+        {
+            return await _http.GetFromJsonAsync<ApiCoordonneesRootDto>("https://api-adresse.data.gouv.fr/search/?q=" + ville + "&type=municipality&lat=" + lat + "&lon=" + lng + "&limit=1");
         }
 
 

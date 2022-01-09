@@ -298,23 +298,11 @@
     <Compile Include="Forms\PrevisualisationPDF.Designer.cs">
       <DependentUpon>PrevisualisationPDF.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Test1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Test1.Designer.cs">
-      <DependentUpon>Test1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Options.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Options.Designer.cs">
       <DependentUpon>Options.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\OptionHebergement.cs">
       <SubType>UserControl</SubType>
@@ -410,14 +398,8 @@
     <EmbeddedResource Include="Forms\OptionHebergement.resx">
       <DependentUpon>OptionHebergement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Test1.resx">
-      <DependentUpon>Test1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\modifHebergement.resx">
       <DependentUpon>modifHebergement.cs</DependentUpon>

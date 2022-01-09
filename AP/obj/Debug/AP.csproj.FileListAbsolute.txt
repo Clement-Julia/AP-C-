@@ -37,8 +37,6 @@ C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Home.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Justificatif.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.PrevisualisationPDF.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.OptionHebergement.resources
-C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Test1.resources
-C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.UserControl1.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.modifHebergement.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Properties.Resources.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.UserControls.LigneReservationHebergement.resources
