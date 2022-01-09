@@ -19,6 +19,9 @@ namespace AP.Model
         private string _libelle;
         public string Libelle { get { return _libelle; } set { _libelle = value; } }
 
+        private string _adresse;
+        public string Adresse { get { return _adresse; } set { _adresse = value; } }
+
         private string _description;
         public string Description { get { return _description; } set { _description = value; } }
 
@@ -40,6 +43,9 @@ namespace AP.Model
         private int _idUtilisateur;
         public int IdUtilisateur { get { return _idUtilisateur; } set { _idUtilisateur = value; } }
 
+        private DateTime _dateEnregistrement;
+        public DateTime DateEnregistrement { get { return _dateEnregistrement; } set { _dateEnregistrement = value; } }
+
         public Hebergement(int IdHebergement = 0)
         {
             if (IdHebergement != 0)
@@ -53,22 +59,25 @@ namespace AP.Model
                 {
                     this.IdHebergement = reader.GetInt32(0);
                     this.Libelle = reader.GetString(1);
-                    this.Description = reader.GetString(2);
-                    this.IdVille = reader.GetInt32(3);
-                    this.Latitude = reader.GetInt32(4);
-                    this.Longitude = reader.GetInt32(5);
-                    this.Prix = reader.GetInt32(6);
-                    this.Uuid = reader.GetString(7);
-                    this.IdUtilisateur = reader.GetInt32(8);
+                    this.Adresse = reader.GetString(2);
+                    this.Description = reader.GetString(3);
+                    this.IdVille = reader.GetInt32(4);
+                    this.Latitude = reader.GetInt32(5);
+                    this.Longitude = reader.GetInt32(6);
+                    this.Prix = reader.GetInt32(7);
+                    this.Uuid = reader.GetString(8);
+                    this.IdUtilisateur = reader.GetInt32(9);
+                    this.DateEnregistrement = reader.GetDateTime(10);
                 }
                 _bdd.Close();
             }
         }
 
-        public void InitialisationHebergement(int id, string libelle, string description, int idVille, int latitude, int longitude, int prix, string uuid, int idUtilisateur)
+        public void InitialisationHebergement(int id, string libelle, string adresse, string description, int idVille, int latitude, int longitude, int prix, string uuid, int idUtilisateur, DateTime dateEnregistrement)
         {
             this.IdHebergement = id;
             this.Libelle = libelle;
+            this.Adresse = adresse;
             this.Description = description;
             this.IdVille = idVille;
             this.Latitude = latitude;
@@ -76,15 +85,17 @@ namespace AP.Model
             this.Prix = prix;
             this.Uuid = uuid;
             this.IdUtilisateur = idUtilisateur;
+            this.DateEnregistrement = dateEnregistrement;
         }
 
         public bool UpdateHebergement()
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "UPDATE hebergements SET idHebergement = @idHebergement, libelle = @libelle, description = @description, idVille = @idVille, latitude = @latitude, longitude = @longitude, prix = @prix, uudi = @uuid, idUtilisateur = @idUtilisateur WHERE idHebergement = @idHebergement";
+            query.CommandText = "UPDATE hebergements SET idHebergement = @idHebergement, libelle = @libelle, adresse = @adresse, description = @description, idVille = @idVille, latitude = @latitude, longitude = @longitude, prix = @prix, uudi = @uuid, idUtilisateur = @idUtilisateur WHERE idHebergement = @idHebergement";
             query.Parameters.AddWithValue("@idHebergement", IdHebergement);
             query.Parameters.AddWithValue("@libelle", Libelle);
+            query.Parameters.AddWithValue("@adresse", Adresse);
             query.Parameters.AddWithValue("@description", Description);
             query.Parameters.AddWithValue("@idVille", IdVille);
             query.Parameters.AddWithValue("@latitude", Latitude);
@@ -274,26 +285,22 @@ namespace AP.Model
             DateTime minDate = DateTime.Now;
 
             _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.Parameters.AddWithValue("@date", firstDay);
-            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
-                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
-                "INNER JOIN hebergement USING(idHebergement) " +
-                "where idHebergement = @idHebergement  " +
-                "AND is_building = 0 " +
-                "AND dateFin BETWEEN " +
-                "(CASE " +
-                "WHEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) < @date THEN @date " +
-                "ELSE (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) " +
-                "END)" +
-                "AND NOW()";
+
+            MySqlCommand query = new MySqlCommand("get_infos_about_to_year", _bdd);
+            query.CommandType = CommandType.StoredProcedure;
+
+            query.Parameters.AddWithValue("p_id_hebergement", this._idHebergement);
+            query.Parameters["p_id_hebergement"].Direction = ParameterDirection.Input;
+            
+            query.Parameters.AddWithValue("p_date", firstDay);
+            query.Parameters["p_date"].Direction = ParameterDirection.Input;
+
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
                 if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
                 minDate = reader.GetDateTime(1);
-                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nbReservations = reader.GetInt32(2); } else { nbReservations = 0; }
             }
             _bdd.Close();
 
@@ -319,20 +326,18 @@ namespace AP.Model
             DateTime dateEnregistrementHebergement = DateTime.Now;
 
             _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.CommandText = "SELECT SUM(nbJours) as nuitees, hebergement.dateEnregistrement, COUNT(*) as nbReservation FROM reservations_hebergement " +
-                "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage " +
-                "INNER JOIN hebergement USING(idHebergement) " +
-                "where idHebergement = @idHebergement  " +
-                "AND is_building = 0 " +
-                "AND dateFin BETWEEN (SELECT dateEnregistrement FROM hebergement WHERE idHebergement = @idHebergement) AND NOW()";
+            MySqlCommand query = new MySqlCommand("get_infos_about_to_all", _bdd);
+            query.CommandType = CommandType.StoredProcedure;
+
+            query.Parameters.AddWithValue("p_id_hebergement", this._idHebergement);
+            query.Parameters["p_id_hebergement"].Direction = ParameterDirection.Input;
+
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
                 if (!reader.IsDBNull(reader.GetOrdinal("nuitees"))) { nuitees = reader.GetInt32(0); } else { nuitees = 0; }
                 dateEnregistrementHebergement = reader.GetDateTime(1);
-                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nuitees = reader.GetInt32(2); } else { nuitees = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("nbReservation"))) { nbReservations = reader.GetInt32(2); } else { nbReservations = 0; }
             }
             _bdd.Close();
 
@@ -359,43 +364,21 @@ namespace AP.Model
             int gainAll = 0;
 
             _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", this._idHebergement);
-            query.Parameters.AddWithValue("@thisMounth", thisMounth);
-            query.Parameters.AddWithValue("@threeMounth", threeMounth);
-            query.Parameters.AddWithValue("@sixMounth", sixMounth);
-            query.Parameters.AddWithValue("@oneYear", oneYear);
-            query.CommandText = "SELECT " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @thisMounth " +
-                    "AND dateFin < NOW() ) as gainsDuMois, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @threeMounth " +
-                    "AND dateFin < NOW() ) as gainsDuTrimestre, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @sixMounth " +
-                    "AND dateFin < NOW() ) as gainsDuSemestre, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateDebut > @oneYear " +
-                    "AND dateFin < NOW() ) as gainsAnnee, " +
-                    "( SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement " +
-                    "INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage  " +
-                    "WHERE reservations_hebergement.idHebergement = hebergement.idHebergement " +
-                    "AND is_building = 0 " +
-                    "AND dateFin < NOW() ) as gainsALL " +
-                "FROM hebergement WHERE idHebergement = @idHebergement";
+            // Oui oui, c'est une procédure stockée :)
+            MySqlCommand query = new MySqlCommand("obtenir_infos_gains", _bdd);
+            query.CommandType = CommandType.StoredProcedure;
+
+            query.Parameters.AddWithValue("p_id_hebergement", this._idHebergement);
+            query.Parameters["p_id_hebergement"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_1_mois", thisMounth);
+            query.Parameters["p_1_mois"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_3_mois", threeMounth);
+            query.Parameters["p_3_mois"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_6_mois", sixMounth);
+            query.Parameters["p_6_mois"].Direction = ParameterDirection.Input;
+            query.Parameters.AddWithValue("p_1_an", oneYear);
+            query.Parameters["p_1_an"].Direction = ParameterDirection.Input;
+
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {

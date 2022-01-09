@@ -232,6 +232,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dtos\ApiCommuneDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesFeatureDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesGeometryDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesPropertiesDto.cs" />
+    <Compile Include="dtos\ApiCoordonneesRootDto.cs" />
     <Compile Include="dtos\ApiRegionDto.cs" />
     <Compile Include="Forms\AccueilCustomControl.cs">
       <SubType>UserControl</SubType>
@@ -257,6 +261,12 @@
     <Compile Include="Forms\ControlResponse.Designer.cs">
       <DependentUpon>ControlResponse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Conseils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Conseils.Designer.cs">
+      <DependentUpon>Conseils.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormAccueil.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +291,7 @@
     <Compile Include="Forms\Inscription.Designer.cs">
       <DependentUpon>Inscription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AdminValidHebergement.cs" />
     <Compile Include="Services\ApiGouvCommunes.cs" />
     <Compile Include="Services\GeneratePDF.cs" />
     <Compile Include="UserControls\HebergementsCustumControl.cs">
@@ -313,23 +324,11 @@
     <Compile Include="Forms\PrevisualisationPDF.Designer.cs">
       <DependentUpon>PrevisualisationPDF.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Test1.cs">
+    <Compile Include="Forms\Options.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Test1.Designer.cs">
-      <DependentUpon>Test1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\test2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\test2.Designer.cs">
-      <DependentUpon>test2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <Compile Include="Forms\Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\OptionHebergement.cs">
       <SubType>UserControl</SubType>
@@ -407,6 +406,9 @@
     <EmbeddedResource Include="Forms\ControlResponse.resx">
       <DependentUpon>ControlResponse.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Conseils.resx">
+      <DependentUpon>Conseils.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAccueil.resx">
       <DependentUpon>FormAccueil.cs</DependentUpon>
     </EmbeddedResource>
@@ -449,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\modifHebergement.resx">
       <DependentUpon>modifHebergement.cs</DependentUpon>

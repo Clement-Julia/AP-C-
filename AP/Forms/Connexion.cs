@@ -20,6 +20,8 @@ namespace AP.Forms
         public Connexion()
         {
             InitializeComponent();
+            TextBoxUsername.Text = "mrtreflestremy@outlook.com";
+            TextBoxPassword.Text = "Kdo%test89T";
         }
 
         private void BtnConnexion_Click(object sender, EventArgs e)

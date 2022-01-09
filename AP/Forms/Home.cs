@@ -35,7 +35,8 @@ namespace AP.Forms
         public Home(Utilisateur utilisateur)
         {
             InitializeComponent();
-            // accueilCustomControl1.BringToFront();
+            panelFiscaliteSubmenu.Visible = false;
+            panelHebergementSubmenu.Visible = false;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             PnlNav.Height = BtnAccueil.Height;
             PnlNav.Top = BtnAccueil.Top;
@@ -50,6 +51,7 @@ namespace AP.Forms
 
         private void BtnAccueil_Click(object sender, EventArgs e)
         {
+            HideSubmenu();
             PnlNav.Height = BtnAccueil.Height;
             PnlNav.Top = BtnAccueil.Top;
             PnlNav.Left = BtnAccueil.Left;
@@ -74,9 +76,10 @@ namespace AP.Forms
 
         private void BtnOptions_Click(object sender, EventArgs e)
         {
+            HideSubmenu();
             PnlNav.Height = BtnOptions.Height;
             PnlNav.Top = BtnOptions.Top;
-            openChildForm(new test2());
+            openChildForm(new Options(Utilisateur, this));
         }
 
         private void BtnAccueil_Leave(object sender, EventArgs e)
@@ -112,6 +115,54 @@ namespace AP.Forms
             childForm.Show();
         }
 
+        private void BtnTest_Click(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnHebergements.Height;
+            PnlNav.Top = BtnHebergements.Top;
+            openChildForm(new AjoutHebergement(Utilisateur));
+        }
+
+        // C'est le bouton HEBERGEMENT qui ouvre le submenu 
+        private void BtnHebergements_Click_1(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnHebergements.Height;
+            PnlNav.Top = BtnHebergements.Top;
+            ShowSubmenu(panelHebergementSubmenu);
+        }
+
+        // C'est le bouton FISCALITE qui ouvre le submenu 
+        private void BtnFiscalite_Click_1(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnFiscalite.Height;
+            PnlNav.Top = BtnFiscalite.Top;
+            ShowSubmenu(panelFiscaliteSubmenu);
+        }
+
+        private void HideSubmenu()
+        {
+            if (panelFiscaliteSubmenu.Visible == true)
+                panelFiscaliteSubmenu.Visible = false;
+            if (panelHebergementSubmenu.Visible == true)
+                panelHebergementSubmenu.Visible = false;
+        }
+
+        private void ShowSubmenu(Panel submenu)
+        {
+            if (submenu.Visible == false)
+            {
+                HideSubmenu();
+                submenu.Visible = true;
+            }
+            else
+                submenu.Visible = false;
+        }
+
+        private void BtnConseils_Click(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnFiscalite.Height;
+            PnlNav.Top = BtnFiscalite.Top;
+            openChildForm(new Conseils());
+        }
     }
 }
 

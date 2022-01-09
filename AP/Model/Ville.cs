@@ -66,6 +66,7 @@ namespace AP.Model
             this.Uuid = uuid;
         }
 
+<<<<<<< HEAD
         public List<Ville> GetAllVille()
         {
             _bdd.Open();
@@ -89,6 +90,45 @@ namespace AP.Model
                 if (!reader.IsDBNull(reader.GetOrdinal("description"))) { idRegion = reader.GetInt32(4); } else { idRegion = 0; }
                 if (!reader.IsDBNull(reader.GetOrdinal("description"))) { description = reader.GetString(5); } else { description = "null"; }
                 if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(6); } else { uuid = ""; }
+=======
+        public bool IsThisTownExist(string ville)
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@libelle", ville);
+            query.CommandText = "SELECT COUNT(*) FROM villes WHERE libelle = @libelle";
+            MySqlDataReader reader = query.ExecuteReader();
+            int result = 0;
+            while (reader.Read())
+            {
+                result = reader.GetInt32(0);
+            }
+            _bdd.Close();
+            if (result > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public int GetIdRegion(string nomRegion)
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT idRegion FROM regions WHERE libelle = @libelle";
+            query.Parameters.AddWithValue("@libelle", nomRegion);
+            MySqlDataReader reader = query.ExecuteReader();
+            int idRegion = 0;
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(reader.GetOrdinal("idRegion"))) { idRegion = reader.GetInt32(0); } else { idRegion = 0; }
+            }
+            _bdd.Close();
+
+            return idRegion;
+        }
+
+>>>>>>> remy2
 
                 ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), latitude, longitude, idRegion, description, uuid);
 
