@@ -31,9 +31,15 @@ namespace AP.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panelFiscaliteSubmenu = new System.Windows.Forms.Panel();
+            this.BtnConseils = new System.Windows.Forms.Button();
+            this.BtnJustificatif = new System.Windows.Forms.Button();
+            this.BtnFiscalite = new System.Windows.Forms.Button();
+            this.panelHebergementSubmenu = new System.Windows.Forms.Panel();
+            this.BtnAjoutHebergement = new System.Windows.Forms.Button();
+            this.BtnVoirHebergement = new System.Windows.Forms.Button();
             this.PnlNav = new System.Windows.Forms.Panel();
             this.BtnOptions = new System.Windows.Forms.Button();
-            this.BtnFiscalite = new System.Windows.Forms.Button();
             this.BtnHebergements = new System.Windows.Forms.Button();
             this.BtnAccueil = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -45,6 +51,8 @@ namespace AP.Forms
             this.hebergementsCustumControl1 = new AP.Forms.HebergementsCustumControl();
             this.accueilCustomControl1 = new AP.Forms.AccueilCustomControl();
             this.panel1.SuspendLayout();
+            this.panelFiscaliteSubmenu.SuspendLayout();
+            this.panelHebergementSubmenu.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -52,9 +60,11 @@ namespace AP.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panel1.Controls.Add(this.panelFiscaliteSubmenu);
+            this.panel1.Controls.Add(this.BtnFiscalite);
+            this.panel1.Controls.Add(this.panelHebergementSubmenu);
             this.panel1.Controls.Add(this.PnlNav);
             this.panel1.Controls.Add(this.BtnOptions);
-            this.panel1.Controls.Add(this.BtnFiscalite);
             this.panel1.Controls.Add(this.BtnHebergements);
             this.panel1.Controls.Add(this.BtnAccueil);
             this.panel1.Controls.Add(this.panel2);
@@ -63,6 +73,129 @@ namespace AP.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 500);
             this.panel1.TabIndex = 0;
+            // 
+            // panelFiscaliteSubmenu
+            // 
+            this.panelFiscaliteSubmenu.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.panelFiscaliteSubmenu.Controls.Add(this.BtnConseils);
+            this.panelFiscaliteSubmenu.Controls.Add(this.BtnJustificatif);
+            this.panelFiscaliteSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelFiscaliteSubmenu.Location = new System.Drawing.Point(0, 353);
+            this.panelFiscaliteSubmenu.Name = "panelFiscaliteSubmenu";
+            this.panelFiscaliteSubmenu.Size = new System.Drawing.Size(200, 90);
+            this.panelFiscaliteSubmenu.TabIndex = 11;
+            // 
+            // BtnConseils
+            // 
+            this.BtnConseils.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.BtnConseils.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnConseils.FlatAppearance.BorderSize = 0;
+            this.BtnConseils.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnConseils.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnConseils.ForeColor = System.Drawing.Color.White;
+            this.BtnConseils.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnConseils.Location = new System.Drawing.Point(0, 45);
+            this.BtnConseils.Name = "BtnConseils";
+            this.BtnConseils.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
+            this.BtnConseils.Size = new System.Drawing.Size(200, 45);
+            this.BtnConseils.TabIndex = 11;
+            this.BtnConseils.Text = "Conseils";
+            this.BtnConseils.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnConseils.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BtnConseils.UseVisualStyleBackColor = false;
+            this.BtnConseils.Click += new System.EventHandler(this.BtnConseils_Click);
+            // 
+            // BtnJustificatif
+            // 
+            this.BtnJustificatif.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.BtnJustificatif.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnJustificatif.FlatAppearance.BorderSize = 0;
+            this.BtnJustificatif.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnJustificatif.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnJustificatif.ForeColor = System.Drawing.Color.White;
+            this.BtnJustificatif.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnJustificatif.Location = new System.Drawing.Point(0, 0);
+            this.BtnJustificatif.Name = "BtnJustificatif";
+            this.BtnJustificatif.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
+            this.BtnJustificatif.Size = new System.Drawing.Size(200, 45);
+            this.BtnJustificatif.TabIndex = 10;
+            this.BtnJustificatif.Text = "Justificatif";
+            this.BtnJustificatif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnJustificatif.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BtnJustificatif.UseVisualStyleBackColor = false;
+            this.BtnJustificatif.Click += new System.EventHandler(this.BtnFiscalite_Click);
+            // 
+            // BtnFiscalite
+            // 
+            this.BtnFiscalite.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnFiscalite.FlatAppearance.BorderSize = 0;
+            this.BtnFiscalite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnFiscalite.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnFiscalite.ForeColor = System.Drawing.Color.White;
+            this.BtnFiscalite.Image = ((System.Drawing.Image)(resources.GetObject("BtnFiscalite.Image")));
+            this.BtnFiscalite.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnFiscalite.Location = new System.Drawing.Point(0, 308);
+            this.BtnFiscalite.Name = "BtnFiscalite";
+            this.BtnFiscalite.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.BtnFiscalite.Size = new System.Drawing.Size(200, 45);
+            this.BtnFiscalite.TabIndex = 10;
+            this.BtnFiscalite.Text = "Fiscalité";
+            this.BtnFiscalite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnFiscalite.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BtnFiscalite.UseVisualStyleBackColor = true;
+            this.BtnFiscalite.Click += new System.EventHandler(this.BtnFiscalite_Click_1);
+            this.BtnFiscalite.Leave += new System.EventHandler(this.BtnFiscalite_Leave);
+            // 
+            // panelHebergementSubmenu
+            // 
+            this.panelHebergementSubmenu.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.panelHebergementSubmenu.Controls.Add(this.BtnAjoutHebergement);
+            this.panelHebergementSubmenu.Controls.Add(this.BtnVoirHebergement);
+            this.panelHebergementSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHebergementSubmenu.Location = new System.Drawing.Point(0, 218);
+            this.panelHebergementSubmenu.Name = "panelHebergementSubmenu";
+            this.panelHebergementSubmenu.Size = new System.Drawing.Size(200, 90);
+            this.panelHebergementSubmenu.TabIndex = 9;
+            // 
+            // BtnAjoutHebergement
+            // 
+            this.BtnAjoutHebergement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.BtnAjoutHebergement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnAjoutHebergement.FlatAppearance.BorderSize = 0;
+            this.BtnAjoutHebergement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAjoutHebergement.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAjoutHebergement.ForeColor = System.Drawing.Color.White;
+            this.BtnAjoutHebergement.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnAjoutHebergement.Location = new System.Drawing.Point(0, 45);
+            this.BtnAjoutHebergement.Name = "BtnAjoutHebergement";
+            this.BtnAjoutHebergement.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
+            this.BtnAjoutHebergement.Size = new System.Drawing.Size(200, 45);
+            this.BtnAjoutHebergement.TabIndex = 9;
+            this.BtnAjoutHebergement.Text = "Ajouter";
+            this.BtnAjoutHebergement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnAjoutHebergement.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BtnAjoutHebergement.UseVisualStyleBackColor = false;
+            this.BtnAjoutHebergement.Click += new System.EventHandler(this.BtnTest_Click);
+            // 
+            // BtnVoirHebergement
+            // 
+            this.BtnVoirHebergement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
+            this.BtnVoirHebergement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnVoirHebergement.FlatAppearance.BorderSize = 0;
+            this.BtnVoirHebergement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnVoirHebergement.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVoirHebergement.ForeColor = System.Drawing.Color.White;
+            this.BtnVoirHebergement.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnVoirHebergement.Location = new System.Drawing.Point(0, 0);
+            this.BtnVoirHebergement.Name = "BtnVoirHebergement";
+            this.BtnVoirHebergement.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
+            this.BtnVoirHebergement.Size = new System.Drawing.Size(200, 45);
+            this.BtnVoirHebergement.TabIndex = 8;
+            this.BtnVoirHebergement.Text = "Voir";
+            this.BtnVoirHebergement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnVoirHebergement.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BtnVoirHebergement.UseVisualStyleBackColor = false;
+            this.BtnVoirHebergement.Click += new System.EventHandler(this.BtnHebergements_Click);
             // 
             // PnlNav
             // 
@@ -93,28 +226,6 @@ namespace AP.Forms
             this.BtnOptions.Click += new System.EventHandler(this.BtnOptions_Click);
             this.BtnOptions.Leave += new System.EventHandler(this.BtnOptions_Leave);
             // 
-            // BtnFiscalite
-            // 
-            this.BtnFiscalite.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.BtnFiscalite.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnFiscalite.FlatAppearance.BorderSize = 0;
-            this.BtnFiscalite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnFiscalite.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnFiscalite.ForeColor = System.Drawing.Color.White;
-            this.BtnFiscalite.Image = ((System.Drawing.Image)(resources.GetObject("BtnFiscalite.Image")));
-            this.BtnFiscalite.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnFiscalite.Location = new System.Drawing.Point(0, 218);
-            this.BtnFiscalite.Name = "BtnFiscalite";
-            this.BtnFiscalite.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.BtnFiscalite.Size = new System.Drawing.Size(200, 45);
-            this.BtnFiscalite.TabIndex = 4;
-            this.BtnFiscalite.Text = "Fiscalité";
-            this.BtnFiscalite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnFiscalite.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.BtnFiscalite.UseVisualStyleBackColor = false;
-            this.BtnFiscalite.Click += new System.EventHandler(this.BtnFiscalite_Click);
-            this.BtnFiscalite.Leave += new System.EventHandler(this.BtnFiscalite_Leave);
-            // 
             // BtnHebergements
             // 
             this.BtnHebergements.Dock = System.Windows.Forms.DockStyle.Top;
@@ -133,7 +244,7 @@ namespace AP.Forms
             this.BtnHebergements.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnHebergements.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnHebergements.UseVisualStyleBackColor = true;
-            this.BtnHebergements.Click += new System.EventHandler(this.BtnHebergements_Click);
+            this.BtnHebergements.Click += new System.EventHandler(this.BtnHebergements_Click_1);
             this.BtnHebergements.Leave += new System.EventHandler(this.BtnHebergements_Leave);
             // 
             // BtnAccueil
@@ -218,6 +329,7 @@ namespace AP.Forms
             // 
             this.hebergementsCustumControl1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.hebergementsCustumControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.hebergementsCustumControl1.FormHeber = null;
             this.hebergementsCustumControl1.Hebergement = null;
             this.hebergementsCustumControl1.Location = new System.Drawing.Point(200, 0);
             this.hebergementsCustumControl1.Margin = new System.Windows.Forms.Padding(25, 10, 25, 10);
@@ -246,6 +358,8 @@ namespace AP.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.panel1.ResumeLayout(false);
+            this.panelFiscaliteSubmenu.ResumeLayout(false);
+            this.panelHebergementSubmenu.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -261,13 +375,19 @@ namespace AP.Forms
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button BtnOptions;
-        private System.Windows.Forms.Button BtnFiscalite;
         private System.Windows.Forms.Panel PnlNav;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private AccueilCustomControl accueilCustomControl1;
         private HebergementsCustumControl hebergementsCustumControl1;
         private System.Windows.Forms.Panel PanelAccueil;
         private System.Windows.Forms.Label LabelMembreDepuis;
-        private System.Windows.Forms.Label LabelUserName;
+        public System.Windows.Forms.Label LabelUserName;
+        private System.Windows.Forms.Button BtnVoirHebergement;
+        private System.Windows.Forms.Button BtnFiscalite;
+        private System.Windows.Forms.Panel panelHebergementSubmenu;
+        private System.Windows.Forms.Button BtnAjoutHebergement;
+        private System.Windows.Forms.Panel panelFiscaliteSubmenu;
+        private System.Windows.Forms.Button BtnConseils;
+        private System.Windows.Forms.Button BtnJustificatif;
     }
 }

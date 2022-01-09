@@ -109,7 +109,7 @@ namespace AP.Model
             while (reader.Read())
             {
                 Hebergement Hebergement = new Hebergement();
-                Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetString(7), reader.GetInt32(8));
+                Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetString(8), reader.GetInt32(9), reader.GetDateTime(10));
                 Hebergements.Add(Hebergement);
             }
             _bdd.Close();
@@ -127,7 +127,7 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
@@ -144,7 +144,7 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
@@ -162,12 +162,11 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
             return quantite;
-            
         }
         
         public int GetNbTotalReservationsAVenir()
@@ -180,7 +179,7 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                quantite = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
             }
             _bdd.Close();
 
@@ -192,13 +191,13 @@ namespace AP.Model
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() > dateFin";
+            query.CommandText = "SELECT SUM(reservations_hebergement.prix) as gains FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() > dateFin";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
             MySqlDataReader reader = query.ExecuteReader();
             int Gains = 0;
             while (reader.Read())
             {
-                Gains = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("gains"))) { Gains = reader.GetInt32(0); } else { Gains = 0; }
             }
             _bdd.Close();
 
@@ -209,17 +208,109 @@ namespace AP.Model
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT SUM(reservations_hebergement.prix) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() < dateFin";
+            query.CommandText = "SELECT SUM(reservations_hebergement.prix) as gainsPrevisionnels FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND NOW() < dateFin";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
             MySqlDataReader reader = query.ExecuteReader();
             int GainsPrevisionnels = 0;
             while (reader.Read())
             {
-                GainsPrevisionnels = reader.GetInt32(0);
+                if (!reader.IsDBNull(reader.GetOrdinal("gainsPrevisionnels"))) { GainsPrevisionnels = reader.GetInt32(0); } else { GainsPrevisionnels = 0; }
             }
             _bdd.Close();
 
             return GainsPrevisionnels;
+        }
+
+        public List<ReservationHebergement> GetReservationsBetween(DateTime one, DateTime two)
+        {
+            List<ReservationHebergement> reservationHebergements = new List<ReservationHebergement>();
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT reservations_hebergement.* FROM hebergement INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND dateFin BETWEEN @date1 AND @date2";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            query.Parameters.AddWithValue("@date1", one.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@date2", two.ToString("yyyy-MM-dd"));
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                ReservationHebergement reservationHebergement = new ReservationHebergement();
+                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                reservationHebergements.Add(reservationHebergement);
+            }
+            _bdd.Close();
+
+            return reservationHebergements;
+        }
+
+        public string GetAge()
+        {
+            string[] infos = DateOfBirth.Substring(0,10).Split('/');
+            DateTime DoB = new DateTime(Convert.ToInt32(infos[2]), Convert.ToInt32(infos[1]), Convert.ToInt32(infos[0]));
+            DateTime Now = DateTime.Now;
+
+            return (Now.Subtract(DoB).Days / 365).ToString();
+        }
+
+        public bool UpdateMDP(string OldMotDePasse, string NewMotDePasse)
+        {
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT mdp FROM utilisateurs WHERE idUtilisateur = @idUtilisateur";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            string mdp = "";
+            while (reader.Read())
+            {
+                mdp = reader.GetString(0);
+            }
+            _bdd.Close();
+
+            if (OldMotDePasse != null && BCrypt.Net.BCrypt.Verify(OldMotDePasse, mdp))
+            {
+                _bdd.Open();
+                query = _bdd.CreateCommand();
+                query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+                query.Parameters.AddWithValue("@mdp", BCrypt.Net.BCrypt.HashPassword(NewMotDePasse));
+                query.CommandText = "UPDATE utilisateurs SET mdp = @mdp WHERE idUtilisateur = @idUtilisateur";
+
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    _bdd.Close();
+                    return true;
+                }
+                else
+                {
+                    _bdd.Close();
+                    return false;
+                }
+            } else
+            {
+                return false;
+            }
+
+        }
+
+        public bool UpdateUser(string nom, string prenom, string email)
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            query.Parameters.AddWithValue("@nom", nom);
+            query.Parameters.AddWithValue("@prenom", prenom);
+            query.Parameters.AddWithValue("@email", email);
+            query.CommandText = "UPDATE utilisateurs SET nom = @nom, prenom = @prenom, email = @email WHERE idUtilisateur = @idUtilisateur";
+            if (query.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return true;
+            }
+            else
+            {
+                _bdd.Close();
+                return false;
+            }
         }
 
 

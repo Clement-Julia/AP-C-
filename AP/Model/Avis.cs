@@ -41,7 +41,7 @@ namespace AP.Model
             {
                 _bdd.Open();
                 MySqlCommand query = _bdd.CreateCommand();
-                query.CommandText = "SELECT * FROM options WHERE idAvis = @idAvis";
+                query.CommandText = "SELECT * FROM avis WHERE idAvis = @idAvis";
                 query.Parameters.AddWithValue("@idAvis", IdAvis);
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
@@ -85,6 +85,80 @@ namespace AP.Model
             }
             _bdd.Close();
             return Avis;
+        }
+        
+        public int AjoutResponse(int avis, int idUser, string text)
+        {
+            if(!String.IsNullOrEmpty(text))
+            {
+                _bdd.Open();
+                MySqlCommand query2 = _bdd.CreateCommand();
+                query2.Parameters.AddWithValue("@idAvis", avis);
+                query2.Parameters.AddWithValue("@idUtilisateur", idUser);
+                query2.Parameters.AddWithValue("@reponse", text);
+
+                query2.CommandText = "insert into avis_response(idAvis, idUtilisateur, reponse, date) values(@idAvis, @idUtilisateur, @reponse, now())";
+                if (query2.ExecuteNonQuery() > 0)
+                {
+                    _bdd.Close();
+                    return 1;
+                }
+                else
+                {
+                    _bdd.Close();
+                    return 0;
+                }
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        public int UpdateResponse(int response, string text)
+        {
+            if (!String.IsNullOrEmpty(text))
+            {
+                _bdd.Open();
+
+                MySqlCommand query = _bdd.CreateCommand();
+                query.Parameters.AddWithValue("@idResponse", response);
+                query.Parameters.AddWithValue("@reponse", text);
+
+                query.CommandText = "update avis_response set reponse = @reponse where idResponse = @idResponse";
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    _bdd.Close();
+                    return 1;
+                }
+                else
+                {
+                    _bdd.Close();
+                    return 0;
+                }
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        public string SuppressionResponse(int response)
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idResponse", response);
+            query.CommandText = "DELETE FROM avis_response where idResponse = @idResponse";
+            if (query.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return "Suppression réussie !";
+            }
+            else
+            {
+                _bdd.Close();
+                return "Echec";
+            }
         }
     }
 }

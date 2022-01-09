@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AP.UserControls;
 
 namespace AP.Forms
 {
@@ -28,7 +29,7 @@ namespace AP.Forms
 
             foreach (Hebergement hebergement in Hebergements)
             {
-                HebergementsCustumControl Cs = new HebergementsCustumControl(hebergement, this);
+                HebergementsCustumControl Cs = new HebergementsCustumControl(hebergement, Utilisateur, this);
                 PanelHebergements.Controls.Add(Cs);
                 Cs.FormHeber = this;
             }

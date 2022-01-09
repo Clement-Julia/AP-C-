@@ -15,62 +15,53 @@ namespace AP
 {
     public partial class modifHebergement : Form
     {
-        int idHebergement = 0;
-        int idVille = 0;
-        int open = 0;
-        List<Option> allOptions;
-        List<Option> checkedOptions;
-        List<Avis> allAvis;
+        private int idHebergement = 23;
+        private int idVille = 0;
+        private int open = 0;
 
-        public modifHebergement()
+        private List<Ville> allVilles;
+        private List<Option> allOptions;
+        private List<Option> checkedOptions;
+        private List<Avis> allAvis;
+
+        private Utilisateur _utilisateur;
+        private Hebergement _hebergement;
+
+        public modifHebergement(Utilisateur Utilisateur, Hebergement Hebergement)
         {
             InitializeComponent();
-            
-            MySqlConnection conn = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
-            conn.Open();
+            this._utilisateur = Utilisateur;
 
+            this._hebergement = Hebergement;
 
-            //Initialisation des valeurs du menu de base
-            MySqlCommand command = conn.CreateCommand();
-            command.Parameters.AddWithValue("@id", 23);
-            command.CommandText = "SELECT libelle, description, prix, latitude, longitude, idVille, idHebergement FROM hebergement WHERE idHebergement = @id";
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            //Initialisation des valeurs de tab généraux
+            name.Text = _hebergement.Libelle;
+            description.Text = _hebergement.Description;
+            prix.Text = _hebergement.Prix.ToString();
+            latitude.Text = _hebergement.Latitude.ToString();
+            longitude.Text = _hebergement.Longitude.ToString();
+            idVille = _hebergement.IdVille;
+
+            Ville Ville = new Ville();
+            allVilles = Ville.GetAllVille();
+
+            foreach(Ville allVille in allVilles)
             {
-                name.Text = reader.GetString(0);
-                description.Text = reader.GetString(1);
-                prix.Text = reader.GetString(2);
-                latitude.Text = reader.GetString(3);
-                longitude.Text = reader.GetString(4);
-                idVille = reader.GetInt32(5);
-                idHebergement = reader.GetInt32(6);
-            }
-            conn.Close();
-
-            conn.Open();
-            MySqlCommand test = conn.CreateCommand();
-            test.Parameters.AddWithValue("@ville", idVille);
-            test.CommandText = "SELECT libelle, idVille FROM villes";
-            MySqlDataReader reader2 = test.ExecuteReader();
-            while (reader2.Read())
-            {
-                if (reader2.GetInt32(1) == idVille)
+                if (allVille.IdVille == idVille)
                 {
-                    ville.Text = reader2.GetString(0);
+                    ville.Text = allVille.Libelle;
                 }
                 else
                 {
-                    ville.Items.Add(reader2.GetString(0));
+                    ville.Items.Add(allVille.Libelle);
                 }
-
             }
-            conn.Close();
 
             //Initialisation du menu option
             Option Option = new Option();
-            Hebergement Hebergement = new Hebergement();
+            Hebergement hebergement = new Hebergement();
             this.allOptions = Option.getAllOptions();
-            this.checkedOptions = Hebergement.GetAllOptionsByHebergement(idHebergement);
+            this.checkedOptions = hebergement.GetAllOptionsByHebergement(idHebergement);
 
             foreach (Option option in allOptions)
             {
@@ -93,33 +84,12 @@ namespace AP
 
             foreach (Avis avis in allAvis)
             {
-                AvisHebergement customControl = new AvisHebergement(avis);
+                AvisHebergement customControl = new AvisHebergement(avis, this, idHebergement, _utilisateur);
                 flow_avis.Controls.Add(customControl);
             }
 
             //Vérification et avertissement si impossibilité de modifiation
-            conn.Open();
-            string result = null;
-            MySqlCommand verif = conn.CreateCommand();
-            verif.Parameters.AddWithValue("@idHebergement", idHebergement);
-            verif.CommandText = "SELECT * FROM reservations_hebergement where idHebergement = @idHebergement and dateFin > now()";
-
-            MySqlDataReader reader3 = verif.ExecuteReader();
-            while (reader3.Read())
-            {
-                result = reader3.GetString(0);
-            }
-            conn.Close();
-            
-            if(result != null)
-            {
-                open = 1;
-            }
-
-            if(open == 1)
-            {
-                MessageBox.Show("L'herbegement est réservé par des utilisateurs\nToute modification apportée ne sera pas prise en compte", "Attention");
-            }
+            open = hebergement.GetStatusHebergement(_hebergement.IdHebergement);
         }
 
         private void modif_Click(object sender, EventArgs e)
@@ -170,8 +140,8 @@ namespace AP
 
             conn.Close();
         }
-        
-        private void modif2_Click(object sender, EventArgs e)
+
+        private void modif2_Click_1(object sender, EventArgs e)
         {
             List<string> checkid = new List<string>();
 
@@ -194,7 +164,7 @@ namespace AP
             }
         }
 
-        private void sup_Click(object sender, EventArgs e)
+        private void sup_Click_1(object sender, EventArgs e)
         {
             MySqlConnection conn = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
             conn.Open();
@@ -234,7 +204,62 @@ namespace AP
 
         private void retour_Click(object sender, EventArgs e)
         {
-            //Faire une redirection
+            this.Close();
         }
+
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //private void ajoutResponse_Click(object sender, EventArgs e)
+        //{
+        //    List<Response> réponse;
+        //    int idAvis;
+        //    int idHebergement;
+        //    TextResponse textResponse;
+        //    int idResponse;
+        //    modifHebergement ModifHebergement;
+        //    public AjouterResponse(List<Response> réponse, int idAvis, int idHebergement, TextResponse textResponse, int idResponse, modifHebergement modifHebergement)
+        //    {
+        //        InitializeComponent();
+        //        this.réponse = réponse;
+        //        this.idAvis = idAvis;
+        //        this.idHebergement = idHebergement;
+        //        this.textResponse = textResponse;
+        //        this.idResponse = idResponse;
+        //        this.ModifHebergement = modifHebergement;
+        //    }
+
+        //    private void ajout_Click(object sender, EventArgs e)
+        //    {
+        //        Avis Avis = new Avis();
+        //        if (réponse.Count == 0)
+        //        {
+        //            MessageBox.Show(Avis.AjoutResponse(idAvis, idHebergement, textResponse.text.Text));
+
+        //            ModifHebergement.flow_avis.Controls.Clear();
+        //            List<Avis> allAvis = Avis.GetAllAvisHebergement(ModifHebergement.idHebergement);
+        //            foreach (Avis avis in allAvis)
+        //            {
+        //                AvisHebergement customControl = new AvisHebergement(avis, ModifHebergement, idHebergement);
+        //                ModifHebergement.flow_avis.Controls.Add(customControl);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show(Avis.UpdateResponse(idResponse, textResponse.text.Text));
+
+        //            ModifHebergement.flow_avis.Controls.Clear();
+        //            List<Avis> allAvis = Avis.GetAllAvisHebergement(ModifHebergement.idHebergement);
+        //            foreach (Avis avis in allAvis)
+        //            {
+        //                AvisHebergement customControl = new AvisHebergement(avis, ModifHebergement, idHebergement);
+        //                ModifHebergement.flow_avis.Controls.Add(customControl);
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

@@ -74,6 +74,25 @@ namespace AP.Model
             this.IdHebergement = idHebergement;
         }
 
+        public Ville GetVilleInfos()
+        {
+            Ville Ville = new Ville();
+            string descripton = "";
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT villes.* FROM hebergement INNER JOIN villes USING(idVille) WHERE idHebergement = @idHebergement";
+            query.Parameters.AddWithValue("@idHebergement", this.IdHebergement);
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { descripton = reader.GetString(0); } else { descripton = ""; }
+                Ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3), reader.GetInt32(4), descripton, reader.GetString(6));
+            }
+            _bdd.Close();
+
+            return Ville;
+        }
         public List<ReservationHebergement> GetReservationAVenir(int idHebergement)
         {
             List<ReservationHebergement> reservationHebergements = new List<ReservationHebergement>();
