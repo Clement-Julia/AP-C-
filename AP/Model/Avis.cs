@@ -87,54 +87,72 @@ namespace AP.Model
             return Avis;
         }
         
-        public string AjoutResponse(int avis, int idHebergement, string text)
+        public int AjoutResponse(int avis, int idUser, string text)
         {
-            int idUser = 0;
-
-            _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", idHebergement);
-
-            query.CommandText = "SELECT idUtilisateur from hebergement where idHebergement = @idHebergement";
-            MySqlDataReader reader = query.ExecuteReader();
-            while (reader.Read())
+            if(!String.IsNullOrEmpty(text))
             {
-                idUser = reader.GetInt32(0);
-            }
-            _bdd.Close();
+                _bdd.Open();
+                MySqlCommand query2 = _bdd.CreateCommand();
+                query2.Parameters.AddWithValue("@idAvis", avis);
+                query2.Parameters.AddWithValue("@idUtilisateur", idUser);
+                query2.Parameters.AddWithValue("@reponse", text);
 
-            _bdd.Open();
-            MySqlCommand query2 = _bdd.CreateCommand();
-            query2.Parameters.AddWithValue("@idAvis", avis);
-            query2.Parameters.AddWithValue("@idUtilisateur", idUser);
-            query2.Parameters.AddWithValue("@reponse", text);
-
-            query2.CommandText = "insert into avis_response(idAvis, idUtilisateur, reponse, date) values(@idAvis, @idUtilisateur, @reponse, now())";
-            if (query2.ExecuteNonQuery() > 0)
-            {
-                _bdd.Close();
-                return "Ajout réussi !";
+                query2.CommandText = "insert into avis_response(idAvis, idUtilisateur, reponse, date) values(@idAvis, @idUtilisateur, @reponse, now())";
+                if (query2.ExecuteNonQuery() > 0)
+                {
+                    _bdd.Close();
+                    return 1;
+                }
+                else
+                {
+                    _bdd.Close();
+                    return 0;
+                }
             }
             else
             {
-                _bdd.Close();
-                return "Echec";
+                return 2;
             }
         }
 
-        public string UpdateResponse(int response, string text)
+        public int UpdateResponse(int response, string text)
+        {
+            if (!String.IsNullOrEmpty(text))
+            {
+                _bdd.Open();
+
+                MySqlCommand query = _bdd.CreateCommand();
+                query.Parameters.AddWithValue("@idResponse", response);
+                query.Parameters.AddWithValue("@reponse", text);
+
+                query.CommandText = "update avis_response set reponse = @reponse where idResponse = @idResponse";
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    _bdd.Close();
+                    return 1;
+                }
+                else
+                {
+                    _bdd.Close();
+                    return 0;
+                }
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        public string SuppressionResponse(int response)
         {
             _bdd.Open();
-
             MySqlCommand query = _bdd.CreateCommand();
             query.Parameters.AddWithValue("@idResponse", response);
-            query.Parameters.AddWithValue("@reponse", text);
-
-            query.CommandText = "update avis_response set reponse = @reponse where idResponse = @idResponse";
+            query.CommandText = "DELETE FROM avis_response where idResponse = @idResponse";
             if (query.ExecuteNonQuery() > 0)
             {
                 _bdd.Close();
-                return "Ajout réussi !";
+                return "Suppression réussie !";
             }
             else
             {

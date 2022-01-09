@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AP.Forms;
+using System.Data;
 
 namespace AP.Model
 {
@@ -103,6 +104,57 @@ namespace AP.Model
 
         }
 
+        public int GetStatusHebergement(int idHebergement)
+        {
+            //_bdd.Open();
+
+            //string result = null;
+            //int status = 0;
+
+            //MySqlCommand query = _bdd.CreateCommand();
+            //query.Parameters.AddWithValue("@idHebergement", idHebergement);
+            //query.CommandText = "SELECT * FROM reservations_hebergement where idHebergement = @idHebergement and dateFin > now()";
+
+            //MySqlDataReader reader3 = query.ExecuteReader();
+            //while (reader3.Read())
+            //{
+            //    result = reader3.GetString(0);
+            //}
+
+            //if (result != null)
+            //{
+            //    status = 1;
+            //}
+            //else
+            //{
+            //    status = 0;
+            //}
+
+            //_bdd.Close();
+
+            //return status;
+
+            int result = 0;
+
+            _bdd.Open();
+            //MySqlCommand query = _bdd.CreateCommand();
+            MySqlCommand query = new MySqlCommand("est_reserver", _bdd);
+            query.CommandType = CommandType.StoredProcedure;
+
+            //query.Parameters.AddWithValue("@p_idHebergement", idHebergement);
+            query.Parameters.AddWithValue("p_idHebergement", idHebergement);
+            query.Parameters["p_idHebergement"].Direction = ParameterDirection.Input;
+
+            query.Parameters.AddWithValue("nbr", 0);
+            query.Parameters["nbr"].Direction = ParameterDirection.Output;
+
+            query.ExecuteNonQuery();
+
+            _bdd.Close();
+            return Convert.ToInt32(query.Parameters["nbr"].Value);
+
+        }
+
         public string GetNombreReservationEnCours()
         {
             _bdd.Open();
@@ -196,10 +248,6 @@ namespace AP.Model
                 //req.Substring(0, req.Length - 1);
                 req = req.TrimEnd(',');
                 ajoutOption.CommandText = "insert into options_by_hebergement(idHebergement, idOption) values" + req;
-<<<<<<< HEAD
-                MessageBox.Show(ajoutOption.CommandText);
-=======
->>>>>>> new_main
                 if (ajoutOption.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Modification effectuée !");

@@ -49,15 +49,15 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.rating);
             this.panel1.Controls.Add(this.nom);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(43, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(396, 97);
+            this.panel1.Size = new System.Drawing.Size(553, 129);
             this.panel1.TabIndex = 22;
             // 
             // prénom
             // 
             this.prénom.AutoSize = true;
-            this.prénom.Location = new System.Drawing.Point(90, 13);
+            this.prénom.Location = new System.Drawing.Point(3, 30);
             this.prénom.Name = "prénom";
             this.prénom.Size = new System.Drawing.Size(57, 17);
             this.prénom.TabIndex = 24;
@@ -66,7 +66,7 @@
             // link_avis
             // 
             this.link_avis.AutoSize = true;
-            this.link_avis.Location = new System.Drawing.Point(317, 13);
+            this.link_avis.Location = new System.Drawing.Point(474, 13);
             this.link_avis.Name = "link_avis";
             this.link_avis.Size = new System.Drawing.Size(76, 17);
             this.link_avis.TabIndex = 23;
@@ -77,7 +77,7 @@
             // commentaire
             // 
             this.commentaire.AutoSize = true;
-            this.commentaire.Location = new System.Drawing.Point(143, 61);
+            this.commentaire.Location = new System.Drawing.Point(221, 79);
             this.commentaire.Name = "commentaire";
             this.commentaire.Size = new System.Drawing.Size(90, 17);
             this.commentaire.TabIndex = 20;
@@ -117,7 +117,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Name = "AvisHebergement";
-            this.Size = new System.Drawing.Size(401, 104);
+            this.Size = new System.Drawing.Size(612, 135);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

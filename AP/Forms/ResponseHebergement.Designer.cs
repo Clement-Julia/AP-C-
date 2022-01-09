@@ -42,15 +42,15 @@ namespace AP.Forms
             this.panel2.Controls.Add(this.prenom);
             this.panel2.Controls.Add(this.reponse);
             this.panel2.Controls.Add(this.nom);
-            this.panel2.Location = new System.Drawing.Point(59, 3);
+            this.panel2.Location = new System.Drawing.Point(237, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(341, 97);
+            this.panel2.Size = new System.Drawing.Size(362, 125);
             this.panel2.TabIndex = 24;
             // 
             // prenom
             // 
             this.prenom.AutoSize = true;
-            this.prenom.Location = new System.Drawing.Point(132, 13);
+            this.prenom.Location = new System.Drawing.Point(12, 26);
             this.prenom.Name = "prenom";
             this.prenom.Size = new System.Drawing.Size(126, 17);
             this.prenom.TabIndex = 21;
@@ -59,7 +59,7 @@ namespace AP.Forms
             // reponse
             // 
             this.reponse.AutoSize = true;
-            this.reponse.Location = new System.Drawing.Point(85, 64);
+            this.reponse.Location = new System.Drawing.Point(162, 86);
             this.reponse.Name = "reponse";
             this.reponse.Size = new System.Drawing.Size(152, 17);
             this.reponse.TabIndex = 20;
@@ -68,7 +68,7 @@ namespace AP.Forms
             // nom
             // 
             this.nom.AutoSize = true;
-            this.nom.Location = new System.Drawing.Point(20, 13);
+            this.nom.Location = new System.Drawing.Point(12, 9);
             this.nom.Name = "nom";
             this.nom.Size = new System.Drawing.Size(106, 17);
             this.nom.TabIndex = 20;
@@ -80,7 +80,7 @@ namespace AP.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel2);
             this.Name = "ResponseHebergement";
-            this.Size = new System.Drawing.Size(402, 103);
+            this.Size = new System.Drawing.Size(602, 139);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);

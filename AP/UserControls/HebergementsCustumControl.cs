@@ -14,11 +14,13 @@ namespace AP.Forms
     public partial class HebergementsCustumControl : UserControl
     {
         public Hebergement Hebergement { get; set; }
+        public Utilisateur Utilisateur { get; set; }
         public FormHebergements FormHeber { get; set; }
-        public HebergementsCustumControl(Hebergement hebergement, FormHebergements formHebergements)
+        public HebergementsCustumControl(Hebergement hebergement, Utilisateur utilisateur, FormHebergements formHebergements)
         {
             InitializeComponent();
             this.Hebergement = hebergement;
+            this.Utilisateur = utilisateur;
             this.FormHeber = formHebergements;
             LabelNomHebergement.Text = Hebergement.Libelle;
             LabelNbReservationEnCours.Text = Hebergement.GetNombreReservationEnCours();
@@ -51,5 +53,19 @@ namespace AP.Forms
 
         }
 
+        private void BtnModification_Click(object sender, EventArgs e)
+        {
+
+            modifHebergement Panel = new modifHebergement(Utilisateur, Hebergement);
+            Panel.TopLevel = false;
+            Panel.FormBorderStyle = FormBorderStyle.None;
+            Panel.AutoScroll = true;
+            FormHeber.Controls.Add(Panel);
+            FormHeber.Tag = Panel;
+            Panel.Dock = DockStyle.Fill;
+            Panel.BringToFront();
+            Panel.Show();
+
+        }
     }
 }

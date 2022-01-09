@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AP.Model
 {
@@ -65,6 +66,38 @@ namespace AP.Model
             this.Uuid = uuid;
         }
 
+        public List<Ville> GetAllVille()
+        {
+            _bdd.Open();
 
+            List<Ville> Villes = new List<Ville>();
+            float latitude;
+            float longitude;
+            int idRegion;
+            string description;
+            string uuid;
+
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT * FROM villes";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                Ville ville = new Ville();
+
+                if (!reader.IsDBNull(reader.GetOrdinal("latitude"))) { latitude = reader.GetFloat(2); } else { latitude = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("longitude"))) { longitude = reader.GetFloat(3); } else { longitude = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { idRegion = reader.GetInt32(4); } else { idRegion = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { description = reader.GetString(5); } else { description = "null"; }
+                if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(6); } else { uuid = ""; }
+
+                ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), latitude, longitude, idRegion, description, uuid);
+
+                Villes.Add(ville);
+            }
+
+            _bdd.Close();
+
+            return Villes;
+        }
     }
 }
