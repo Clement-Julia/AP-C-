@@ -15,6 +15,9 @@ namespace AP.Model
 
         private string _libelle { get; set; }
         public string Libelle { get { return _libelle; } set { _libelle = value; } }
+        
+        private string _codePostal { get; set; }
+        public string CodePostal { get { return _codePostal; } set { _codePostal = value; } }
 
         private float _latitude { get; set; }
         public float Latitude { get { return _latitude; } set { _latitude = value; } }
@@ -45,20 +48,22 @@ namespace AP.Model
                 {
                     this.IdVille = reader.GetInt32(0);
                     this.Libelle = reader.GetString(1);
-                    this.Latitude = reader.GetFloat(2);
-                    this.Longitude = reader.GetFloat(3);
-                    this.IdRegion = reader.GetInt32(4);
-                    this.Description = reader.GetString(5);
-                    this.Uuid = reader.GetString(6);
+                    this.CodePostal = reader.GetString(2);
+                    this.Latitude = reader.GetFloat(3);
+                    this.Longitude = reader.GetFloat(4);
+                    this.IdRegion = reader.GetInt32(5);
+                    this.Description = reader.GetString(6);
+                    this.Uuid = reader.GetString(7);
                 }
                 _bdd.Close();
             }
         }
 
-        public void InitialiserVille(int idVille, string libelle, float latitude, float longitude, int idRegion, string description, string uuid)
+        public void InitialiserVille(int idVille, string libelle, string codePostal, float latitude, float longitude, int idRegion, string description, string uuid)
         {
             this.IdVille = idVille;
             this.Libelle = libelle;
+            this.CodePostal = codePostal;
             this.Latitude = latitude;
             this.Longitude = longitude;
             this.IdRegion = idRegion;
@@ -84,13 +89,14 @@ namespace AP.Model
             {
                 Ville ville = new Ville();
 
-                if (!reader.IsDBNull(reader.GetOrdinal("latitude"))) { latitude = reader.GetFloat(2); } else { latitude = 0; }
-                if (!reader.IsDBNull(reader.GetOrdinal("longitude"))) { longitude = reader.GetFloat(3); } else { longitude = 0; }
-                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { idRegion = reader.GetInt32(4); } else { idRegion = 0; }
-                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { description = reader.GetString(5); } else { description = "null"; }
-                if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(6); } else { uuid = ""; }
+                if (!reader.IsDBNull(reader.GetOrdinal("latitude"))) { latitude = reader.GetFloat(3); } else { latitude = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("longitude"))) { longitude = reader.GetFloat(4); } else { longitude = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("idRegion"))) { idRegion = reader.GetInt32(5); } else { idRegion = 0; }
+                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { description = reader.GetString(6); } else { description = "null"; }
+                if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(7); } else { uuid = ""; }
 
-                ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), latitude, longitude, idRegion, description, uuid);
+                // ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetFloat(4), reader.GetInt32(5), description, uuid);
+                ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), latitude, longitude, idRegion, description, uuid);
 
                 Villes.Add(ville);
             }

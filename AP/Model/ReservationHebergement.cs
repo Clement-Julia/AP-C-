@@ -87,7 +87,7 @@ namespace AP.Model
             while (reader.Read())
             {
                 if (!reader.IsDBNull(reader.GetOrdinal("description"))) { descripton = reader.GetString(0); } else { descripton = ""; }
-                Ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3), reader.GetInt32(4), descripton, reader.GetString(6));
+                Ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetFloat(4), reader.GetInt32(5), descripton, reader.GetString(7));
             }
             _bdd.Close();
 
