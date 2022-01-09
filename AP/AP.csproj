@@ -443,15 +443,6 @@
     <EmbeddedResource Include="Forms\SupprimerResponse.resx">
       <DependentUpon>SupprimerResponse.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Test1.resx">
-      <DependentUpon>Test1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\test2.resx">
-      <DependentUpon>test2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>

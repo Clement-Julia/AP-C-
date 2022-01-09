@@ -66,7 +66,6 @@ namespace AP.Model
             this.Uuid = uuid;
         }
 
-<<<<<<< HEAD
         public List<Ville> GetAllVille()
         {
             _bdd.Open();
@@ -90,7 +89,17 @@ namespace AP.Model
                 if (!reader.IsDBNull(reader.GetOrdinal("description"))) { idRegion = reader.GetInt32(4); } else { idRegion = 0; }
                 if (!reader.IsDBNull(reader.GetOrdinal("description"))) { description = reader.GetString(5); } else { description = "null"; }
                 if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(6); } else { uuid = ""; }
-=======
+
+                ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), latitude, longitude, idRegion, description, uuid);
+
+                Villes.Add(ville);
+            }
+
+            _bdd.Close();
+
+            return Villes;
+        }
+
         public bool IsThisTownExist(string ville)
         {
             _bdd.Open();
@@ -126,18 +135,6 @@ namespace AP.Model
             _bdd.Close();
 
             return idRegion;
-        }
-
->>>>>>> remy2
-
-                ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), latitude, longitude, idRegion, description, uuid);
-
-                Villes.Add(ville);
-            }
-
-            _bdd.Close();
-
-            return Villes;
         }
     }
 }

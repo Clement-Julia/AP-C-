@@ -32,17 +32,10 @@ namespace From
 
             SetProcessDpiAwareness((int)DpiAwareness.PerMonitorAware);
 
-<<<<<<< HEAD
-             //Application.Run(new AP.modifHebergement());
+            //Application.Run(new AP.modifHebergement());
             //Application.Run(new Home());
             Application.Run(new Connexion());
             //Application.Run(new AjoutHebergement());
-=======
-            // Application.Run(new AP.modifHebergement());
-            // Application.Run(new Home());
-            Application.Run(new Connexion());
-            // Application.Run(new AjoutHebergement());
->>>>>>> remy2
         }
     }
 }
