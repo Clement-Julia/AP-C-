@@ -36,6 +36,10 @@ namespace AP.Model
         private string _dateOfBirth;
         public string DateOfBirth { get { return _dateOfBirth; } set { _dateOfBirth = value; } }
 
+        private List<Hebergement> _listHebergements = new List<Hebergement>();
+
+        public List<Hebergement> ListHebergements { get { return _listHebergements; } set { _listHebergements = value; } }
+
         public Utilisateur(int IdUtilisateur = 0)
         {
             if(IdUtilisateur != 0)
@@ -58,6 +62,8 @@ namespace AP.Model
                     this.DateOfBirth = reader.GetString(8);
                 }
                 _bdd.Close();
+
+                GetAllHebergements();
             }
         }
 
@@ -81,6 +87,8 @@ namespace AP.Model
                 this.DateOfBirth = reader.GetString(8);
             }
             _bdd.Close();
+
+            GetAllHebergements();
         }
 
         public void InitialisationUtilisateur(int id, string email, string mdp, string nom, string prenom, int idRole, bool acceptRGPD, DateTime dateAcceptRGPD, string dateOfBirth)
@@ -98,9 +106,6 @@ namespace AP.Model
 
         public List<Hebergement> GetAllHebergements()
         {
-
-            List<Hebergement> Hebergements = new List<Hebergement>();
-
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
             query.CommandText = "SELECT * FROM hebergement WHERE idUtilisateur = @idUtilisateur";
@@ -110,41 +115,43 @@ namespace AP.Model
             {
                 Hebergement Hebergement = new Hebergement();
                 Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetString(8), reader.GetInt32(9), reader.GetDateTime(10));
-                Hebergements.Add(Hebergement);
+                _listHebergements.Add(Hebergement);
             }
             _bdd.Close();
 
-            return Hebergements;
+            return _listHebergements;
         }
 
         public int GetNbHebergements()
         {
-            _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT COUNT(idHebergement) FROM hebergement WHERE idUtilisateur = @idUtilisateur";
-            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
-            MySqlDataReader reader = query.ExecuteReader();
-            int quantite = 0;
-            while (reader.Read())
-            {
-                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
-            }
-            _bdd.Close();
+            //_bdd.Open();
+            //MySqlCommand query = _bdd.CreateCommand();
+            //query.CommandText = "SELECT COUNT(idHebergement) FROM hebergement WHERE idUtilisateur = @idUtilisateur";
+            //query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            //MySqlDataReader reader = query.ExecuteReader();
+            //int quantite = 0;
+            //while (reader.Read())
+            //{
+            //    if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
+            //}
+            //_bdd.Close();
 
-            return quantite;
+            // return quantite;
+            return _listHebergements.Count;
         }
 
         public int GetNbTotalReservations()
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT COUNT(idReservationHebergement) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) WHERE hebergement.idUtilisateur = @idUtilisateur";
+            query.CommandText = "SELECT COUNT(*) FROM reservations_hebergement INNER JOIN hebergement USING(idHebergement) WHERE hebergement.idUtilisateur = @idUtilisateur";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
             MySqlDataReader reader = query.ExecuteReader();
             int quantite = 0;
             while (reader.Read())
             {
-                if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
+                //if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
+                quantite = reader.GetInt32(0);
             }
             _bdd.Close();
 

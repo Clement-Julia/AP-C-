@@ -26,13 +26,14 @@ namespace AP
 
         private Utilisateur _utilisateur;
         private Hebergement _hebergement;
+        private FormHebergements _formHebergements;
 
-        public modifHebergement(Utilisateur Utilisateur, Hebergement Hebergement)
+        public modifHebergement(Hebergement hebergement, Utilisateur utilisateur, FormHebergements formHebergements)
         {
             InitializeComponent();
-            this._utilisateur = Utilisateur;
-
-            this._hebergement = Hebergement;
+            this._utilisateur = utilisateur;
+            this._formHebergements = formHebergements;
+            this._hebergement = hebergement;
 
             //Initialisation des valeurs de tab généraux
             name.Text = _hebergement.Libelle;
@@ -59,9 +60,9 @@ namespace AP
 
             //Initialisation du menu option
             Option Option = new Option();
-            Hebergement hebergement = new Hebergement();
+            Hebergement Hebergement = new Hebergement();
             this.allOptions = Option.getAllOptions();
-            this.checkedOptions = hebergement.GetAllOptionsByHebergement(idHebergement);
+            this.checkedOptions = Hebergement.GetAllOptionsByHebergement(idHebergement);
 
             foreach (Option option in allOptions)
             {

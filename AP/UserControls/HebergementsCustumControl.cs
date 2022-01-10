@@ -13,18 +13,18 @@ namespace AP.Forms
 {
     public partial class HebergementsCustumControl : UserControl
     {
-        public Hebergement Hebergement { get; set; }
-        public Utilisateur Utilisateur { get; set; }
-        public FormHebergements FormHeber { get; set; }
+        private Hebergement _hebergement { get; set; }
+        private Utilisateur _utilisateur { get; set; }
+        private FormHebergements _formHebergement { get; set; }
         public HebergementsCustumControl(Hebergement hebergement, Utilisateur utilisateur, FormHebergements formHebergements)
         {
             InitializeComponent();
-            this.Hebergement = hebergement;
-            this.Utilisateur = utilisateur;
-            this.FormHeber = formHebergements;
-            LabelNomHebergement.Text = Hebergement.Libelle;
-            LabelNbReservationEnCours.Text = Hebergement.GetNombreReservationEnCours();
-            LabelNbReservationAVenir.Text = Hebergement.GetNombreReservationAVenir();
+            this._hebergement = hebergement;
+            this._utilisateur = utilisateur;
+            this._formHebergement = formHebergements;
+            LabelNomHebergement.Text = _hebergement.Libelle;
+            LabelNbReservationEnCours.Text = _hebergement.GetNombreReservationEnCours();
+            LabelNbReservationAVenir.Text = _hebergement.GetNombreReservationAVenir();
         }
 
         public HebergementsCustumControl()
@@ -32,40 +32,28 @@ namespace AP.Forms
             InitializeComponent();
         }
 
-
-        private void HebergementsCustumControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void BtnInfos_Click(object sender, EventArgs e)
         {
-
-            HebergementInfos Panel = new HebergementInfos(Hebergement);
-            Panel.TopLevel = false;
-            Panel.FormBorderStyle = FormBorderStyle.None;
-            Panel.AutoScroll = true;
-            FormHeber.Controls.Add(Panel);
-            FormHeber.Tag = Panel;
-            Panel.Dock = DockStyle.Fill;
-            Panel.BringToFront();
-            Panel.Show();
-
+            HebergementInfos form = new HebergementInfos(_hebergement);
+            ShowInParent(form);
         }
 
         private void BtnModification_Click(object sender, EventArgs e)
         {
+            modifHebergement form = new modifHebergement(_hebergement, _utilisateur, _formHebergement);
+            ShowInParent(form);
+        }
 
-            modifHebergement Panel = new modifHebergement(Utilisateur, Hebergement);
-            Panel.TopLevel = false;
-            Panel.FormBorderStyle = FormBorderStyle.None;
-            Panel.AutoScroll = true;
-            FormHeber.Controls.Add(Panel);
-            FormHeber.Tag = Panel;
-            Panel.Dock = DockStyle.Fill;
-            Panel.BringToFront();
-            Panel.Show();
-
+        private void ShowInParent(Form form)
+        {
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.AutoScroll = true;
+            _formHebergement.Controls.Add(form);
+            _formHebergement.Tag = form;
+            form.Dock = DockStyle.Fill;
+            form.BringToFront();
+            form.Show();
         }
     }
 }

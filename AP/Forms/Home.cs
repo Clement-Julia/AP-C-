@@ -35,6 +35,7 @@ namespace AP.Forms
         public Home(Utilisateur utilisateur)
         {
             InitializeComponent();
+            this.Utilisateur = utilisateur;
             panelFiscaliteSubmenu.Visible = false;
             panelHebergementSubmenu.Visible = false;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
@@ -42,7 +43,6 @@ namespace AP.Forms
             PnlNav.Top = BtnAccueil.Top;
             PnlNav.Left = BtnAccueil.Left;
             BtnAccueil.BackColor = Color.FromArgb(32, 178, 170);
-            this.Utilisateur = utilisateur;
             LabelUserName.Text = Utilisateur.Nom + " " + Utilisateur.Prenom;
             LabelMembreDepuis.Text = "Membre depuis " + Utilisateur.DateAcceptRGPD.ToString("dd-MM-yyyy");
 

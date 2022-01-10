@@ -329,8 +329,6 @@ namespace AP.Forms
             // 
             this.hebergementsCustumControl1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.hebergementsCustumControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.hebergementsCustumControl1.FormHeber = null;
-            this.hebergementsCustumControl1.Hebergement = null;
             this.hebergementsCustumControl1.Location = new System.Drawing.Point(200, 0);
             this.hebergementsCustumControl1.Margin = new System.Windows.Forms.Padding(25, 10, 25, 10);
             this.hebergementsCustumControl1.Name = "hebergementsCustumControl1";
