@@ -28,14 +28,14 @@ namespace AP.Model
         private int _idVille;
         public int IdVille { get { return _idVille; } set { _idVille = value; } }
 
-        private int _latitude;
-        public int Latitude { get { return _latitude; } set { _latitude = value; } }
+        private double _latitude;
+        public double Latitude { get { return _latitude; } set { _latitude = value; } }
 
-        private int _longitude;
-        public int Longitude { get { return _longitude; } set { _longitude = value; } }
+        private double _longitude;
+        public double Longitude { get { return _longitude; } set { _longitude = value; } }
 
-        private int _prix;
-        public int Prix { get { return _prix; } set { _prix = value; } }
+        private decimal _prix;
+        public decimal Prix { get { return _prix; } set { _prix = value; } }
 
         private string _uuid;
         public string Uuid { get { return _uuid; } set { _uuid = value; } }
@@ -45,6 +45,14 @@ namespace AP.Model
 
         private DateTime _dateEnregistrement;
         public DateTime DateEnregistrement { get { return _dateEnregistrement; } set { _dateEnregistrement = value; } }
+
+        private List<Avis> _listAvis = new List<Avis>();
+
+        public List<Avis> ListAvis { get { return _listAvis; } set { _listAvis = value; } }
+
+        private List<Option> _listOptions = new List<Option>();
+
+        public List<Option> ListOption { get { return _listOptions; } set { _listOptions = value; } }
 
         public Hebergement(int IdHebergement = 0)
         {
@@ -62,18 +70,41 @@ namespace AP.Model
                     this.Adresse = reader.GetString(2);
                     this.Description = reader.GetString(3);
                     this.IdVille = reader.GetInt32(4);
-                    this.Latitude = reader.GetInt32(5);
-                    this.Longitude = reader.GetInt32(6);
-                    this.Prix = reader.GetInt32(7);
+                    this.Latitude = reader.GetDouble(5);
+                    this.Longitude = reader.GetDouble(6);
+                    this.Prix = reader.GetDecimal(7);
                     this.Uuid = reader.GetString(8);
                     this.IdUtilisateur = reader.GetInt32(9);
                     this.DateEnregistrement = reader.GetDateTime(10);
                 }
                 _bdd.Close();
+
+                _bdd.Open();
+                query.CommandText = "SELECT * FROM avis WHERE idHebergement = @idHebergement";
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    Avis avis = new Avis();
+                    avis.InitialisationAvis(reader.GetInt32(0), reader.GetDateTime(1), reader.GetInt32(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5));
+                    _listAvis.Add(avis);
+                }
+                _bdd.Close();
+
+                _bdd.Open();
+                query.CommandText = "SELECT op.* FROM options op INNER JOIN options_by_hebergement USING(idOption) WHERE idHebergement = @idHebergement";
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    Option option = new Option();
+                    option.InitialisationOption(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
+                    ListOption.Add(option);
+                }
+                _bdd.Close();
+
             }
         }
 
-        public void InitialisationHebergement(int id, string libelle, string adresse, string description, int idVille, int latitude, int longitude, int prix, string uuid, int idUtilisateur, DateTime dateEnregistrement)
+        public void InitialisationHebergement(int id, string libelle, string adresse, string description, int idVille, double latitude, double longitude, decimal prix, string uuid, int idUtilisateur, DateTime dateEnregistrement)
         {
             this.IdHebergement = id;
             this.Libelle = libelle;
@@ -92,7 +123,7 @@ namespace AP.Model
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "UPDATE hebergements SET idHebergement = @idHebergement, libelle = @libelle, adresse = @adresse, description = @description, idVille = @idVille, latitude = @latitude, longitude = @longitude, prix = @prix, uudi = @uuid, idUtilisateur = @idUtilisateur WHERE idHebergement = @idHebergement";
+            query.CommandText = "UPDATE hebergement SET idHebergement = @idHebergement, libelle = @libelle, adresse = @adresse, description = @description, idVille = @idVille, latitude = @latitude, longitude = @longitude, prix = @prix WHERE idHebergement = @idHebergement";
             query.Parameters.AddWithValue("@idHebergement", IdHebergement);
             query.Parameters.AddWithValue("@libelle", Libelle);
             query.Parameters.AddWithValue("@adresse", Adresse);
@@ -101,15 +132,14 @@ namespace AP.Model
             query.Parameters.AddWithValue("@latitude", Latitude);
             query.Parameters.AddWithValue("@longitude", Longitude);
             query.Parameters.AddWithValue("@prix", Prix);
-            query.Parameters.AddWithValue("@uuid", Uuid);
-            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
-            _bdd.Close();
             if (query.ExecuteNonQuery() > 0)
             {
+                _bdd.Close();
                 return true;
             }
             else
             {
+                _bdd.Close();
                 return false;
             }
 
@@ -117,42 +147,11 @@ namespace AP.Model
 
         public int GetStatusHebergement(int idHebergement)
         {
-            //_bdd.Open();
-
-            //string result = null;
-            //int status = 0;
-
-            //MySqlCommand query = _bdd.CreateCommand();
-            //query.Parameters.AddWithValue("@idHebergement", idHebergement);
-            //query.CommandText = "SELECT * FROM reservations_hebergement where idHebergement = @idHebergement and dateFin > now()";
-
-            //MySqlDataReader reader3 = query.ExecuteReader();
-            //while (reader3.Read())
-            //{
-            //    result = reader3.GetString(0);
-            //}
-
-            //if (result != null)
-            //{
-            //    status = 1;
-            //}
-            //else
-            //{
-            //    status = 0;
-            //}
-
-            //_bdd.Close();
-
-            //return status;
-
-            int result = 0;
-
             _bdd.Open();
-            //MySqlCommand query = _bdd.CreateCommand();
+
             MySqlCommand query = new MySqlCommand("est_reserver", _bdd);
             query.CommandType = CommandType.StoredProcedure;
 
-            //query.Parameters.AddWithValue("@p_idHebergement", idHebergement);
             query.Parameters.AddWithValue("p_idHebergement", idHebergement);
             query.Parameters["p_idHebergement"].Direction = ParameterDirection.Input;
 
@@ -215,22 +214,6 @@ namespace AP.Model
             }
         }
 
-        public List<Option> GetAllOptionsByHebergement(int id)
-        {
-            _bdd.Open();
-            List<Option> Options = new List<Option>();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", id);
-            query.CommandText = "SELECT * FROM options_by_hebergement where idHebergement = @idHebergement";
-            MySqlDataReader reader = query.ExecuteReader();
-            while (reader.Read())
-            {
-                Options.Add(new Option(reader.GetInt32(1)));
-            }
-            _bdd.Close();
-            return Options;
-        }
-
         public void UpdateOption(int id, int option, List<string> name)
         {
             string req = "";
@@ -240,13 +223,9 @@ namespace AP.Model
             supOption.Parameters.AddWithValue("@idHebergement", id);
             supOption.CommandText = "delete from options_by_hebergement where idHebergement = @idHebergement";
             supOption.ExecuteNonQuery();
-            if (supOption.ExecuteNonQuery() > 0)
-            {
-                MessageBox.Show("Suppression effectuée !");
-            }
-
             _bdd.Close();
-            if(name.Count != 0)
+
+            if(name.Count > 0)
             {
                 _bdd.Open();
                 MySqlCommand ajoutOption = _bdd.CreateCommand();
@@ -256,7 +235,6 @@ namespace AP.Model
                     ajoutOption.Parameters.AddWithValue("@idOption" + i, name[i]);
                     req += "(@idHebergement, @idOption" + i + "),";
                 }
-                //req.Substring(0, req.Length - 1);
                 req = req.TrimEnd(',');
                 ajoutOption.CommandText = "insert into options_by_hebergement(idHebergement, idOption) values" + req;
                 if (ajoutOption.ExecuteNonQuery() > 0)

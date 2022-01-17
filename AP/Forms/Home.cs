@@ -36,50 +36,21 @@ namespace AP.Forms
         {
             InitializeComponent();
             this.Utilisateur = utilisateur;
+            // On masque les sous menus
             panelFiscaliteSubmenu.Visible = false;
             panelHebergementSubmenu.Visible = false;
+            // Fonction pour arrondir les bords du Form principal
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+            // PnlNav = Bordure blanche indiquant la sélection d'un bouton
             PnlNav.Height = BtnAccueil.Height;
             PnlNav.Top = BtnAccueil.Top;
             PnlNav.Left = BtnAccueil.Left;
             BtnAccueil.BackColor = Color.FromArgb(32, 178, 170);
+
             LabelUserName.Text = Utilisateur.Nom + " " + Utilisateur.Prenom;
             LabelMembreDepuis.Text = "Membre depuis " + Utilisateur.DateAcceptRGPD.ToString("dd-MM-yyyy");
 
             openChildForm(new FormAccueil(utilisateur));
-        }
-
-        private void BtnAccueil_Click(object sender, EventArgs e)
-        {
-            HideSubmenu();
-            PnlNav.Height = BtnAccueil.Height;
-            PnlNav.Top = BtnAccueil.Top;
-            PnlNav.Left = BtnAccueil.Left;
-            openChildForm(new FormAccueil(Utilisateur));
-
-        }
-
-        private void BtnHebergements_Click(object sender, EventArgs e)
-        {
-            PnlNav.Height = BtnHebergements.Height;
-            PnlNav.Top = BtnHebergements.Top;
-            openChildForm(new FormHebergements(Utilisateur));
-
-        }
-
-        private void BtnFiscalite_Click(object sender, EventArgs e)
-        {
-            PnlNav.Height = BtnFiscalite.Height;
-            PnlNav.Top = BtnFiscalite.Top;
-            openChildForm(new Justificatif(Utilisateur));
-        }
-
-        private void BtnOptions_Click(object sender, EventArgs e)
-        {
-            HideSubmenu();
-            PnlNav.Height = BtnOptions.Height;
-            PnlNav.Top = BtnOptions.Top;
-            openChildForm(new Options(Utilisateur, this));
         }
 
         private void BtnAccueil_Leave(object sender, EventArgs e)
@@ -101,43 +72,69 @@ namespace AP.Forms
         {
             BtnOptions.BackColor = Color.FromArgb(32, 178, 170);
         }
-        private void openChildForm(Form childForm)
+
+        // ACCUEIL
+        private void Accueil_Click(object sender, EventArgs e)
         {
-            if (activeForm != null)
-                activeForm.Close();
-            activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            PanelAccueil.Controls.Add(childForm);
-            PanelAccueil.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
+            HideSubmenu();
+            PnlNav.Height = BtnAccueil.Height;
+            PnlNav.Top = BtnAccueil.Top;
+            PnlNav.Left = BtnAccueil.Left;
+            openChildForm(new FormAccueil(Utilisateur));
         }
 
-        private void BtnTest_Click(object sender, EventArgs e)
+        // HEBERGEMENT
+        private void OpenHebergementSubMenu(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnHebergements.Height;
+            PnlNav.Top = BtnHebergements.Top;
+            ShowSubmenu(panelHebergementSubmenu);
+        }
+        private void AjoutHebergement_Click(object sender, EventArgs e)
         {
             PnlNav.Height = BtnHebergements.Height;
             PnlNav.Top = BtnHebergements.Top;
             openChildForm(new AjoutHebergement(Utilisateur));
         }
 
-        // C'est le bouton HEBERGEMENT qui ouvre le submenu 
-        private void BtnHebergements_Click_1(object sender, EventArgs e)
+        private void VoirHebergements_Click(object sender, EventArgs e)
         {
             PnlNav.Height = BtnHebergements.Height;
             PnlNav.Top = BtnHebergements.Top;
-            ShowSubmenu(panelHebergementSubmenu);
+            openChildForm(new FormHebergements(Utilisateur));
         }
 
-        // C'est le bouton FISCALITE qui ouvre le submenu 
-        private void BtnFiscalite_Click_1(object sender, EventArgs e)
+        // FISCALITE
+        private void OpenFiscaliteSubMenu(object sender, EventArgs e)
         {
             PnlNav.Height = BtnFiscalite.Height;
             PnlNav.Top = BtnFiscalite.Top;
             ShowSubmenu(panelFiscaliteSubmenu);
         }
 
+        private void Justificatif_Click(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnFiscalite.Height;
+            PnlNav.Top = BtnFiscalite.Top;
+            openChildForm(new Justificatif(Utilisateur));
+        }
+        private void Conseils_Click(object sender, EventArgs e)
+        {
+            PnlNav.Height = BtnFiscalite.Height;
+            PnlNav.Top = BtnFiscalite.Top;
+            openChildForm(new Conseils());
+        }
+
+        // OPTIONS / PARAMETRES
+        private void Options_Click(object sender, EventArgs e)
+        {
+            HideSubmenu();
+            PnlNav.Height = BtnOptions.Height;
+            PnlNav.Top = BtnOptions.Top;
+            openChildForm(new Options(Utilisateur, this));
+        }
+
+        // FONCTIONS AUTRES
         private void HideSubmenu()
         {
             if (panelFiscaliteSubmenu.Visible == true)
@@ -157,12 +154,20 @@ namespace AP.Forms
                 submenu.Visible = false;
         }
 
-        private void BtnConseils_Click(object sender, EventArgs e)
+        private void openChildForm(Form childForm)
         {
-            PnlNav.Height = BtnFiscalite.Height;
-            PnlNav.Top = BtnFiscalite.Top;
-            openChildForm(new Conseils());
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            PanelAccueil.Controls.Add(childForm);
+            PanelAccueil.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
+
     }
 }
 

@@ -113,9 +113,10 @@ namespace AP.Model
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                Hebergement Hebergement = new Hebergement();
-                Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetString(8), reader.GetInt32(9), reader.GetDateTime(10));
-                _listHebergements.Add(Hebergement);
+                //Hebergement Hebergement = new Hebergement();
+                //Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetDouble(5), reader.GetDouble(6), reader.GetInt32(7), reader.GetString(8), reader.GetInt32(9), reader.GetDateTime(10));
+                //_listHebergements.Add(Hebergement);
+                _listHebergements.Add(new Hebergement(reader.GetInt32(0)));
             }
             _bdd.Close();
 

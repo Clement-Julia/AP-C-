@@ -17,40 +17,55 @@ namespace AP.Forms
         private modifHebergement ModifHebergement;
         private int idHebergement;
         private Utilisateur _utilisateur;
-        public AvisHebergement(Avis avis, modifHebergement ModifHebergement, int idHebergement, Utilisateur utilisateur)
+        private Response _response;
+        public Response Response { get { return _response; } set { _response = value; } }
+
+        public AvisHebergement(Avis avis, modifHebergement ModifHebergement, int idHebergement, Utilisateur utilisateur, Boolean boolean = false)
         {
             InitializeComponent();
-            this.nom.Text = avis.Nom;
-            this.prénom.Text = avis.Prénom;
-            this.rating.Text = avis.Note.ToString();
-            this.commentaire.Text = avis.Commentaire;
             this.avis = avis;
             this.ModifHebergement = ModifHebergement;
             this.idHebergement = idHebergement;
             this._utilisateur = utilisateur;
+
+            Utilisateur user = new Utilisateur(avis.IdUtilisateur);
+
+            nom.Text = user.Nom + " " + user.Prenom;
+            rating.Text = avis.Note.ToString();
+            commentaire.Text = avis.Commentaire;
+            labelDate.Text = "Le " + avis.Date.ToString("dd-MM-yyyy");
+
+            _response = new Response(avis.IdAvis);
+
+            if (_response.IdAvis != 0)
+            {
+                panelNonRepondu.Hide();
+                BtnReponse.Text = "Voir réponse";
+                BtnReponse.BackColor = Color.FromArgb(192, 255, 192);
+            } else
+            {
+                panelRepondu.Hide();
+                BtnReponse.Text = "Répondre";
+                BtnReponse.BackColor = Color.FromArgb(255, 224, 192);
+            }
+
+            if (boolean)
+                BtnReponse.Hide();
+
         }
 
-        private void link_avis_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void BtnReponse_Click(object sender, EventArgs e)
         {
+            ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
             ModifHebergement.flow_avis.Controls.Clear();
-            ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-            Response Response = new Response();
-            List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-            foreach (Response result in réponse)
-            {
-                ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                ModifHebergement.flow_avis.Controls.Add(customControl);
-            }
-            ControlResponse Panel = new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur);
+            ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur, true));
+            ControlResponse Panel = new ControlResponse(_response, avis, idHebergement, ModifHebergement, _utilisateur);
             Panel.AutoScroll = true;
             ModifHebergement.tab_avis.Controls.Add(Panel);
             ModifHebergement.tab_avis.Tag = Panel;
             Panel.Dock = DockStyle.Bottom;
             Panel.BringToFront();
             Panel.Show();
-
-            //ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
         }
     }
 }

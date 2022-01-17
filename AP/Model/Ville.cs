@@ -52,7 +52,7 @@ namespace AP.Model
                     this.Latitude = reader.GetFloat(3);
                     this.Longitude = reader.GetFloat(4);
                     this.IdRegion = reader.GetInt32(5);
-                    this.Description = reader.GetString(6);
+                    if (!reader.IsDBNull(reader.GetOrdinal("description"))) { this.Description = reader.GetString(6); } else { this.Description = ""; }
                     this.Uuid = reader.GetString(7);
                 }
                 _bdd.Close();

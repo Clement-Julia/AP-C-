@@ -41,9 +41,10 @@ namespace AP.Forms
             this.retourResponse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.retourResponse.Font = new System.Drawing.Font("Bodoni MT", 14F, System.Drawing.FontStyle.Bold);
             this.retourResponse.ForeColor = System.Drawing.Color.White;
-            this.retourResponse.Location = new System.Drawing.Point(440, 174);
+            this.retourResponse.Location = new System.Drawing.Point(330, 141);
+            this.retourResponse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.retourResponse.Name = "retourResponse";
-            this.retourResponse.Size = new System.Drawing.Size(114, 39);
+            this.retourResponse.Size = new System.Drawing.Size(86, 32);
             this.retourResponse.TabIndex = 33;
             this.retourResponse.Text = "Retour";
             this.retourResponse.UseVisualStyleBackColor = false;
@@ -55,9 +56,10 @@ namespace AP.Forms
             this.supprimerResponse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.supprimerResponse.Font = new System.Drawing.Font("Bodoni MT", 14F, System.Drawing.FontStyle.Bold);
             this.supprimerResponse.ForeColor = System.Drawing.Color.White;
-            this.supprimerResponse.Location = new System.Drawing.Point(263, 174);
+            this.supprimerResponse.Location = new System.Drawing.Point(189, 141);
+            this.supprimerResponse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.supprimerResponse.Name = "supprimerResponse";
-            this.supprimerResponse.Size = new System.Drawing.Size(129, 39);
+            this.supprimerResponse.Size = new System.Drawing.Size(110, 32);
             this.supprimerResponse.TabIndex = 32;
             this.supprimerResponse.Text = "Supprimer";
             this.supprimerResponse.UseVisualStyleBackColor = false;
@@ -69,9 +71,10 @@ namespace AP.Forms
             this.ajoutResponse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ajoutResponse.Font = new System.Drawing.Font("Bodoni MT", 14F, System.Drawing.FontStyle.Bold);
             this.ajoutResponse.ForeColor = System.Drawing.Color.White;
-            this.ajoutResponse.Location = new System.Drawing.Point(95, 174);
+            this.ajoutResponse.Location = new System.Drawing.Point(71, 141);
+            this.ajoutResponse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ajoutResponse.Name = "ajoutResponse";
-            this.ajoutResponse.Size = new System.Drawing.Size(114, 40);
+            this.ajoutResponse.Size = new System.Drawing.Size(86, 32);
             this.ajoutResponse.TabIndex = 30;
             this.ajoutResponse.Text = "Publier";
             this.ajoutResponse.UseVisualStyleBackColor = false;
@@ -79,23 +82,25 @@ namespace AP.Forms
             // 
             // text
             // 
-            this.text.Location = new System.Drawing.Point(71, 30);
+            this.text.Location = new System.Drawing.Point(53, 24);
+            this.text.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.text.Multiline = true;
             this.text.Name = "text";
-            this.text.Size = new System.Drawing.Size(509, 138);
+            this.text.Size = new System.Drawing.Size(383, 113);
             this.text.TabIndex = 31;
             // 
             // ControlResponse
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Controls.Add(this.retourResponse);
             this.Controls.Add(this.supprimerResponse);
             this.Controls.Add(this.ajoutResponse);
             this.Controls.Add(this.text);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ControlResponse";
-            this.Size = new System.Drawing.Size(649, 222);
+            this.Size = new System.Drawing.Size(487, 180);
             this.ResumeLayout(false);
             this.PerformLayout();
 

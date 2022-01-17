@@ -13,185 +13,91 @@ namespace AP.Forms
 {
     public partial class ControlResponse : UserControl
     {
-        List<Response> oldréponse;
-        Avis avis;
-        int idHebergement;
-        modifHebergement ModifHebergement;
+        private int _idHebergement;
+        private modifHebergement _modifHebergement;
         private Utilisateur _utilisateur;
-        public ControlResponse(List<Response> réponse, Avis avis, int idHebergement, modifHebergement modifHebergement, Utilisateur utilisateur)
+        private Response _response;
+        private Avis _avis;
+        private ResponseHebergement _responseHebergement;
+
+        public ControlResponse(Response response, Avis avis, int idHebergement, modifHebergement modifHebergement, Utilisateur utilisateur)
         {
             InitializeComponent();
-            this.oldréponse = réponse;
-            this.avis = avis;
-            this.idHebergement = idHebergement;
-            this.ModifHebergement = modifHebergement;
+            this._idHebergement = idHebergement;
+            this._modifHebergement = modifHebergement;
             this._utilisateur = utilisateur;
+            this._response = response;
+            this._avis = avis;
 
-            if (réponse.Count > 0)
+            if (_response.IdAvis != 0)
             {
                 ajoutResponse.Text = "Modifier";
-                text.Text = réponse[0].Reponse;
+                text.Text = _response.Reponse;
+                this._responseHebergement = new ResponseHebergement(_response, _modifHebergement, _utilisateur);
+                _modifHebergement.flow_avis.Controls.Add(_responseHebergement);
             }
             else
-            {
                 supprimerResponse.Hide();
-            }
         }
 
         private void ajoutResponse_Click(object sender, EventArgs e)
         {
-            Avis Avis = new Avis();
-            if (oldréponse.Count == 0)
+            if (text.Text != "")
             {
-                int status = Avis.AjoutResponse(avis.IdAvis, _utilisateur.IdUtilisateur, text.Text);
-                if (status == 0)
+                if (_response.IdAvis == 0)
                 {
-                    MessageBox.Show("Echec de l'ajout !");
-
-                    ModifHebergement.flow_avis.Controls.Clear();
-                    ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
-                    ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-
-                    Response Response = new Response();
-                    List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-                    foreach (Response result in réponse)
+                    _response = _avis.AjoutResponse(_avis.IdAvis, _utilisateur.IdUtilisateur, text.Text);
+                    if (_response.IdAvis == 0)
+                        MessageBox.Show("Echec de l'ajout !");
+                    else
                     {
-                        ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                        ModifHebergement.flow_avis.Controls.Add(customControl);
+                        MessageBox.Show("Ajout réussi !");
+                        this._responseHebergement = new ResponseHebergement(_response, _modifHebergement, _utilisateur);
+                        _modifHebergement.flow_avis.Controls.Add(_responseHebergement);
+                        ajoutResponse.Text = "Modifier";
+                        supprimerResponse.Show();
                     }
-                    ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
-                }
-                else if (status == 1)
-                {
-                    MessageBox.Show("Ajout réussi !");
-
-                    ModifHebergement.flow_avis.Controls.Clear();
-                    ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
-                    ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-
-                    Response Response = new Response();
-                    List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-                    foreach (Response result in réponse)
-                    {
-                        ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                        ModifHebergement.flow_avis.Controls.Add(customControl);
-                    }
-                    ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
                 }
                 else
                 {
-                    MessageBox.Show("Votre message ne peut pas être vide !");
+                    _response = _avis.UpdateResponse(_response, text.Text);
 
-                    ModifHebergement.flow_avis.Controls.Clear();
-                    ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
-                    ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-
-                    Response Response = new Response();
-                    List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-                    foreach (Response result in réponse)
+                    if (_response.Reponse == text.Text)
                     {
-                        ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                        ModifHebergement.flow_avis.Controls.Add(customControl);
+                        MessageBox.Show("Modification réussie !");
+                        _responseHebergement.reponse.Text = _response.Reponse;
                     }
-                    ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
+                    else
+                        MessageBox.Show("Echec de la modification !");
                 }
             }
             else
             {
-                int status = Avis.UpdateResponse(oldréponse[0].IdResponse, text.Text);
-
-                if (status == 0)
-                {
-                    MessageBox.Show("Echec de la modification !");
-
-                    ModifHebergement.flow_avis.Controls.Clear();
-                    ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
-                    ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-
-                    Response Response = new Response();
-                    List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-                    foreach (Response result in réponse)
-                    {
-                        ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                        ModifHebergement.flow_avis.Controls.Add(customControl);
-                    }
-                    ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
-                }
-                else if (status == 1)
-                {
-                    MessageBox.Show("Modification réussie !");
-
-                    ModifHebergement.flow_avis.Controls.Clear();
-                    ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
-                    ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-
-                    Response Response = new Response();
-                    List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-                    foreach (Response result in réponse)
-                    {
-                        ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                        ModifHebergement.flow_avis.Controls.Add(customControl);
-                    }
-                    ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
-                }
-                else
-                {
-                    MessageBox.Show("Votre message ne peut pas être vide !");
-
-                    ModifHebergement.flow_avis.Controls.Clear();
-                    ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
-                    ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-
-                    Response Response = new Response();
-                    List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-                    foreach (Response result in réponse)
-                    {
-                        ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                        ModifHebergement.flow_avis.Controls.Add(customControl);
-                    }
-                    ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
-                }
+                MessageBox.Show("Votre message ne peut pas être vide !");
             }
         }
 
         private void supprimerResponse_Click(object sender, EventArgs e)
         {
-            Avis Avis = new Avis();
-            MessageBox.Show(Avis.SuppressionResponse(oldréponse[0].IdResponse));
-
-            ModifHebergement.flow_avis.Controls.Clear();
-            ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
-            ModifHebergement.flow_avis.Controls.Add(new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur));
-
-            Response Response = new Response();
-            List<Response> réponse = Response.GetResponses(avis.IdAvis);
-
-            foreach (Response result in réponse)
-            {
-                ResponseHebergement customControl = new ResponseHebergement(result, ModifHebergement);
-                ModifHebergement.flow_avis.Controls.Add(customControl);
-            }
-            ModifHebergement.tab_avis.Controls.Add(new ControlResponse(réponse, avis, idHebergement, ModifHebergement, _utilisateur));
+            MessageBox.Show(_avis.SuppressionResponse(_response));
+            _response = new Response();
+            _modifHebergement.flow_avis.Controls.Remove(_responseHebergement);
+            this._responseHebergement = new ResponseHebergement(_response, _modifHebergement, _utilisateur);
+            ajoutResponse.Text = "Ajouter";
+            supprimerResponse.Hide();
         }
 
         private void retourResponse_Click(object sender, EventArgs e)
         {
-            ModifHebergement.flow_avis.Controls.Clear();
-            ModifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
+            _modifHebergement.flow_avis.Controls.Clear();
+            _modifHebergement.tab_avis.Controls.RemoveByKey("ControlResponse");
 
-            Avis Avis = new Avis();
-            List<Avis> allAvis = Avis.GetAllAvisHebergement(idHebergement);
+            Hebergement Hebergement = new Hebergement(_idHebergement);
 
-            foreach (Avis avis in allAvis)
+            foreach (Avis avis in Hebergement.ListAvis)
             {
-                AvisHebergement customControl = new AvisHebergement(avis, ModifHebergement, idHebergement, _utilisateur);
-                ModifHebergement.flow_avis.Controls.Add(customControl);
+                AvisHebergement customControl = new AvisHebergement(avis, _modifHebergement, _idHebergement, _utilisateur);
+                _modifHebergement.flow_avis.Controls.Add(customControl);
             }
         }
     }

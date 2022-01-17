@@ -10,20 +10,15 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using AP.Forms;
+using AP.Services;
 
 namespace AP
 {
     public partial class modifHebergement : Form
     {
-        private int idHebergement = 23;
-        private int idVille = 0;
-        private int open = 0;
-
         private List<Ville> allVilles;
         private List<Option> allOptions;
-        private List<Option> checkedOptions;
-        private List<Avis> allAvis;
-
+        private int open = 0;
         private Utilisateur _utilisateur;
         private Hebergement _hebergement;
         private FormHebergements _formHebergements;
@@ -33,7 +28,7 @@ namespace AP
             InitializeComponent();
             this._utilisateur = utilisateur;
             this._formHebergements = formHebergements;
-            this._hebergement = hebergement;
+            this._hebergement = new Hebergement(hebergement.IdHebergement);
 
             //Initialisation des valeurs de tab généraux
             name.Text = _hebergement.Libelle;
@@ -41,32 +36,35 @@ namespace AP
             prix.Text = _hebergement.Prix.ToString();
             latitude.Text = _hebergement.Latitude.ToString();
             longitude.Text = _hebergement.Longitude.ToString();
-            idVille = _hebergement.IdVille;
 
             Ville Ville = new Ville();
             allVilles = Ville.GetAllVille();
 
-            foreach(Ville allVille in allVilles)
+            List<Object> items = new List<Object>();
+            ville.DisplayMember = "Text";
+            ville.ValueMember = "Value";
+
+            string nomVille = "";
+            int index = 0;
+            for(int i = 0; i < allVilles.Count; i++)
             {
-                if (allVille.IdVille == idVille)
+                items.Add(new ComboboxItem { Text = allVilles[i].Libelle, Value = allVilles[i].IdVille });
+                if (allVilles[i].IdVille == _hebergement.IdVille)
                 {
-                    ville.Text = allVille.Libelle;
-                }
-                else
-                {
-                    ville.Items.Add(allVille.Libelle);
+                    index = i;
+                    nomVille = allVilles[i].Libelle;
                 }
             }
+            ville.DataSource = items;
+            ville.SelectedIndex = index;
 
             //Initialisation du menu option
             Option Option = new Option();
-            Hebergement Hebergement = new Hebergement();
             this.allOptions = Option.getAllOptions();
-            this.checkedOptions = Hebergement.GetAllOptionsByHebergement(idHebergement);
 
             foreach (Option option in allOptions)
             {
-                var check = checkedOptions.Where(w => w.IdOption == option.IdOption).FirstOrDefault();
+                var check = _hebergement.ListOption.Where(w => w.IdOption == option.IdOption).FirstOrDefault();
                 if (check != null)
                 {
                     OptionHebergement customControl = new OptionHebergement(option, true);
@@ -80,12 +78,9 @@ namespace AP
             }
 
             //Initialisation menu avis
-            Avis Avis = new Avis();
-            allAvis = Avis.GetAllAvisHebergement(idHebergement);
-
-            foreach (Avis avis in allAvis)
+            foreach (Avis avis in _hebergement.ListAvis)
             {
-                AvisHebergement customControl = new AvisHebergement(avis, this, idHebergement, _utilisateur);
+                AvisHebergement customControl = new AvisHebergement(avis, this, _hebergement.IdHebergement, _utilisateur);
                 flow_avis.Controls.Add(customControl);
             }
 
@@ -95,19 +90,8 @@ namespace AP
 
         private void modif_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
-            conn.Open();
-            MySqlCommand command = conn.CreateCommand();
-
-            command.Parameters.AddWithValue("@idHebergement", idHebergement);
-            command.Parameters.AddWithValue("@libelle", name.Text);
-            command.Parameters.AddWithValue("@desciption", description.Text);
-            command.Parameters.AddWithValue("@prix", prix.Text);
-            command.Parameters.AddWithValue("@latitude", latitude.Text);
-            command.Parameters.AddWithValue("@longitude", longitude.Text);
-            conn.Close();
-
-            if (String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(prix.Text) && String.IsNullOrEmpty(latitude.Text) && String.IsNullOrEmpty(longitude.Text))
+            string idVilleComboBox = (ville.SelectedItem as ComboboxItem).Value.ToString();
+            if (String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(idVilleComboBox) && String.IsNullOrEmpty(description.Text) && String.IsNullOrEmpty(prix.Text) && String.IsNullOrEmpty(latitude.Text) && String.IsNullOrEmpty(longitude.Text))
             {
                 MessageBox.Show("Les informations ne peuvent pas être vides");
             }else if(open == 1)
@@ -116,19 +100,21 @@ namespace AP
             }
             else
             {
-                conn.Open();
-                MySqlCommand recup = conn.CreateCommand();
-                recup.Parameters.AddWithValue("@libelle_ville", ville.Text);
-                recup.CommandText = "SELECT idVille from villes where libelle = @libelle_ville";
-                MySqlDataReader recup_ville = recup.ExecuteReader();
-                while (recup_ville.Read())
+                _hebergement.Libelle = name.Text;
+                _hebergement.Description = description.Text;
+                _hebergement.IdVille = Convert.ToInt32(idVilleComboBox);
+                try
                 {
-                    command.Parameters.AddWithValue("@ville", recup_ville.GetInt32(0));
+                    _hebergement.Latitude = Convert.ToDouble(latitude.Text);
+                    _hebergement.Longitude = Convert.ToDouble(longitude.Text);
+                    _hebergement.Prix = Convert.ToDecimal(prix.Text);
+                } catch (Exception)
+                {
+                    MessageBox.Show("Une erreur est survenu durant la mise à jour de l'hébergement, veuillez vérifier le format des données que vous avez souhaité envoyer.");
+                    return;
                 }
-                conn.Close();
-                conn.Open();
-                command.CommandText = "update hebergement set libelle = @libelle, description = @desciption, prix = @prix, idVille = @ville where idHebergement = @idHebergement";
-                if (command.ExecuteNonQuery() > 0)
+                bool result = _hebergement.UpdateHebergement();
+                if (result)
                 {
                     MessageBox.Show("Modification effectuée !");
                 }
@@ -138,8 +124,6 @@ namespace AP
                 }
             }
 
-
-            conn.Close();
         }
 
         private void modif2_Click_1(object sender, EventArgs e)
@@ -156,8 +140,7 @@ namespace AP
 
             if (open != 1)
             {
-                Hebergement Hebergement = new Hebergement();
-                Hebergement.UpdateOption(idHebergement, allOptions.Count(), checkid);
+                _hebergement.UpdateOption(_hebergement.IdHebergement, allOptions.Count(), checkid);
             }
             else
             {
@@ -171,7 +154,7 @@ namespace AP
             conn.Open();
             MySqlCommand command = conn.CreateCommand();
 
-            command.Parameters.AddWithValue("@idHebergement", idHebergement);
+            command.Parameters.AddWithValue("@idHebergement", _hebergement.IdHebergement);
 
             if (open != 1)
             {

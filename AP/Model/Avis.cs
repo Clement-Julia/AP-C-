@@ -29,12 +29,6 @@ namespace AP.Model
         private int _idHebergements;
         public int IdHebergement { get { return _idHebergements; } set { _idHebergements = value; } }
 
-        private string _nom;
-        public string Nom { get { return _nom; } set { _nom = value; } }
-
-        private string _prénom;
-        public string Prénom { get { return _prénom; } set { _prénom = value; } }
-
         public Avis(int IdAvis = 0)
         {
             if (IdAvis != 0)
@@ -57,7 +51,7 @@ namespace AP.Model
             }
         }
 
-        public void InitialisationAvis(int id, DateTime date, int note, string commentaire, int idUtilisateur, int idHebergement, string nom, string prenom)
+        public void InitialisationAvis(int id, DateTime date, int note, string commentaire, int idUtilisateur, int idHebergement)
         {
             this.IdAvis = id;
             this.Date = date;
@@ -65,8 +59,6 @@ namespace AP.Model
             this.Commentaire = commentaire;
             this.IdUtilisateur = idUtilisateur;
             this.IdHebergement = idHebergement;
-            this.Nom = nom;
-            this.Prénom = prenom;
         }
 
         public List<Avis> GetAllAvisHebergement(int id)
@@ -75,79 +67,77 @@ namespace AP.Model
             List<Avis> Avis = new List<Avis>();
             MySqlCommand query = _bdd.CreateCommand();
             query.Parameters.AddWithValue("@idHebergement", id);
-            query.CommandText = "SELECT idAvis, date, note, commentaire, idUtilisateur, idHebergement, nom, prenom FROM avis inner JOIN utilisateurs using (idutilisateur) where idHebergement = @idHebergement";
+            query.CommandText = "SELECT idAvis, date, note, commentaire, idUtilisateur, idHebergement FROM avis inner JOIN utilisateurs using (idutilisateur) where idHebergement = @idHebergement";
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
                 Avis Avi = new Avis();
-                Avi.InitialisationAvis(reader.GetInt32(0), reader.GetDateTime(1), reader.GetInt32(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetString(6), reader.GetString(7));
+                Avi.InitialisationAvis(reader.GetInt32(0), reader.GetDateTime(1), reader.GetInt32(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5));
                 Avis.Add(Avi);
             }
             _bdd.Close();
             return Avis;
         }
         
-        public int AjoutResponse(int avis, int idUser, string text)
+        public Response AjoutResponse(int avis, int idUser, string text)
         {
-            if(!String.IsNullOrEmpty(text))
-            {
-                _bdd.Open();
-                MySqlCommand query2 = _bdd.CreateCommand();
-                query2.Parameters.AddWithValue("@idAvis", avis);
-                query2.Parameters.AddWithValue("@idUtilisateur", idUser);
-                query2.Parameters.AddWithValue("@reponse", text);
+            Response Response = new Response();
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idAvis", avis);
+            query.Parameters.AddWithValue("@idUtilisateur", idUser);
+            query.Parameters.AddWithValue("@reponse", text);
 
-                query2.CommandText = "insert into avis_response(idAvis, idUtilisateur, reponse, date) values(@idAvis, @idUtilisateur, @reponse, now())";
-                if (query2.ExecuteNonQuery() > 0)
+            query.CommandText = "insert into avis_response(idAvis, idUtilisateur, reponse, date) values(@idAvis, @idUtilisateur, @reponse, now())";
+            if (query.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                _bdd.Open();
+                query.CommandText = "SELECT * FROM avis_response WHERE idAvis = @idAvis";
+                MySqlDataReader reader = query.ExecuteReader();
+                while (reader.Read())
                 {
-                    _bdd.Close();
-                    return 1;
+                    Response.InitialisationResponse(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetString(3), reader.GetDateTime(4));
                 }
-                else
-                {
-                    _bdd.Close();
-                    return 0;
-                }
+                _bdd.Close();
+                return Response;
             }
             else
             {
-                return 2;
+                _bdd.Close();
+                return Response;
             }
         }
 
-        public int UpdateResponse(int response, string text)
+        public Response UpdateResponse(Response Response, string newReponse)
         {
-            if (!String.IsNullOrEmpty(text))
+            _bdd.Open();
+            DateTime now = DateTime.Now;
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idResponse", Response.IdResponse);
+            query.Parameters.AddWithValue("@date", now);
+            query.Parameters.AddWithValue("@reponse", newReponse);
+
+            query.CommandText = "UPDATE avis_response SET reponse = @reponse, date = @date WHERE idResponse = @idResponse";
+            if (query.ExecuteNonQuery() > 0)
             {
-                _bdd.Open();
-
-                MySqlCommand query = _bdd.CreateCommand();
-                query.Parameters.AddWithValue("@idResponse", response);
-                query.Parameters.AddWithValue("@reponse", text);
-
-                query.CommandText = "update avis_response set reponse = @reponse where idResponse = @idResponse";
-                if (query.ExecuteNonQuery() > 0)
-                {
-                    _bdd.Close();
-                    return 1;
-                }
-                else
-                {
-                    _bdd.Close();
-                    return 0;
-                }
+                _bdd.Close();
+                Response.Reponse = newReponse;
+                Response.Date = now;
+                return Response;
             }
             else
             {
-                return 2;
+                _bdd.Close();
+                return Response;
             }
         }
 
-        public string SuppressionResponse(int response)
+        public string SuppressionResponse(Response Response)
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idResponse", response);
+            query.Parameters.AddWithValue("@idResponse", Response.IdResponse);
             query.CommandText = "DELETE FROM avis_response where idResponse = @idResponse";
             if (query.ExecuteNonQuery() > 0)
             {

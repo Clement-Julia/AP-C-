@@ -13,16 +13,18 @@ namespace AP.Forms
 {
     public partial class ResponseHebergement : UserControl
     {
-        private Response response;
-        private modifHebergement ModifHebergement;
-        public ResponseHebergement(Response response = null, modifHebergement ModifHebergement = null)
+        private Response _response;
+        private modifHebergement _modifHebergement;
+        private Utilisateur _utilisateur;
+        public ResponseHebergement(Response response = null, modifHebergement ModifHebergement = null, Utilisateur utilisateur = null)
         {
             InitializeComponent();
-            this.nom.Text = response.Nom;
-            this.prenom.Text = response.Prénom;
+            this._response = response;
+            this._modifHebergement = ModifHebergement;
+            this._utilisateur = utilisateur;
+            this.nom.Text = utilisateur.Nom + " " + utilisateur.Prenom;
             this.reponse.Text = response.Reponse;
-            this.response = response;
-            this.ModifHebergement = ModifHebergement;
+            labelDate.Text = _response.Date.ToString("dd-MM-yyyy");
         }
     }
 }

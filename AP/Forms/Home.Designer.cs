@@ -49,7 +49,6 @@ namespace AP.Forms
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.PanelAccueil = new System.Windows.Forms.Panel();
             this.hebergementsCustumControl1 = new AP.Forms.HebergementsCustumControl();
-            this.accueilCustomControl1 = new AP.Forms.AccueilCustomControl();
             this.panel1.SuspendLayout();
             this.panelFiscaliteSubmenu.SuspendLayout();
             this.panelHebergementSubmenu.SuspendLayout();
@@ -103,7 +102,7 @@ namespace AP.Forms
             this.BtnConseils.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnConseils.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnConseils.UseVisualStyleBackColor = false;
-            this.BtnConseils.Click += new System.EventHandler(this.BtnConseils_Click);
+            this.BtnConseils.Click += new System.EventHandler(this.Conseils_Click);
             // 
             // BtnJustificatif
             // 
@@ -123,7 +122,7 @@ namespace AP.Forms
             this.BtnJustificatif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnJustificatif.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnJustificatif.UseVisualStyleBackColor = false;
-            this.BtnJustificatif.Click += new System.EventHandler(this.BtnFiscalite_Click);
+            this.BtnJustificatif.Click += new System.EventHandler(this.Justificatif_Click);
             // 
             // BtnFiscalite
             // 
@@ -143,7 +142,7 @@ namespace AP.Forms
             this.BtnFiscalite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnFiscalite.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnFiscalite.UseVisualStyleBackColor = true;
-            this.BtnFiscalite.Click += new System.EventHandler(this.BtnFiscalite_Click_1);
+            this.BtnFiscalite.Click += new System.EventHandler(this.OpenFiscaliteSubMenu);
             this.BtnFiscalite.Leave += new System.EventHandler(this.BtnFiscalite_Leave);
             // 
             // panelHebergementSubmenu
@@ -175,7 +174,7 @@ namespace AP.Forms
             this.BtnAjoutHebergement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnAjoutHebergement.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnAjoutHebergement.UseVisualStyleBackColor = false;
-            this.BtnAjoutHebergement.Click += new System.EventHandler(this.BtnTest_Click);
+            this.BtnAjoutHebergement.Click += new System.EventHandler(this.AjoutHebergement_Click);
             // 
             // BtnVoirHebergement
             // 
@@ -195,7 +194,7 @@ namespace AP.Forms
             this.BtnVoirHebergement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnVoirHebergement.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnVoirHebergement.UseVisualStyleBackColor = false;
-            this.BtnVoirHebergement.Click += new System.EventHandler(this.BtnHebergements_Click);
+            this.BtnVoirHebergement.Click += new System.EventHandler(this.VoirHebergements_Click);
             // 
             // PnlNav
             // 
@@ -223,7 +222,7 @@ namespace AP.Forms
             this.BtnOptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnOptions.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnOptions.UseVisualStyleBackColor = true;
-            this.BtnOptions.Click += new System.EventHandler(this.BtnOptions_Click);
+            this.BtnOptions.Click += new System.EventHandler(this.Options_Click);
             this.BtnOptions.Leave += new System.EventHandler(this.BtnOptions_Leave);
             // 
             // BtnHebergements
@@ -244,7 +243,7 @@ namespace AP.Forms
             this.BtnHebergements.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnHebergements.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnHebergements.UseVisualStyleBackColor = true;
-            this.BtnHebergements.Click += new System.EventHandler(this.BtnHebergements_Click_1);
+            this.BtnHebergements.Click += new System.EventHandler(this.OpenHebergementSubMenu);
             this.BtnHebergements.Leave += new System.EventHandler(this.BtnHebergements_Leave);
             // 
             // BtnAccueil
@@ -265,7 +264,7 @@ namespace AP.Forms
             this.BtnAccueil.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnAccueil.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BtnAccueil.UseVisualStyleBackColor = true;
-            this.BtnAccueil.Click += new System.EventHandler(this.BtnAccueil_Click);
+            this.BtnAccueil.Click += new System.EventHandler(this.Accueil_Click);
             this.BtnAccueil.Leave += new System.EventHandler(this.BtnAccueil_Leave);
             // 
             // panel2
@@ -336,13 +335,6 @@ namespace AP.Forms
             this.hebergementsCustumControl1.Size = new System.Drawing.Size(700, 500);
             this.hebergementsCustumControl1.TabIndex = 2;
             // 
-            // accueilCustomControl1
-            // 
-            this.accueilCustomControl1.Location = new System.Drawing.Point(200, 0);
-            this.accueilCustomControl1.Name = "accueilCustomControl1";
-            this.accueilCustomControl1.Size = new System.Drawing.Size(700, 500);
-            this.accueilCustomControl1.TabIndex = 1;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,7 +367,6 @@ namespace AP.Forms
         private System.Windows.Forms.Button BtnOptions;
         private System.Windows.Forms.Panel PnlNav;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private AccueilCustomControl accueilCustomControl1;
         private HebergementsCustumControl hebergementsCustumControl1;
         private System.Windows.Forms.Panel PanelAccueil;
         private System.Windows.Forms.Label LabelMembreDepuis;

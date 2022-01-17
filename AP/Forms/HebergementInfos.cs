@@ -35,9 +35,10 @@ namespace AP.Forms
             labelTitreHebergement.Text = _hebergement.Libelle;
 
             // Remplissage Infos Hébergement
+            Ville Ville = new Ville(_hebergement.IdVille);
             labelDescription.Text = _hebergement.Description;
             labelDescriptionPrix.Text = "Prix : " + _hebergement.Prix.ToString() + " € / nuit";
-            labelDescriptionAdresse.Text = "Adresse : ";
+            labelDescriptionAdresse.Text = "Adresse : " + _hebergement.Adresse + " \n" + Ville.CodePostal + " " + Ville.Libelle;
 
             // Remplissage des gains
             int[] infosGains = _hebergement.GetInfosGains();
@@ -82,6 +83,7 @@ namespace AP.Forms
             for(int i = 0; i < _reservationHebergements.Count; i++)
             {
                 Utilisateur utilisateur = new Utilisateur(_reservationHebergements[i].IdUtilisateur);
+                // Le modulo permet d'alterner le troisième paramètre qui défini la couleur de fond de la ligne
                 if(i%2 == 0)
                 {
                     flowLayoutPanelReservAVenir.Controls.Add(new LigneReservationHebergement(_reservationHebergements[i], utilisateur, false));
@@ -92,19 +94,16 @@ namespace AP.Forms
             }
 
             // Infos Avis
-            Avis Avis = new Avis();
-            List<Avis> listAvis = Avis.GetAllAvisHebergement(_hebergement.IdHebergement);
-
-            for (int i = 0; i < listAvis.Count; i++)
+            for (int i = 0; i < _hebergement.ListAvis.Count; i++)
             {
-                Utilisateur User = new Utilisateur(listAvis[i].IdUtilisateur);
+                Utilisateur User = new Utilisateur(_hebergement.ListAvis[i].IdUtilisateur);
                 if (i % 2 == 0)
                 {
-                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(listAvis[i], User, false));
+                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(_hebergement.ListAvis[i], User, false));
                 }
                 else
                 {
-                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(listAvis[i], User, true));
+                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(_hebergement.ListAvis[i], User, true));
                 }
             }
 

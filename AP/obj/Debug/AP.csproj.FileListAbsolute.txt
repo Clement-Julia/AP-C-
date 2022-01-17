@@ -146,7 +146,6 @@ C:\wamp64\www\Projet\C#\AP\obj\Debug\AP.csproj.CopyComplete
 C:\wamp64\www\Projet\C#\AP\obj\Debug\AP.exe
 C:\wamp64\www\Projet\C#\AP\obj\Debug\AP.pdb
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.csproj.AssemblyReference.cache
-C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.AccueilCustomControl.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.AjoutHebergement.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.AvisHebergement.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Connexion.resources
@@ -162,7 +161,6 @@ C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Justificatif.re
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.PrevisualisationPDF.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.OptionHebergement.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.ResponseHebergement.resources
-C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.SupprimerResponse.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Forms.Options.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.modifHebergement.resources
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.Properties.Resources.resources
@@ -291,3 +289,4 @@ C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Text.Json.xml
 C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\System.ValueTuple.xml
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.csproj.CopyComplete
+C:\Users\mrtre\source\repos\AP-application\AP\bin\Debug\FontAwesome.Sharp.dll
