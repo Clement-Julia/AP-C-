@@ -19,7 +19,7 @@ namespace AP.Forms
         private DateTime _au;
         private List<ReservationHebergement> _reservationsHebergement;
         private Utilisateur _utilisateur;
-        private int _gains = 0;
+        private decimal _gains = 0;
 
         public PrevisualisationPDF(DateTime dateTime1, DateTime dateTime2, Utilisateur utilisateur)
         {

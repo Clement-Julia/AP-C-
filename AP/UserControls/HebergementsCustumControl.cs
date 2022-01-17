@@ -40,7 +40,7 @@ namespace AP.Forms
 
         private void BtnModification_Click(object sender, EventArgs e)
         {
-            modifHebergement form = new modifHebergement(_hebergement, _utilisateur, _formHebergement);
+            modifHebergement form = new modifHebergement(_hebergement, _utilisateur, _formHebergement, this);
             ShowInParent(form);
         }
 

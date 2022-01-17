@@ -24,7 +24,7 @@ namespace AP.Services
         private string _id;
         private string _periode;
         private string _folder;
-        private int _gains;
+        private decimal _gains;
         private DateTime _du;
         private DateTime _au;
 

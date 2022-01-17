@@ -83,6 +83,7 @@ namespace AP.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.labelReservCetteAnnee = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.panelDescription = new System.Windows.Forms.Panel();
             this.panelGiant.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -92,6 +93,7 @@ namespace AP.Forms
             this.panelPasDeReservEnCours.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panelDescription.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelGiant
@@ -107,33 +109,30 @@ namespace AP.Forms
             this.panelGiant.Controls.Add(this.button1);
             this.panelGiant.Controls.Add(this.panel4);
             this.panelGiant.Location = new System.Drawing.Point(0, 0);
-            this.panelGiant.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelGiant.Name = "panelGiant";
-            this.panelGiant.Size = new System.Drawing.Size(1000, 1545);
+            this.panelGiant.Size = new System.Drawing.Size(750, 1255);
             this.panelGiant.TabIndex = 0;
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.panelDescription);
             this.panel5.Controls.Add(this.labelDescriptionPrix);
             this.panel5.Controls.Add(this.labelDescriptionAdresse);
             this.panel5.Controls.Add(this.label29);
-            this.panel5.Controls.Add(this.labelDescription);
-            this.panel5.Location = new System.Drawing.Point(16, 114);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel5.Location = new System.Drawing.Point(12, 93);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(966, 177);
+            this.panel5.Size = new System.Drawing.Size(725, 144);
             this.panel5.TabIndex = 31;
             // 
             // labelDescriptionPrix
             // 
             this.labelDescriptionPrix.BackColor = System.Drawing.Color.White;
             this.labelDescriptionPrix.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescriptionPrix.Location = new System.Drawing.Point(-1, 49);
-            this.labelDescriptionPrix.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDescriptionPrix.Location = new System.Drawing.Point(-1, 40);
             this.labelDescriptionPrix.Name = "labelDescriptionPrix";
-            this.labelDescriptionPrix.Size = new System.Drawing.Size(384, 48);
+            this.labelDescriptionPrix.Size = new System.Drawing.Size(288, 39);
             this.labelDescriptionPrix.TabIndex = 27;
             this.labelDescriptionPrix.Text = "Prix : 37 € / nuit ";
             this.labelDescriptionPrix.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,10 +141,9 @@ namespace AP.Forms
             // 
             this.labelDescriptionAdresse.BackColor = System.Drawing.Color.White;
             this.labelDescriptionAdresse.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescriptionAdresse.Location = new System.Drawing.Point(-1, 97);
-            this.labelDescriptionAdresse.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDescriptionAdresse.Location = new System.Drawing.Point(-1, 79);
             this.labelDescriptionAdresse.Name = "labelDescriptionAdresse";
-            this.labelDescriptionAdresse.Size = new System.Drawing.Size(388, 78);
+            this.labelDescriptionAdresse.Size = new System.Drawing.Size(291, 63);
             this.labelDescriptionAdresse.TabIndex = 27;
             this.labelDescriptionAdresse.Text = "Adresse : ";
             // 
@@ -155,24 +153,24 @@ namespace AP.Forms
             this.label29.BackColor = System.Drawing.Color.LightSeaGreen;
             this.label29.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.Location = new System.Drawing.Point(0, 0);
-            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(964, 49);
+            this.label29.Size = new System.Drawing.Size(723, 40);
             this.label29.TabIndex = 27;
             this.label29.Text = "Votre Hébergement";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelDescription
             // 
+            this.labelDescription.AutoSize = true;
             this.labelDescription.BackColor = System.Drawing.Color.White;
             this.labelDescription.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescription.Location = new System.Drawing.Point(395, 49);
-            this.labelDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDescription.Location = new System.Drawing.Point(0, 0);
+            this.labelDescription.MaximumSize = new System.Drawing.Size(390, 0);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(571, 126);
+            this.labelDescription.Padding = new System.Windows.Forms.Padding(0, 5, 0, 2);
+            this.labelDescription.Size = new System.Drawing.Size(190, 28);
             this.labelDescription.TabIndex = 3;
             this.labelDescription.Text = "Nombre de réservations : ";
-            this.labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel2
             // 
@@ -188,20 +186,18 @@ namespace AP.Forms
             this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label7);
-            this.panel2.Location = new System.Drawing.Point(16, 299);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(12, 243);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(386, 361);
+            this.panel2.Size = new System.Drawing.Size(290, 294);
             this.panel2.TabIndex = 30;
             // 
             // labelGainAll
             // 
             this.labelGainAll.BackColor = System.Drawing.Color.White;
             this.labelGainAll.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGainAll.Location = new System.Drawing.Point(108, 295);
-            this.labelGainAll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelGainAll.Location = new System.Drawing.Point(81, 240);
             this.labelGainAll.Name = "labelGainAll";
-            this.labelGainAll.Size = new System.Drawing.Size(275, 63);
+            this.labelGainAll.Size = new System.Drawing.Size(206, 51);
             this.labelGainAll.TabIndex = 36;
             this.labelGainAll.Text = "EUROS";
             this.labelGainAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -210,10 +206,9 @@ namespace AP.Forms
             // 
             this.labelGain1A.BackColor = System.Drawing.Color.WhiteSmoke;
             this.labelGain1A.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGain1A.Location = new System.Drawing.Point(108, 238);
-            this.labelGain1A.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelGain1A.Location = new System.Drawing.Point(81, 193);
             this.labelGain1A.Name = "labelGain1A";
-            this.labelGain1A.Size = new System.Drawing.Size(275, 63);
+            this.labelGain1A.Size = new System.Drawing.Size(206, 51);
             this.labelGain1A.TabIndex = 35;
             this.labelGain1A.Text = "EUROS";
             this.labelGain1A.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -222,10 +217,9 @@ namespace AP.Forms
             // 
             this.labelGain6M.BackColor = System.Drawing.Color.White;
             this.labelGain6M.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGain6M.Location = new System.Drawing.Point(108, 175);
-            this.labelGain6M.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelGain6M.Location = new System.Drawing.Point(81, 142);
             this.labelGain6M.Name = "labelGain6M";
-            this.labelGain6M.Size = new System.Drawing.Size(275, 63);
+            this.labelGain6M.Size = new System.Drawing.Size(206, 51);
             this.labelGain6M.TabIndex = 34;
             this.labelGain6M.Text = "EUROS";
             this.labelGain6M.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -234,10 +228,9 @@ namespace AP.Forms
             // 
             this.labelGain3M.BackColor = System.Drawing.Color.WhiteSmoke;
             this.labelGain3M.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGain3M.Location = new System.Drawing.Point(108, 112);
-            this.labelGain3M.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelGain3M.Location = new System.Drawing.Point(81, 91);
             this.labelGain3M.Name = "labelGain3M";
-            this.labelGain3M.Size = new System.Drawing.Size(275, 63);
+            this.labelGain3M.Size = new System.Drawing.Size(206, 51);
             this.labelGain3M.TabIndex = 33;
             this.labelGain3M.Text = "EUROS";
             this.labelGain3M.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -246,10 +239,9 @@ namespace AP.Forms
             // 
             this.labelGain1M.BackColor = System.Drawing.Color.White;
             this.labelGain1M.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGain1M.Location = new System.Drawing.Point(108, 49);
-            this.labelGain1M.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelGain1M.Location = new System.Drawing.Point(81, 40);
             this.labelGain1M.Name = "labelGain1M";
-            this.labelGain1M.Size = new System.Drawing.Size(275, 63);
+            this.labelGain1M.Size = new System.Drawing.Size(206, 51);
             this.labelGain1M.TabIndex = 32;
             this.labelGain1M.Text = "EUROS";
             this.labelGain1M.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -258,10 +250,9 @@ namespace AP.Forms
             // 
             this.label18.BackColor = System.Drawing.Color.White;
             this.label18.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(0, 295);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Location = new System.Drawing.Point(0, 240);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(113, 63);
+            this.label18.Size = new System.Drawing.Size(85, 51);
             this.label18.TabIndex = 31;
             this.label18.Text = "Total";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -270,10 +261,9 @@ namespace AP.Forms
             // 
             this.label15.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label15.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(0, 238);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Location = new System.Drawing.Point(0, 193);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(113, 63);
+            this.label15.Size = new System.Drawing.Size(85, 51);
             this.label15.TabIndex = 30;
             this.label15.Text = "1 An";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -282,10 +272,9 @@ namespace AP.Forms
             // 
             this.label14.BackColor = System.Drawing.Color.White;
             this.label14.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(0, 175);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Location = new System.Drawing.Point(0, 142);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(113, 63);
+            this.label14.Size = new System.Drawing.Size(85, 51);
             this.label14.TabIndex = 29;
             this.label14.Text = "6 Mois";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -294,10 +283,9 @@ namespace AP.Forms
             // 
             this.label13.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label13.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(0, 112);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Location = new System.Drawing.Point(0, 91);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(113, 62);
+            this.label13.Size = new System.Drawing.Size(85, 50);
             this.label13.TabIndex = 28;
             this.label13.Text = "3 Mois";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -306,10 +294,9 @@ namespace AP.Forms
             // 
             this.label12.BackColor = System.Drawing.Color.White;
             this.label12.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(0, 49);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(0, 40);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(113, 63);
+            this.label12.Size = new System.Drawing.Size(85, 51);
             this.label12.TabIndex = 27;
             this.label12.Text = "Ce Mois";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -320,9 +307,8 @@ namespace AP.Forms
             this.label7.BackColor = System.Drawing.Color.LightSeaGreen;
             this.label7.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(0, -1);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(384, 49);
+            this.label7.Size = new System.Drawing.Size(288, 40);
             this.label7.TabIndex = 27;
             this.label7.Text = "GAINS";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -332,10 +318,9 @@ namespace AP.Forms
             this.panelAvis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAvis.Controls.Add(this.flowLayoutPanelAvis);
             this.panelAvis.Controls.Add(this.labelAvis);
-            this.panelAvis.Location = new System.Drawing.Point(16, 1062);
-            this.panelAvis.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelAvis.Location = new System.Drawing.Point(12, 863);
             this.panelAvis.Name = "panelAvis";
-            this.panelAvis.Size = new System.Drawing.Size(966, 467);
+            this.panelAvis.Size = new System.Drawing.Size(725, 380);
             this.panelAvis.TabIndex = 28;
             // 
             // flowLayoutPanelAvis
@@ -343,10 +328,9 @@ namespace AP.Forms
             this.flowLayoutPanelAvis.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.flowLayoutPanelAvis.AutoScroll = true;
             this.flowLayoutPanelAvis.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelAvis.Location = new System.Drawing.Point(0, 47);
-            this.flowLayoutPanelAvis.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanelAvis.Location = new System.Drawing.Point(0, 38);
             this.flowLayoutPanelAvis.Name = "flowLayoutPanelAvis";
-            this.flowLayoutPanelAvis.Size = new System.Drawing.Size(964, 418);
+            this.flowLayoutPanelAvis.Size = new System.Drawing.Size(723, 340);
             this.flowLayoutPanelAvis.TabIndex = 20;
             // 
             // labelAvis
@@ -355,9 +339,8 @@ namespace AP.Forms
             this.labelAvis.BackColor = System.Drawing.Color.LightSeaGreen;
             this.labelAvis.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAvis.Location = new System.Drawing.Point(0, 0);
-            this.labelAvis.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAvis.Name = "labelAvis";
-            this.labelAvis.Size = new System.Drawing.Size(963, 49);
+            this.labelAvis.Size = new System.Drawing.Size(722, 40);
             this.labelAvis.TabIndex = 19;
             this.labelAvis.Text = "Avis";
             this.labelAvis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -367,10 +350,9 @@ namespace AP.Forms
             this.labelTitreHebergement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTitreHebergement.Font = new System.Drawing.Font("Nirmala UI", 24F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitreHebergement.Location = new System.Drawing.Point(119, 15);
-            this.labelTitreHebergement.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTitreHebergement.Location = new System.Drawing.Point(89, 12);
             this.labelTitreHebergement.Name = "labelTitreHebergement";
-            this.labelTitreHebergement.Size = new System.Drawing.Size(864, 55);
+            this.labelTitreHebergement.Size = new System.Drawing.Size(648, 45);
             this.labelTitreHebergement.TabIndex = 29;
             this.labelTitreHebergement.Text = "Le nom de l\'hébergement";
             this.labelTitreHebergement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -380,10 +362,9 @@ namespace AP.Forms
             this.panelReservationAVenir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelReservationAVenir.Controls.Add(this.flowLayoutPanelReservAVenir);
             this.panelReservationAVenir.Controls.Add(this.label17);
-            this.panelReservationAVenir.Location = new System.Drawing.Point(16, 774);
-            this.panelReservationAVenir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelReservationAVenir.Location = new System.Drawing.Point(12, 629);
             this.panelReservationAVenir.Name = "panelReservationAVenir";
-            this.panelReservationAVenir.Size = new System.Drawing.Size(966, 280);
+            this.panelReservationAVenir.Size = new System.Drawing.Size(725, 228);
             this.panelReservationAVenir.TabIndex = 27;
             // 
             // flowLayoutPanelReservAVenir
@@ -392,10 +373,9 @@ namespace AP.Forms
             this.flowLayoutPanelReservAVenir.AutoScroll = true;
             this.flowLayoutPanelReservAVenir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelReservAVenir.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelReservAVenir.Location = new System.Drawing.Point(0, 49);
-            this.flowLayoutPanelReservAVenir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanelReservAVenir.Location = new System.Drawing.Point(0, 40);
             this.flowLayoutPanelReservAVenir.Name = "flowLayoutPanelReservAVenir";
-            this.flowLayoutPanelReservAVenir.Size = new System.Drawing.Size(964, 230);
+            this.flowLayoutPanelReservAVenir.Size = new System.Drawing.Size(723, 187);
             this.flowLayoutPanelReservAVenir.TabIndex = 20;
             // 
             // label17
@@ -404,9 +384,8 @@ namespace AP.Forms
             this.label17.BackColor = System.Drawing.Color.LightSeaGreen;
             this.label17.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(0, -1);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(963, 49);
+            this.label17.Size = new System.Drawing.Size(722, 40);
             this.label17.TabIndex = 19;
             this.label17.Text = "Réservation à venir";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -421,20 +400,18 @@ namespace AP.Forms
             this.panelReservationEnCours.Controls.Add(this.labelReservEnCoursUsername);
             this.panelReservationEnCours.Controls.Add(this.labelReservEnCoursPeriode);
             this.panelReservationEnCours.Controls.Add(this.label11);
-            this.panelReservationEnCours.Location = new System.Drawing.Point(16, 668);
-            this.panelReservationEnCours.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelReservationEnCours.Location = new System.Drawing.Point(12, 543);
             this.panelReservationEnCours.Name = "panelReservationEnCours";
-            this.panelReservationEnCours.Size = new System.Drawing.Size(967, 98);
+            this.panelReservationEnCours.Size = new System.Drawing.Size(726, 80);
             this.panelReservationEnCours.TabIndex = 26;
             // 
             // panelPasDeReservEnCours
             // 
             this.panelPasDeReservEnCours.BackColor = System.Drawing.Color.Transparent;
             this.panelPasDeReservEnCours.Controls.Add(this.label6);
-            this.panelPasDeReservEnCours.Location = new System.Drawing.Point(0, 49);
-            this.panelPasDeReservEnCours.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelPasDeReservEnCours.Location = new System.Drawing.Point(0, 40);
             this.panelPasDeReservEnCours.Name = "panelPasDeReservEnCours";
-            this.panelPasDeReservEnCours.Size = new System.Drawing.Size(967, 48);
+            this.panelPasDeReservEnCours.Size = new System.Drawing.Size(725, 39);
             this.panelPasDeReservEnCours.TabIndex = 19;
             // 
             // label6
@@ -443,9 +420,8 @@ namespace AP.Forms
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(967, 48);
+            this.label6.Size = new System.Drawing.Size(725, 39);
             this.label6.TabIndex = 0;
             this.label6.Text = "Pas de réservation en cours";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -453,10 +429,9 @@ namespace AP.Forms
             // labelReservEnCoursPrix
             // 
             this.labelReservEnCoursPrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReservEnCoursPrix.Location = new System.Drawing.Point(833, 49);
-            this.labelReservEnCoursPrix.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelReservEnCoursPrix.Location = new System.Drawing.Point(625, 40);
             this.labelReservEnCoursPrix.Name = "labelReservEnCoursPrix";
-            this.labelReservEnCoursPrix.Size = new System.Drawing.Size(135, 49);
+            this.labelReservEnCoursPrix.Size = new System.Drawing.Size(101, 40);
             this.labelReservEnCoursPrix.TabIndex = 18;
             this.labelReservEnCoursPrix.Text = "Prix";
             this.labelReservEnCoursPrix.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -464,10 +439,9 @@ namespace AP.Forms
             // labelReservEnCoursCodeReserv
             // 
             this.labelReservEnCoursCodeReserv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReservEnCoursCodeReserv.Location = new System.Drawing.Point(617, 49);
-            this.labelReservEnCoursCodeReserv.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelReservEnCoursCodeReserv.Location = new System.Drawing.Point(463, 40);
             this.labelReservEnCoursCodeReserv.Name = "labelReservEnCoursCodeReserv";
-            this.labelReservEnCoursCodeReserv.Size = new System.Drawing.Size(208, 49);
+            this.labelReservEnCoursCodeReserv.Size = new System.Drawing.Size(156, 40);
             this.labelReservEnCoursCodeReserv.TabIndex = 17;
             this.labelReservEnCoursCodeReserv.Text = "Code Reserv";
             this.labelReservEnCoursCodeReserv.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -475,10 +449,9 @@ namespace AP.Forms
             // labelReservEnCoursUsername
             // 
             this.labelReservEnCoursUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReservEnCoursUsername.Location = new System.Drawing.Point(315, 49);
-            this.labelReservEnCoursUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelReservEnCoursUsername.Location = new System.Drawing.Point(236, 40);
             this.labelReservEnCoursUsername.Name = "labelReservEnCoursUsername";
-            this.labelReservEnCoursUsername.Size = new System.Drawing.Size(295, 49);
+            this.labelReservEnCoursUsername.Size = new System.Drawing.Size(221, 40);
             this.labelReservEnCoursUsername.TabIndex = 16;
             this.labelReservEnCoursUsername.Text = "Nom de l\'utilisateur";
             this.labelReservEnCoursUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -486,10 +459,9 @@ namespace AP.Forms
             // labelReservEnCoursPeriode
             // 
             this.labelReservEnCoursPeriode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReservEnCoursPeriode.Location = new System.Drawing.Point(0, 49);
-            this.labelReservEnCoursPeriode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelReservEnCoursPeriode.Location = new System.Drawing.Point(0, 40);
             this.labelReservEnCoursPeriode.Name = "labelReservEnCoursPeriode";
-            this.labelReservEnCoursPeriode.Size = new System.Drawing.Size(304, 49);
+            this.labelReservEnCoursPeriode.Size = new System.Drawing.Size(228, 40);
             this.labelReservEnCoursPeriode.TabIndex = 15;
             this.labelReservEnCoursPeriode.Text = "Du 01/01/2020 au 01/02/2020";
             this.labelReservEnCoursPeriode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -500,9 +472,8 @@ namespace AP.Forms
             this.label11.BackColor = System.Drawing.Color.LightSeaGreen;
             this.label11.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(0, 0);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(965, 49);
+            this.label11.Size = new System.Drawing.Size(724, 40);
             this.label11.TabIndex = 14;
             this.label11.Text = "Réservation en cours";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -520,19 +491,17 @@ namespace AP.Forms
             this.panel3.Controls.Add(this.labelReservAll);
             this.panel3.Controls.Add(this.label21);
             this.panel3.Controls.Add(this.label16);
-            this.panel3.Location = new System.Drawing.Point(409, 484);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Location = new System.Drawing.Point(307, 393);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(573, 177);
+            this.panel3.Size = new System.Drawing.Size(430, 144);
             this.panel3.TabIndex = 24;
             // 
             // labelNuitsReserveesAll
             // 
             this.labelNuitsReserveesAll.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNuitsReserveesAll.Location = new System.Drawing.Point(367, 140);
-            this.labelNuitsReserveesAll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelNuitsReserveesAll.Location = new System.Drawing.Point(275, 114);
             this.labelNuitsReserveesAll.Name = "labelNuitsReserveesAll";
-            this.labelNuitsReserveesAll.Size = new System.Drawing.Size(205, 31);
+            this.labelNuitsReserveesAll.Size = new System.Drawing.Size(154, 25);
             this.labelNuitsReserveesAll.TabIndex = 34;
             this.labelNuitsReserveesAll.Text = "32%";
             this.labelNuitsReserveesAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -540,10 +509,9 @@ namespace AP.Forms
             // labelTotalNuitsAll
             // 
             this.labelTotalNuitsAll.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalNuitsAll.Location = new System.Drawing.Point(368, 110);
-            this.labelTotalNuitsAll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalNuitsAll.Location = new System.Drawing.Point(276, 89);
             this.labelTotalNuitsAll.Name = "labelTotalNuitsAll";
-            this.labelTotalNuitsAll.Size = new System.Drawing.Size(205, 31);
+            this.labelTotalNuitsAll.Size = new System.Drawing.Size(154, 25);
             this.labelTotalNuitsAll.TabIndex = 33;
             this.labelTotalNuitsAll.Text = "32%";
             this.labelTotalNuitsAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -552,10 +520,9 @@ namespace AP.Forms
             // 
             this.label9.BackColor = System.Drawing.Color.White;
             this.label9.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(53, 140);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(40, 114);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(311, 31);
+            this.label9.Size = new System.Drawing.Size(233, 25);
             this.label9.TabIndex = 32;
             this.label9.Text = "Nuits réservées :";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -564,10 +531,9 @@ namespace AP.Forms
             // 
             this.label10.BackColor = System.Drawing.Color.White;
             this.label10.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(53, 110);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(40, 89);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(304, 31);
+            this.label10.Size = new System.Drawing.Size(228, 25);
             this.label10.TabIndex = 31;
             this.label10.Text = "Nuitées totales :";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -575,10 +541,9 @@ namespace AP.Forms
             // labelTOAll
             // 
             this.labelTOAll.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTOAll.Location = new System.Drawing.Point(368, 79);
-            this.labelTOAll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTOAll.Location = new System.Drawing.Point(276, 64);
             this.labelTOAll.Name = "labelTOAll";
-            this.labelTOAll.Size = new System.Drawing.Size(205, 31);
+            this.labelTOAll.Size = new System.Drawing.Size(154, 25);
             this.labelTOAll.TabIndex = 30;
             this.labelTOAll.Text = "32%";
             this.labelTOAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -587,10 +552,9 @@ namespace AP.Forms
             // 
             this.label19.BackColor = System.Drawing.Color.White;
             this.label19.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(0, 79);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Location = new System.Drawing.Point(0, 64);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(359, 31);
+            this.label19.Size = new System.Drawing.Size(269, 25);
             this.label19.TabIndex = 29;
             this.label19.Text = "Taux d\'occupation : ";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -598,10 +562,9 @@ namespace AP.Forms
             // labelReservAll
             // 
             this.labelReservAll.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReservAll.Location = new System.Drawing.Point(367, 48);
-            this.labelReservAll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelReservAll.Location = new System.Drawing.Point(275, 39);
             this.labelReservAll.Name = "labelReservAll";
-            this.labelReservAll.Size = new System.Drawing.Size(205, 31);
+            this.labelReservAll.Size = new System.Drawing.Size(154, 25);
             this.labelReservAll.TabIndex = 28;
             this.labelReservAll.Text = "18";
             this.labelReservAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -610,10 +573,9 @@ namespace AP.Forms
             // 
             this.label21.BackColor = System.Drawing.Color.White;
             this.label21.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(0, 48);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Location = new System.Drawing.Point(0, 39);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(359, 31);
+            this.label21.Size = new System.Drawing.Size(269, 25);
             this.label21.TabIndex = 27;
             this.label21.Text = "Nombre de réservations : ";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -624,9 +586,8 @@ namespace AP.Forms
             this.label16.BackColor = System.Drawing.Color.LightSeaGreen;
             this.label16.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(0, -1);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(571, 49);
+            this.label16.Size = new System.Drawing.Size(428, 40);
             this.label16.TabIndex = 19;
             this.label16.Text = "Toutes périodes confondues";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -638,10 +599,9 @@ namespace AP.Forms
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(16, 15);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 55);
+            this.button1.Size = new System.Drawing.Size(79, 45);
             this.button1.TabIndex = 25;
             this.button1.Text = "Retour";
             this.button1.UseVisualStyleBackColor = false;
@@ -660,19 +620,17 @@ namespace AP.Forms
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.labelReservCetteAnnee);
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(411, 299);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Location = new System.Drawing.Point(308, 243);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(573, 177);
+            this.panel4.Size = new System.Drawing.Size(430, 144);
             this.panel4.TabIndex = 23;
             // 
             // labelNuitsReserveesYear
             // 
             this.labelNuitsReserveesYear.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNuitsReserveesYear.Location = new System.Drawing.Point(367, 142);
-            this.labelNuitsReserveesYear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelNuitsReserveesYear.Location = new System.Drawing.Point(275, 115);
             this.labelNuitsReserveesYear.Name = "labelNuitsReserveesYear";
-            this.labelNuitsReserveesYear.Size = new System.Drawing.Size(205, 31);
+            this.labelNuitsReserveesYear.Size = new System.Drawing.Size(154, 25);
             this.labelNuitsReserveesYear.TabIndex = 26;
             this.labelNuitsReserveesYear.Text = "32%";
             this.labelNuitsReserveesYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -680,10 +638,9 @@ namespace AP.Forms
             // labelTotalNuitsYear
             // 
             this.labelTotalNuitsYear.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalNuitsYear.Location = new System.Drawing.Point(368, 111);
-            this.labelTotalNuitsYear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalNuitsYear.Location = new System.Drawing.Point(276, 90);
             this.labelTotalNuitsYear.Name = "labelTotalNuitsYear";
-            this.labelTotalNuitsYear.Size = new System.Drawing.Size(205, 31);
+            this.labelTotalNuitsYear.Size = new System.Drawing.Size(154, 25);
             this.labelTotalNuitsYear.TabIndex = 25;
             this.labelTotalNuitsYear.Text = "32%";
             this.labelTotalNuitsYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -692,10 +649,9 @@ namespace AP.Forms
             // 
             this.label8.BackColor = System.Drawing.Color.White;
             this.label8.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(53, 142);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(40, 115);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(311, 31);
+            this.label8.Size = new System.Drawing.Size(233, 25);
             this.label8.TabIndex = 24;
             this.label8.Text = "Nuits réservées :";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -704,10 +660,9 @@ namespace AP.Forms
             // 
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(53, 111);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(40, 90);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(304, 31);
+            this.label5.Size = new System.Drawing.Size(228, 25);
             this.label5.TabIndex = 23;
             this.label5.Text = "Nuitées totales :";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -715,10 +670,9 @@ namespace AP.Forms
             // labelTOYear
             // 
             this.labelTOYear.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTOYear.Location = new System.Drawing.Point(368, 80);
-            this.labelTOYear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTOYear.Location = new System.Drawing.Point(276, 65);
             this.labelTOYear.Name = "labelTOYear";
-            this.labelTOYear.Size = new System.Drawing.Size(205, 31);
+            this.labelTOYear.Size = new System.Drawing.Size(154, 25);
             this.labelTOYear.TabIndex = 22;
             this.labelTOYear.Text = "32%";
             this.labelTOYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -727,10 +681,9 @@ namespace AP.Forms
             // 
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(0, 80);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(0, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(359, 31);
+            this.label2.Size = new System.Drawing.Size(269, 25);
             this.label2.TabIndex = 21;
             this.label2.Text = "Taux d\'occupation : ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -741,9 +694,8 @@ namespace AP.Forms
             this.label4.BackColor = System.Drawing.Color.LightSeaGreen;
             this.label4.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(0, -1);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(571, 49);
+            this.label4.Size = new System.Drawing.Size(428, 40);
             this.label4.TabIndex = 20;
             this.label4.Text = "Année en cours";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -751,10 +703,9 @@ namespace AP.Forms
             // labelReservCetteAnnee
             // 
             this.labelReservCetteAnnee.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReservCetteAnnee.Location = new System.Drawing.Point(367, 49);
-            this.labelReservCetteAnnee.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelReservCetteAnnee.Location = new System.Drawing.Point(275, 40);
             this.labelReservCetteAnnee.Name = "labelReservCetteAnnee";
-            this.labelReservCetteAnnee.Size = new System.Drawing.Size(205, 31);
+            this.labelReservCetteAnnee.Size = new System.Drawing.Size(154, 25);
             this.labelReservCetteAnnee.TabIndex = 4;
             this.labelReservCetteAnnee.Text = "18";
             this.labelReservCetteAnnee.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -763,23 +714,30 @@ namespace AP.Forms
             // 
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Nirmala UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(0, 49);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(0, 40);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(359, 31);
+            this.label3.Size = new System.Drawing.Size(269, 25);
             this.label3.TabIndex = 3;
             this.label3.Text = "Nombre de réservations : ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panelDescription
+            // 
+            this.panelDescription.AutoScroll = true;
+            this.panelDescription.Controls.Add(this.labelDescription);
+            this.panelDescription.Location = new System.Drawing.Point(302, 40);
+            this.panelDescription.Name = "panelDescription";
+            this.panelDescription.Size = new System.Drawing.Size(422, 100);
+            this.panelDescription.TabIndex = 28;
+            // 
             // HebergementInfos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1000, 1102);
+            this.ClientSize = new System.Drawing.Size(750, 894);
             this.Controls.Add(this.panelGiant);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "HebergementInfos";
             this.Text = "HebergementInfos";
             this.Load += new System.EventHandler(this.HebergementInfos_Load);
@@ -792,6 +750,8 @@ namespace AP.Forms
             this.panelPasDeReservEnCours.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panelDescription.ResumeLayout(false);
+            this.panelDescription.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -852,5 +812,6 @@ namespace AP.Forms
         private System.Windows.Forms.Label labelDescriptionAdresse;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label labelDescription;
+        private System.Windows.Forms.Panel panelDescription;
     }
 }

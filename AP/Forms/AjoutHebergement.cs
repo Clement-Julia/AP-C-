@@ -23,14 +23,12 @@ namespace AP.Forms
         private List<ApiCommuneDto> _listeCommunes = new List<ApiCommuneDto>();
         private List<string> _idsRegion = new List<string>();
         private ApiCoordonneesRootDto _allMatch;
-        private int number = 2;
         private string _codeVille = "";
         private int _cp;
         private string _adresse;
         private string _commune;
         private double _latVille;
         private double _longVille;
-        private string _nomRegion;
 
         public AjoutHebergement(Utilisateur utilisateur)
         {
@@ -40,7 +38,6 @@ namespace AP.Forms
             panelChoixAdresse.Hide();
             panelChoixVille.Hide();
             labelErreurSubmit.Hide();
-            BtnRetourOk.Hide();
         }
 
 
@@ -264,12 +261,6 @@ namespace AP.Forms
             }
         }
 
-        // bouton de base du formulaire pour revenir à l'accueil
-        private void BtnRetourClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private async void BtnValidHebergement_Click(object sender, EventArgs e)
         {
 
@@ -314,7 +305,7 @@ namespace AP.Forms
                 string[] tempsTab = nomRegion.Split(',');
                 nomRegion = tempsTab[2].Trim();
 
-                int idRegion = Ville.GetIdRegion(nomRegion);
+                int idRegion = Ville.GetIdRegionByNomRegion(nomRegion);
 
                 Boolean result = false;
                 AdminValidHebergement adminValidHebergement = new AdminValidHebergement();
@@ -336,7 +327,7 @@ namespace AP.Forms
                     labelErreurSubmit.TextAlign = ContentAlignment.MiddleCenter;
                     labelErreurSubmit.BackColor = Color.FromArgb(227, 255, 179);
                     labelErreurSubmit.Show();
-                    BtnRetourOk.Show();
+                    BtnValidAjoutHebergement.Hide();
                 }
                 else
                 {

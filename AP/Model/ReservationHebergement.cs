@@ -15,8 +15,8 @@ namespace AP.Model
         private string _codeReservation { get; set; }
         public string CodeReservation { get { return _codeReservation; } set { _codeReservation = value; } }
 
-        private int _prix { get; set; }
-        public int Prix { get { return _prix; } set { _prix = value; } }
+        private decimal _prix { get; set; }
+        public decimal Prix { get { return _prix; } set { _prix = value; } }
 
         private DateTime _dateDebut { get; set; }
         public DateTime DateDebut { get { return _dateDebut; } set { _dateDebut = value; } }
@@ -49,7 +49,7 @@ namespace AP.Model
                 {
                     this.IdReservationHebergement = reader.GetInt32(0);
                     this.CodeReservation = reader.GetString(1);
-                    this.Prix = reader.GetInt32(2);
+                    this.Prix = reader.GetDecimal(2);
                     this.DateDebut = reader.GetDateTime(3);
                     this.DateFin = reader.GetDateTime(4);
                     this.NbJours = reader.GetInt32(5);
@@ -61,7 +61,7 @@ namespace AP.Model
             }
         }
 
-        public void InitialiserReservationHebergement(int idReservationHebergement, string codeReservation, int prix, DateTime dateDebut, DateTime dateFin, int nbJours, int idVoyage, int idUtilisateur, int idHebergement)
+        public void InitialiserReservationHebergement(int idReservationHebergement, string codeReservation, decimal prix, DateTime dateDebut, DateTime dateFin, int nbJours, int idVoyage, int idUtilisateur, int idHebergement)
         {
             this.IdReservationHebergement = idReservationHebergement;
             this.CodeReservation = codeReservation;
@@ -105,7 +105,7 @@ namespace AP.Model
             while (reader.Read())
             {
                 ReservationHebergement reservationHebergement = new ReservationHebergement();
-                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
                 reservationHebergements.Add(reservationHebergement);
             }
             _bdd.Close();
@@ -119,12 +119,12 @@ namespace AP.Model
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT * FROM reservations_hebergement WHERE idHebergement = @idHebergement AND dateDebut > NOW() AND dateFin < NOW()";
+            query.CommandText = "SELECT * FROM reservations_hebergement WHERE idHebergement = @idHebergement AND dateDebut < NOW() AND dateFin > NOW()";
             query.Parameters.AddWithValue("@idHebergement", idHebergement);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
 
             }
             _bdd.Close();

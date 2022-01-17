@@ -29,16 +29,13 @@ namespace AP.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AjoutHebergement));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnRetourOk = new System.Windows.Forms.Button();
             this.labelErreurSubmit = new System.Windows.Forms.Label();
-            this.BtnRetourClose = new System.Windows.Forms.Button();
             this.BtnValidAjoutHebergement = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -73,6 +70,7 @@ namespace AP.Forms
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBoxNomHebergement = new System.Windows.Forms.RichTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -84,14 +82,13 @@ namespace AP.Forms
             this.panelChoixAdresse.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.BtnRetourOk);
             this.panel1.Controls.Add(this.labelErreurSubmit);
-            this.panel1.Controls.Add(this.BtnRetourClose);
             this.panel1.Controls.Add(this.BtnValidAjoutHebergement);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.panel3);
@@ -100,20 +97,6 @@ namespace AP.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(725, 657);
             this.panel1.TabIndex = 0;
-            // 
-            // BtnRetourOk
-            // 
-            this.BtnRetourOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(189)))), ((int)(((byte)(115)))));
-            this.BtnRetourOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRetourOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnRetourOk.ForeColor = System.Drawing.Color.White;
-            this.BtnRetourOk.Location = new System.Drawing.Point(12, 609);
-            this.BtnRetourOk.Name = "BtnRetourOk";
-            this.BtnRetourOk.Size = new System.Drawing.Size(703, 40);
-            this.BtnRetourOk.TabIndex = 10;
-            this.BtnRetourOk.Text = "Retour à l\'accueil";
-            this.BtnRetourOk.UseVisualStyleBackColor = false;
-            this.BtnRetourOk.Click += new System.EventHandler(this.BtnRetourOk_Click);
             // 
             // labelErreurSubmit
             // 
@@ -127,20 +110,6 @@ namespace AP.Forms
     "ormations.";
             this.labelErreurSubmit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // BtnRetourClose
-            // 
-            this.BtnRetourClose.BackColor = System.Drawing.Color.BurlyWood;
-            this.BtnRetourClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRetourClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnRetourClose.ForeColor = System.Drawing.Color.White;
-            this.BtnRetourClose.Location = new System.Drawing.Point(355, 609);
-            this.BtnRetourClose.Name = "BtnRetourClose";
-            this.BtnRetourClose.Size = new System.Drawing.Size(360, 40);
-            this.BtnRetourClose.TabIndex = 9;
-            this.BtnRetourClose.Text = "Annuler l\'ajout de cet hébergement";
-            this.BtnRetourClose.UseVisualStyleBackColor = false;
-            this.BtnRetourClose.Click += new System.EventHandler(this.BtnRetourClose_Click);
-            // 
             // BtnValidAjoutHebergement
             // 
             this.BtnValidAjoutHebergement.BackColor = System.Drawing.Color.LightSeaGreen;
@@ -149,7 +118,7 @@ namespace AP.Forms
             this.BtnValidAjoutHebergement.ForeColor = System.Drawing.Color.White;
             this.BtnValidAjoutHebergement.Location = new System.Drawing.Point(10, 609);
             this.BtnValidAjoutHebergement.Name = "BtnValidAjoutHebergement";
-            this.BtnValidAjoutHebergement.Size = new System.Drawing.Size(345, 40);
+            this.BtnValidAjoutHebergement.Size = new System.Drawing.Size(705, 40);
             this.BtnValidAjoutHebergement.TabIndex = 9;
             this.BtnValidAjoutHebergement.Text = "Soumettre l\'hébergement à l\'admin";
             this.BtnValidAjoutHebergement.UseVisualStyleBackColor = false;
@@ -181,35 +150,11 @@ namespace AP.Forms
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(237)))), ((int)(((byte)(234)))));
-            this.panel8.Controls.Add(this.button1);
-            this.panel8.Controls.Add(this.label11);
+            this.panel8.Controls.Add(this.pictureBox1);
             this.panel8.Location = new System.Drawing.Point(10, 382);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(340, 108);
             this.panel8.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(14, 59);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(316, 34);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Ajout";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(10, 10);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(320, 25);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Ajouter des photos / une bannière";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel7
             // 
@@ -584,6 +529,16 @@ namespace AP.Forms
             this.richTextBoxNomHebergement.TabIndex = 1;
             this.richTextBoxNomHebergement.Text = "";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(340, 108);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // AjoutHebergement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,6 +561,7 @@ namespace AP.Forms
             this.panelChoixAdresse.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -642,11 +598,8 @@ namespace AP.Forms
         private System.Windows.Forms.Button BtnRetour2;
         private System.Windows.Forms.Button BtnValiderVille;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelChoixVille;
-        private System.Windows.Forms.Button BtnRetourClose;
         private System.Windows.Forms.Button BtnValidAjoutHebergement;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -655,6 +608,6 @@ namespace AP.Forms
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.RichTextBox richTextBoxDescription;
         private System.Windows.Forms.Label labelErreurSubmit;
-        private System.Windows.Forms.Button BtnRetourOk;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

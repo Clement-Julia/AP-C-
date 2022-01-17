@@ -17,11 +17,13 @@ namespace AP.Forms
     {
         private string Email;
         private string MotDePasse;
-        public Connexion()
+        public Connexion(Utilisateur utilisateur = null)
         {
             InitializeComponent();
             TextBoxUsername.Text = "mrtreflestremy@outlook.com";
             TextBoxPassword.Text = "Kdo%test89T";
+            if (utilisateur != null)
+                TextBoxUsername.Text = utilisateur.Email;
         }
 
         private void BtnConnexion_Click(object sender, EventArgs e)

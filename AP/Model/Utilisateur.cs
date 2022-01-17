@@ -33,8 +33,8 @@ namespace AP.Model
         private DateTime _dateAcceptRGPD;
         public DateTime DateAcceptRGPD { get { return _dateAcceptRGPD; } set { _dateAcceptRGPD = value; } }
 
-        private string _dateOfBirth;
-        public string DateOfBirth { get { return _dateOfBirth; } set { _dateOfBirth = value; } }
+        private DateTime _dateOfBirth;
+        public DateTime DateOfBirth { get { return _dateOfBirth; } set { _dateOfBirth = value; } }
 
         private List<Hebergement> _listHebergements = new List<Hebergement>();
 
@@ -59,7 +59,7 @@ namespace AP.Model
                     this.IdRole = reader.GetInt32(5);
                     this.AcceptRGPD = reader.GetBoolean(6);
                     this.DateAcceptRGPD = reader.GetDateTime(7);
-                    this.DateOfBirth = reader.GetString(8);
+                    this.DateOfBirth = reader.GetDateTime(8);
                 }
                 _bdd.Close();
 
@@ -84,28 +84,43 @@ namespace AP.Model
                 this.IdRole = reader.GetInt32(5);
                 this.AcceptRGPD = reader.GetBoolean(6);
                 this.DateAcceptRGPD = reader.GetDateTime(7);
-                this.DateOfBirth = reader.GetString(8);
+                this.DateOfBirth = reader.GetDateTime(8);
             }
             _bdd.Close();
 
             GetAllHebergements();
         }
 
-        public void InitialisationUtilisateur(int id, string email, string mdp, string nom, string prenom, int idRole, bool acceptRGPD, DateTime dateAcceptRGPD, string dateOfBirth)
+        public bool Inscription(string email, string mdp, string nom, string prenom, bool acceptRGPD, DateTime DoB)
         {
-            this.IdUtilisateur = id;
-            this.Email = email;
-            this.Mdp = mdp;
-            this.Nom = nom;
-            this.Prenom = prenom;
-            this.IdRole = idRole;
-            this.AcceptRGPD = acceptRGPD;
-            this.DateAcceptRGPD = dateAcceptRGPD;
-            this.DateOfBirth = dateOfBirth;
+            _bdd.Open();
+            MySqlCommand command = _bdd.CreateCommand();
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@mdp", BCrypt.Net.BCrypt.HashPassword(mdp));
+            command.Parameters.AddWithValue("@nom", nom);
+            command.Parameters.AddWithValue("@prenom", prenom);
+            command.Parameters.AddWithValue("@idRole", 3);
+            command.Parameters.AddWithValue("@acceptRGPD", acceptRGPD);
+            command.Parameters.AddWithValue("@dateAcceptRGPD", DateTime.Now);
+            command.Parameters.AddWithValue("@DoB", DoB);
+            command.CommandText = "INSERT INTO utilisateurs (email, mdp, nom, prenom, idRole, acceptRGPD, dateAcceptRGPD, DoB) VALUES (@email , @mdp , @nom , @prenom , @idRole , @acceptRGPD , @dateAcceptRGPD, @DoB)";
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return true;
+            }
+            else
+            {
+                _bdd.Close();
+                return false;
+            }
         }
 
         public List<Hebergement> GetAllHebergements()
         {
+            _listHebergements.Clear();
+
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
             query.CommandText = "SELECT * FROM hebergement WHERE idUtilisateur = @idUtilisateur";
@@ -113,32 +128,11 @@ namespace AP.Model
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                //Hebergement Hebergement = new Hebergement();
-                //Hebergement.InitialisationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetDouble(5), reader.GetDouble(6), reader.GetInt32(7), reader.GetString(8), reader.GetInt32(9), reader.GetDateTime(10));
-                //_listHebergements.Add(Hebergement);
                 _listHebergements.Add(new Hebergement(reader.GetInt32(0)));
             }
             _bdd.Close();
 
             return _listHebergements;
-        }
-
-        public int GetNbHebergements()
-        {
-            //_bdd.Open();
-            //MySqlCommand query = _bdd.CreateCommand();
-            //query.CommandText = "SELECT COUNT(idHebergement) FROM hebergement WHERE idUtilisateur = @idUtilisateur";
-            //query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
-            //MySqlDataReader reader = query.ExecuteReader();
-            //int quantite = 0;
-            //while (reader.Read())
-            //{
-            //    if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
-            //}
-            //_bdd.Close();
-
-            // return quantite;
-            return _listHebergements.Count;
         }
 
         public int GetNbTotalReservations()
@@ -151,7 +145,6 @@ namespace AP.Model
             int quantite = 0;
             while (reader.Read())
             {
-                //if (!reader.IsDBNull(reader.GetOrdinal("COUNT(idReservationHebergement)"))) { quantite = reader.GetInt32(0); } else { quantite = 0; }
                 quantite = reader.GetInt32(0);
             }
             _bdd.Close();
@@ -253,8 +246,7 @@ namespace AP.Model
 
         public string GetAge()
         {
-            string[] infos = DateOfBirth.Substring(0,10).Split('/');
-            DateTime DoB = new DateTime(Convert.ToInt32(infos[2]), Convert.ToInt32(infos[1]), Convert.ToInt32(infos[0]));
+            DateTime DoB = DateOfBirth;
             DateTime Now = DateTime.Now;
 
             return (Now.Subtract(DoB).Days / 365).ToString();

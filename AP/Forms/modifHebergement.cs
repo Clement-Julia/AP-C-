@@ -22,12 +22,14 @@ namespace AP
         private Utilisateur _utilisateur;
         private Hebergement _hebergement;
         private FormHebergements _formHebergements;
+        private HebergementsCustumControl _hebergementsCustumControl;
 
-        public modifHebergement(Hebergement hebergement, Utilisateur utilisateur, FormHebergements formHebergements)
+        public modifHebergement(Hebergement hebergement, Utilisateur utilisateur, FormHebergements formHebergements, HebergementsCustumControl hebergementsCustumControl)
         {
             InitializeComponent();
             this._utilisateur = utilisateur;
             this._formHebergements = formHebergements;
+            this._hebergementsCustumControl = hebergementsCustumControl;
             this._hebergement = new Hebergement(hebergement.IdHebergement);
 
             //Initialisation des valeurs de tab généraux
@@ -48,7 +50,7 @@ namespace AP
             int index = 0;
             for(int i = 0; i < allVilles.Count; i++)
             {
-                items.Add(new ComboboxItem { Text = allVilles[i].Libelle, Value = allVilles[i].IdVille });
+                items.Add(new ComboboxItemDto { Text = allVilles[i].Libelle, Value = allVilles[i].IdVille });
                 if (allVilles[i].IdVille == _hebergement.IdVille)
                 {
                     index = i;
@@ -90,7 +92,7 @@ namespace AP
 
         private void modif_Click(object sender, EventArgs e)
         {
-            string idVilleComboBox = (ville.SelectedItem as ComboboxItem).Value.ToString();
+            string idVilleComboBox = (ville.SelectedItem as ComboboxItemDto).Value.ToString();
             if (String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(idVilleComboBox) && String.IsNullOrEmpty(description.Text) && String.IsNullOrEmpty(prix.Text) && String.IsNullOrEmpty(latitude.Text) && String.IsNullOrEmpty(longitude.Text))
             {
                 MessageBox.Show("Les informations ne peuvent pas être vides");
@@ -150,21 +152,19 @@ namespace AP
 
         private void sup_Click_1(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection("database=ppe; server=localhost; user id = root; pwd=");
-            conn.Open();
-            MySqlCommand command = conn.CreateCommand();
-
-            command.Parameters.AddWithValue("@idHebergement", _hebergement.IdHebergement);
 
             if (open != 1)
             {
-                var confirmResult = MessageBox.Show("Vous allez supprimer l'herbergement : " + name.Text + "\nÊtes-vous sûr ?", "Attention", MessageBoxButtons.YesNo);
+                var confirmResult = MessageBox.Show("Vous allez supprimer l'herbergement : " + name.Text + "\n\nÊtes-vous sûr ? \n\nSi des utilisateurs avaient réservé votre hébergement pour des dates ultérieures, toutes ses réservations se verrons annulées et les utilisateurs remboursés.", "Attention", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    command.CommandText = "DELETE FROM hebergement where idHebergement = @idHebergement";
-                    if (command.ExecuteNonQuery() > 0)
+                    bool result = _hebergement.DeleteHebergement();
+                    if (result)
                     {
-                        MessageBox.Show("Suppression effectuée !\nVous avez bien supprimé : " + name.Text);
+                        MessageBox.Show("Suppression effectuée !\n\nVous avez bien supprimé : " + name.Text);
+                        _utilisateur.ListHebergements.Remove(_utilisateur.ListHebergements.Where(w => w.IdHebergement.Equals(_hebergement.IdHebergement)).FirstOrDefault());
+                        _formHebergements.PanelHebergements.Controls.Remove(_hebergementsCustumControl);
+                        this.Close();
                     }
                     else
                     {
@@ -178,12 +178,9 @@ namespace AP
             }
             else
             {
-                MessageBox.Show("L'hebegement est réservé\nIl ne peut pas être supprimé", "Attention");
+                MessageBox.Show("L'hebegement est actuellement réservé\nIl ne peut pas être supprimé", "Attention");
             }
 
-            conn.Close();
-
-            //Faire une redirection
         }
 
         private void retour_Click(object sender, EventArgs e)
@@ -191,59 +188,5 @@ namespace AP
             this.Close();
         }
 
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-
-        //private void ajoutResponse_Click(object sender, EventArgs e)
-        //{
-        //    List<Response> réponse;
-        //    int idAvis;
-        //    int idHebergement;
-        //    TextResponse textResponse;
-        //    int idResponse;
-        //    modifHebergement ModifHebergement;
-        //    public AjouterResponse(List<Response> réponse, int idAvis, int idHebergement, TextResponse textResponse, int idResponse, modifHebergement modifHebergement)
-        //    {
-        //        InitializeComponent();
-        //        this.réponse = réponse;
-        //        this.idAvis = idAvis;
-        //        this.idHebergement = idHebergement;
-        //        this.textResponse = textResponse;
-        //        this.idResponse = idResponse;
-        //        this.ModifHebergement = modifHebergement;
-        //    }
-
-        //    private void ajout_Click(object sender, EventArgs e)
-        //    {
-        //        Avis Avis = new Avis();
-        //        if (réponse.Count == 0)
-        //        {
-        //            MessageBox.Show(Avis.AjoutResponse(idAvis, idHebergement, textResponse.text.Text));
-
-        //            ModifHebergement.flow_avis.Controls.Clear();
-        //            List<Avis> allAvis = Avis.GetAllAvisHebergement(ModifHebergement.idHebergement);
-        //            foreach (Avis avis in allAvis)
-        //            {
-        //                AvisHebergement customControl = new AvisHebergement(avis, ModifHebergement, idHebergement);
-        //                ModifHebergement.flow_avis.Controls.Add(customControl);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show(Avis.UpdateResponse(idResponse, textResponse.text.Text));
-
-        //            ModifHebergement.flow_avis.Controls.Clear();
-        //            List<Avis> allAvis = Avis.GetAllAvisHebergement(ModifHebergement.idHebergement);
-        //            foreach (Avis avis in allAvis)
-        //            {
-        //                AvisHebergement customControl = new AvisHebergement(avis, ModifHebergement, idHebergement);
-        //                ModifHebergement.flow_avis.Controls.Add(customControl);
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

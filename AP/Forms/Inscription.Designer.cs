@@ -53,7 +53,7 @@ namespace AP.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Nirmala UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label1.ForeColor = System.Drawing.Color.LightSeaGreen;
             this.label1.Location = new System.Drawing.Point(64, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 37);
@@ -156,7 +156,7 @@ namespace AP.Forms
             // 
             // BtnInscription
             // 
-            this.BtnInscription.BackColor = System.Drawing.Color.RoyalBlue;
+            this.BtnInscription.BackColor = System.Drawing.Color.LightSeaGreen;
             this.BtnInscription.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnInscription.FlatAppearance.BorderSize = 0;
             this.BtnInscription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -185,7 +185,7 @@ namespace AP.Forms
             // 
             this.label6.AutoSize = true;
             this.label6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label6.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label6.ForeColor = System.Drawing.Color.LightSeaGreen;
             this.label6.Location = new System.Drawing.Point(62, 656);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(157, 17);
@@ -256,7 +256,6 @@ namespace AP.Forms
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 25);
             this.dateTimePicker1.TabIndex = 17;
-            this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
             // 
             // Inscription
             // 

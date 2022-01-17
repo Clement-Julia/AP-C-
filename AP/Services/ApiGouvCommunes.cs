@@ -16,10 +16,6 @@ namespace AP.Services
         private List<int> _idRegions = new List<int>();
         private List<string> _nosRegionsString = new List<string>() { "Centre-Val de Loire", "Pays de la Loire", "Bretagne", "Nouvelle-Aquitaine" };
         public List<ApiRegionDto> _listeNosRegions;
-        public ApiGouvCommunes()
-        {
-            // GetRegions(); 
-        }
 
         public async Task<List<ApiRegionDto>> GetRegions()
         {

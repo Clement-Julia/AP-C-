@@ -126,7 +126,7 @@ namespace AP.Model
                 return false;
         }
 
-        public int GetIdRegion(string nomRegion)
+        public int GetIdRegionByNomRegion(string nomRegion)
         {
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();

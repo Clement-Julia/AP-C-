@@ -36,6 +36,7 @@ namespace AP.Forms
             LabelGainsPrevisonel.Text = GainPrevisionel.ToString() + " €";
         }
 
+        // Les trois fonctions sont une des manières de créer des bordures, en l'occurence pour les trois panel du bas de la page formAccueil
         private void panel10_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(new Pen(Color.LightSeaGreen, 15),
@@ -54,20 +55,21 @@ namespace AP.Forms
                             this.DisplayRectangle);
         }
 
+        // Simulation d'animation pour la circular progress bar
         private void FormAccueil_Shown(object sender, EventArgs e)
         {
             CPBhebergements.Value = 0;
             CPBhebergements.Minimum = 0;
-            int donnee = Utilisateur.GetNbHebergements();
-            CPBhebergements.Maximum = donnee + 2;
-            for (int i = 0; i <= donnee; i++)
+            int nbHebergements = Utilisateur.ListHebergements.Count;
+            CPBhebergements.Maximum = nbHebergements + 2;
+            for (int i = 0; i <= nbHebergements; i++)
             {
                 Thread.Sleep(5);
                 CPBhebergements.Value = i;
                 CPBhebergements.Update();
             }
-            CPBhebergements.Text = donnee + " Hébergement";
-            if (donnee > 1)
+            CPBhebergements.Text = nbHebergements + " Hébergement";
+            if (nbHebergements > 1)
                 CPBhebergements.Text += "s";
         }
 

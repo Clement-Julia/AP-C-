@@ -47,7 +47,7 @@ namespace AP.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label1.ForeColor = System.Drawing.Color.LightSeaGreen;
             this.label1.Location = new System.Drawing.Point(76, 656);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 17);
@@ -68,7 +68,7 @@ namespace AP.Forms
             // 
             // BtnConnexion
             // 
-            this.BtnConnexion.BackColor = System.Drawing.Color.RoyalBlue;
+            this.BtnConnexion.BackColor = System.Drawing.Color.LightSeaGreen;
             this.BtnConnexion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnConnexion.FlatAppearance.BorderSize = 0;
             this.BtnConnexion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -145,7 +145,7 @@ namespace AP.Forms
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Nirmala UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label7.ForeColor = System.Drawing.Color.LightSeaGreen;
             this.label7.Location = new System.Drawing.Point(59, 23);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(154, 37);

@@ -86,9 +86,9 @@ namespace AP.Forms
         // HEBERGEMENT
         private void OpenHebergementSubMenu(object sender, EventArgs e)
         {
+            ShowSubmenu(panelHebergementSubmenu);
             PnlNav.Height = BtnHebergements.Height;
             PnlNav.Top = BtnHebergements.Top;
-            ShowSubmenu(panelHebergementSubmenu);
         }
         private void AjoutHebergement_Click(object sender, EventArgs e)
         {
@@ -107,9 +107,10 @@ namespace AP.Forms
         // FISCALITE
         private void OpenFiscaliteSubMenu(object sender, EventArgs e)
         {
+            ShowSubmenu(panelFiscaliteSubmenu);
             PnlNav.Height = BtnFiscalite.Height;
             PnlNav.Top = BtnFiscalite.Top;
-            ShowSubmenu(panelFiscaliteSubmenu);
+            PnlNav.BringToFront();
         }
 
         private void Justificatif_Click(object sender, EventArgs e)

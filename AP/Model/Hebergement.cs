@@ -144,6 +144,25 @@ namespace AP.Model
             }
 
         }
+        
+        public bool DeleteHebergement()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "DELETE FROM hebergement where idHebergement = @idHebergement";
+            query.Parameters.AddWithValue("@idHebergement", IdHebergement);
+            if (query.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return true;
+            }
+            else
+            {
+                _bdd.Close();
+                return false;
+            }
+
+        }
 
         public int GetStatusHebergement(int idHebergement)
         {

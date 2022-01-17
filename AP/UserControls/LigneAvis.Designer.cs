@@ -34,6 +34,8 @@
             this.flowLayoutPanelEtoiles = new System.Windows.Forms.FlowLayoutPanel();
             this.labelCommentaire = new System.Windows.Forms.Label();
             this.labelNom = new System.Windows.Forms.Label();
+            this.panelAvis = new System.Windows.Forms.Panel();
+            this.panelAvis.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelDate
@@ -68,10 +70,12 @@
             // 
             // labelCommentaire
             // 
+            this.labelCommentaire.AutoSize = true;
             this.labelCommentaire.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCommentaire.Location = new System.Drawing.Point(137, 4);
+            this.labelCommentaire.Location = new System.Drawing.Point(0, 0);
+            this.labelCommentaire.MaximumSize = new System.Drawing.Size(350, 0);
             this.labelCommentaire.Name = "labelCommentaire";
-            this.labelCommentaire.Size = new System.Drawing.Size(374, 110);
+            this.labelCommentaire.Size = new System.Drawing.Size(350, 108);
             this.labelCommentaire.TabIndex = 33;
             this.labelCommentaire.Text = resources.GetString("labelCommentaire.Text");
             this.labelCommentaire.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -86,18 +90,29 @@
             this.labelNom.Text = "Nom";
             this.labelNom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panelAvis
+            // 
+            this.panelAvis.AutoScroll = true;
+            this.panelAvis.Controls.Add(this.labelCommentaire);
+            this.panelAvis.Location = new System.Drawing.Point(122, 4);
+            this.panelAvis.Name = "panelAvis";
+            this.panelAvis.Size = new System.Drawing.Size(379, 113);
+            this.panelAvis.TabIndex = 37;
+            // 
             // LigneAvis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.panelAvis);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.labelPrenom);
             this.Controls.Add(this.flowLayoutPanelEtoiles);
-            this.Controls.Add(this.labelCommentaire);
             this.Controls.Add(this.labelNom);
             this.Name = "LigneAvis";
             this.Size = new System.Drawing.Size(700, 120);
+            this.panelAvis.ResumeLayout(false);
+            this.panelAvis.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -109,5 +124,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelEtoiles;
         private System.Windows.Forms.Label labelCommentaire;
         private System.Windows.Forms.Label labelNom;
+        private System.Windows.Forms.Panel panelAvis;
     }
 }
