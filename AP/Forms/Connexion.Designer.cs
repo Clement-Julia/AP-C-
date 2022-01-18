@@ -40,7 +40,9 @@ namespace AP.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.BtnQuitter = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnQuitter)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -162,12 +164,24 @@ namespace AP.Forms
             this.pictureBox1.TabIndex = 36;
             this.pictureBox1.TabStop = false;
             // 
+            // BtnQuitter
+            // 
+            this.BtnQuitter.Image = ((System.Drawing.Image)(resources.GetObject("BtnQuitter.Image")));
+            this.BtnQuitter.Location = new System.Drawing.Point(249, 6);
+            this.BtnQuitter.Name = "BtnQuitter";
+            this.BtnQuitter.Size = new System.Drawing.Size(30, 30);
+            this.BtnQuitter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BtnQuitter.TabIndex = 37;
+            this.BtnQuitter.TabStop = false;
+            this.BtnQuitter.Click += new System.EventHandler(this.BtnQuitter_Click);
+            // 
             // Connexion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(285, 700);
+            this.Controls.Add(this.BtnQuitter);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label5);
@@ -185,6 +199,7 @@ namespace AP.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Connexion";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnQuitter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,5 +216,6 @@ namespace AP.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox BtnQuitter;
     }
 }

@@ -83,5 +83,10 @@ namespace AP.Forms
                 BtnConnexion.PerformClick();
             }
         }
+
+        private void BtnQuitter_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
