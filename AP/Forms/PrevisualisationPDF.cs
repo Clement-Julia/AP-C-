@@ -15,8 +15,8 @@ namespace AP.Forms
 {
     public partial class PrevisualisationPDF : Form
     {
-        private DateTime _du;
-        private DateTime _au;
+        private DateTime _dateDebut;
+        private DateTime _dateFin;
         private List<ReservationHebergement> _reservationsHebergement;
         private Utilisateur _utilisateur;
         private decimal _gains = 0;
@@ -24,8 +24,8 @@ namespace AP.Forms
         public PrevisualisationPDF(DateTime dateTime1, DateTime dateTime2, Utilisateur utilisateur)
         {
             InitializeComponent();
-            this._du = dateTime1;
-            this._au = dateTime2;
+            this._dateDebut = dateTime1;
+            this._dateFin = dateTime2;
             this._utilisateur = utilisateur;
             this._reservationsHebergement = _utilisateur.GetReservationsBetween(dateTime1, dateTime2);
 
@@ -45,7 +45,7 @@ namespace AP.Forms
             labelNom.Text = _utilisateur.Nom;
             labelPrenom.Text = _utilisateur.Prenom;
             labelUserId.Text = "ID : " + _utilisateur.IdUtilisateur.ToString();
-            labelPeriode.Text = "Du " + dateTime1.ToString("dd-MM-yyyy") + " au " + dateTime2.ToString("dd-MM-yyyy");
+            labelPeriode.Text = "Du " + dateTime1.ToShortDateString() + " au " + dateTime2.ToShortDateString();
             labelGains.Text = "Gains : " +  _gains.ToString() + " €";
 
         }
@@ -62,8 +62,8 @@ namespace AP.Forms
             {
                 string folder = folderBrowserDialog1.SelectedPath;
 
-                GeneratePDF generatePDF = new GeneratePDF(labelNom.Text, labelPrenom.Text, labelUserId.Text, labelPeriode.Text, _reservationsHebergement, folder, _du, _au);
-                generatePDF.Pdf();
+                PDF PDF = new PDF(_utilisateur, _reservationsHebergement, folder, _dateDebut, _dateFin);
+                PDF.GeneratePDF();
 
             }
         }

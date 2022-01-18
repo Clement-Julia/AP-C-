@@ -39,14 +39,20 @@ namespace AP.Forms
 
                 Utilisateur utilisateur = new Utilisateur(Email);
 
-                if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
+                if(utilisateur.IdRole != 3 || utilisateur.IdRole == 1)
                 {
-                    new Home(utilisateur).Show();
-                    this.Hide();
-                }
-                else
+                    if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
+                    {
+                        new Home(utilisateur).Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Veuillez vérifier vos informations de connexion", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                } else
                 {
-                    MessageBox.Show("Veuillez vérifier vos informations de connexion", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Il faut avoir le status de propriétaire afin de pouvoir se connecter à l'application", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }

@@ -142,7 +142,8 @@ namespace AP
 
             if (open != 1)
             {
-                _hebergement.UpdateOption(_hebergement.IdHebergement, allOptions.Count(), checkid);
+                Option Option = new Option();
+                Option.UpdateOption(_hebergement.IdHebergement, allOptions.Count(), checkid);
             }
             else
             {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,9 +19,12 @@ namespace AP.Forms
         private string MotDePasse;
         private string ConfirmationMotDePasse;
         private Utilisateur _utilisateur;
+        private bool _showRGPD = false;
         public Inscription()
         {
             InitializeComponent();
+            panelRGPDBorder.Hide();
+            labelRGPD.Text = "Article 1 : Les mentions légales \n\n L'édition de l'application Propalacool est assurée par la Société J&D Development au capital de 10 000 euros, immatriculée au RCS de Paris sous le numéro 5454151, dont le siège social est situé à Paris. \nNuméro de téléphone \n 06.01.18.07.60.\nAdresse e-mail : \nloocalacool @gmail.fr. \nLe Directeur de la publication est: \nJULIA Clément. \nL'hébergeur de l'application Propalacool est la société OVH, dont le siège social est situé au 19 Pl.Françoise Dorin, 75017 Paris, avec le numéro de téléphone: 09 55 00 66 33. \n\n\n ARTICLE 3 : Collecte des données \n\n L'application assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.l'application est déclaré à la CNIL sous le numéro 05151215. En vertu de la loi Informatique et Libertés, en date du 6 janvier 1978, l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles.L'Utilisateur exerce ce droit via son espace personnel";
             DateTime today = DateTime.Now;
             dateTimePicker1.Value = today.AddYears(-18);
         }
@@ -104,5 +108,13 @@ namespace AP.Forms
             }
         }
 
+        private void pictureBoxRGPD_Click(object sender, EventArgs e)
+        {
+            _showRGPD = !_showRGPD;
+            if (_showRGPD)
+                panelRGPDBorder.Show();
+            else
+                panelRGPDBorder.Hide();
+        }
     }
 }

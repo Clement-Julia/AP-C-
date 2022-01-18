@@ -46,7 +46,7 @@ namespace AP.Forms
             {
                 if (_response.IdAvis == 0)
                 {
-                    _response = _avis.AjoutResponse(_avis.IdAvis, _utilisateur.IdUtilisateur, text.Text);
+                    _response = _response.AjoutResponse(_avis.IdAvis, _utilisateur.IdUtilisateur, text.Text);
                     if (_response.IdAvis == 0)
                         MessageBox.Show("Echec de l'ajout !");
                     else
@@ -60,7 +60,7 @@ namespace AP.Forms
                 }
                 else
                 {
-                    _response = _avis.UpdateResponse(_response, text.Text);
+                    _response = _response.UpdateResponse(_response, text.Text);
 
                     if (_response.Reponse == text.Text)
                     {
@@ -79,7 +79,7 @@ namespace AP.Forms
 
         private void supprimerResponse_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_avis.SuppressionResponse(_response));
+            MessageBox.Show(_response.SuppressionResponse(_response));
             _response = new Response();
             _modifHebergement.flow_avis.Controls.Remove(_responseHebergement);
             this._responseHebergement = new ResponseHebergement(_response, _modifHebergement, _utilisateur);

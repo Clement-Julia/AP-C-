@@ -256,6 +256,7 @@
     <Compile Include="Forms\Connexion.Designer.cs">
       <DependentUpon>Connexion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Region.cs" />
     <Compile Include="UserControls\ControlResponse.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -295,7 +296,7 @@
     <Compile Include="Model\AdminValidHebergement.cs" />
     <Compile Include="Services\ApiGouvCommunes.cs" />
     <Compile Include="dtos\ComboboxItemDto.cs" />
-    <Compile Include="Services\GeneratePDF.cs" />
+    <Compile Include="Services\PDF.cs" />
     <Compile Include="UserControls\HebergementsCustumControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

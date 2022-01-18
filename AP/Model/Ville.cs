@@ -126,21 +126,5 @@ namespace AP.Model
                 return false;
         }
 
-        public int GetIdRegionByNomRegion(string nomRegion)
-        {
-            _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT idRegion FROM regions WHERE libelle = @libelle";
-            query.Parameters.AddWithValue("@libelle", nomRegion);
-            MySqlDataReader reader = query.ExecuteReader();
-            int idRegion = 0;
-            while (reader.Read())
-            {
-                if (!reader.IsDBNull(reader.GetOrdinal("idRegion"))) { idRegion = reader.GetInt32(0); } else { idRegion = 0; }
-            }
-            _bdd.Close();
-
-            return idRegion;
-        }
     }
 }

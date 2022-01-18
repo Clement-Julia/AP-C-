@@ -35,10 +35,5 @@ namespace AP.Model
             }
         }
 
-        public void InitialisationHebergement(int idHebergement, int idOptions)
-        {
-            this.IdHebergement = idHebergement;
-            this.IdOption = idOptions;
-        }
     }
 }

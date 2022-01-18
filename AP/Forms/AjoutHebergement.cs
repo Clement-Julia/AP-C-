@@ -108,7 +108,7 @@ namespace AP.Forms
                         temporaire = await _apiGouvCommunes.ListeCommunes(this._cp);
                     }
                     List<string> pk = new List<string>();
-                    _apiGouvCommunes._listeNosRegions.ForEach(x => pk.Add(x.code));
+                    _apiGouvCommunes.ListeNosRegions.ForEach(x => pk.Add(x.code));
                     _listeCommunes.Clear();
                     foreach (var item in temporaire)
                     {
@@ -253,7 +253,7 @@ namespace AP.Forms
             }
             foreach (ApiCommuneDto item in _listeCommunes)
             {
-                if (_apiGouvCommunes._listeNosRegions.Where(w => w.code == item.codeRegion).FirstOrDefault() != null)
+                if (_apiGouvCommunes.ListeNosRegions.Where(w => w.code == item.codeRegion).FirstOrDefault() != null)
                 {
                     string comboItem = item.nom;
                     comboBoxCommune.Items.Add(comboItem);
@@ -297,6 +297,7 @@ namespace AP.Forms
 
                 // On test si la ville existe en base de donnée
                 Ville Ville = new Ville();
+                Model.Region Region = new Model.Region();
 
                 ApiCoordonneesRootDto coordonnees = await _apiGouvCommunes.GetCoordonneesVille(_commune, richTextBoxLatitude.Text, richTextBoxLongitude.Text);
 
@@ -305,7 +306,7 @@ namespace AP.Forms
                 string[] tempsTab = nomRegion.Split(',');
                 nomRegion = tempsTab[2].Trim();
 
-                int idRegion = Ville.GetIdRegionByNomRegion(nomRegion);
+                int idRegion = Region.GetIdRegionByNomRegion(nomRegion);
 
                 Boolean result = false;
                 AdminValidHebergement adminValidHebergement = new AdminValidHebergement();
@@ -360,8 +361,8 @@ namespace AP.Forms
         // Commme le constructeur ne peut pas être async et que j'ai besoin de cette donnée avant de parcourir avec le foreach, j'ai du faire une méthode async
         private async void AjoutHebergement_Load(object sender, EventArgs e)
         {
-            this._apiGouvCommunes._listeNosRegions = await this._apiGouvCommunes.GetRegions();
-            foreach(var item in this._apiGouvCommunes._listeNosRegions)
+            this._apiGouvCommunes.ListeNosRegions = await this._apiGouvCommunes.GetRegions();
+            foreach(var item in this._apiGouvCommunes.ListeNosRegions)
             {
                 this._idsRegion.Add(item.code);
             }

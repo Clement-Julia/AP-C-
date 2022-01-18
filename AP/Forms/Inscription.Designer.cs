@@ -29,6 +29,9 @@ namespace AP.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Panel panelRGPD;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inscription));
+            this.labelRGPD = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.TextBoxUsername = new System.Windows.Forms.TextBox();
@@ -47,7 +50,34 @@ namespace AP.Forms
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.panelRGPDBorder = new System.Windows.Forms.Panel();
+            this.pictureBoxRGPD = new System.Windows.Forms.PictureBox();
+            panelRGPD = new System.Windows.Forms.Panel();
+            panelRGPD.SuspendLayout();
+            this.panelRGPDBorder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRGPD)).BeginInit();
             this.SuspendLayout();
+            // 
+            // panelRGPD
+            // 
+            panelRGPD.AutoScroll = true;
+            panelRGPD.BackColor = System.Drawing.Color.White;
+            panelRGPD.Controls.Add(this.labelRGPD);
+            panelRGPD.ForeColor = System.Drawing.SystemColors.ControlText;
+            panelRGPD.Location = new System.Drawing.Point(3, 3);
+            panelRGPD.Name = "panelRGPD";
+            panelRGPD.Size = new System.Drawing.Size(270, 510);
+            panelRGPD.TabIndex = 0;
+            // 
+            // labelRGPD
+            // 
+            this.labelRGPD.AutoSize = true;
+            this.labelRGPD.Font = new System.Drawing.Font("Nirmala UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRGPD.Location = new System.Drawing.Point(3, 3);
+            this.labelRGPD.MaximumSize = new System.Drawing.Size(240, 0);
+            this.labelRGPD.Name = "labelRGPD";
+            this.labelRGPD.Size = new System.Drawing.Size(0, 20);
+            this.labelRGPD.TabIndex = 0;
             // 
             // label1
             // 
@@ -257,12 +287,34 @@ namespace AP.Forms
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 25);
             this.dateTimePicker1.TabIndex = 17;
             // 
+            // panelRGPDBorder
+            // 
+            this.panelRGPDBorder.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panelRGPDBorder.Controls.Add(panelRGPD);
+            this.panelRGPDBorder.Location = new System.Drawing.Point(4, 4);
+            this.panelRGPDBorder.Name = "panelRGPDBorder";
+            this.panelRGPDBorder.Size = new System.Drawing.Size(276, 516);
+            this.panelRGPDBorder.TabIndex = 18;
+            // 
+            // pictureBoxRGPD
+            // 
+            this.pictureBoxRGPD.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxRGPD.Image")));
+            this.pictureBoxRGPD.Location = new System.Drawing.Point(247, 523);
+            this.pictureBoxRGPD.Name = "pictureBoxRGPD";
+            this.pictureBoxRGPD.Size = new System.Drawing.Size(25, 25);
+            this.pictureBoxRGPD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxRGPD.TabIndex = 19;
+            this.pictureBoxRGPD.TabStop = false;
+            this.pictureBoxRGPD.Click += new System.EventHandler(this.pictureBoxRGPD_Click);
+            // 
             // Inscription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(285, 700);
+            this.Controls.Add(this.pictureBoxRGPD);
+            this.Controls.Add(this.panelRGPDBorder);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.TextBoxPrenom);
@@ -288,6 +340,10 @@ namespace AP.Forms
             this.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Connexion";
+            panelRGPD.ResumeLayout(false);
+            panelRGPD.PerformLayout();
+            this.panelRGPDBorder.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRGPD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,5 +369,8 @@ namespace AP.Forms
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Panel panelRGPDBorder;
+        private System.Windows.Forms.Label labelRGPD;
+        private System.Windows.Forms.PictureBox pictureBoxRGPD;
     }
 }

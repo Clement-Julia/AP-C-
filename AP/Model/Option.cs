@@ -62,5 +62,45 @@ namespace AP.Model
             _bdd.Close();
             return Options;
         }
+
+        public void UpdateOption(int id, int option, List<string> name)
+        {
+            string req = "";
+
+            _bdd.Open();
+            MySqlCommand supOption = _bdd.CreateCommand();
+            supOption.Parameters.AddWithValue("@idHebergement", id);
+            supOption.CommandText = "delete from options_by_hebergement where idHebergement = @idHebergement";
+            supOption.ExecuteNonQuery();
+            _bdd.Close();
+
+            if (name.Count > 0)
+            {
+                _bdd.Open();
+                MySqlCommand ajoutOption = _bdd.CreateCommand();
+                ajoutOption.Parameters.AddWithValue("@idHebergement", id);
+                for (int i = 0; i < name.Count(); i++)
+                {
+                    ajoutOption.Parameters.AddWithValue("@idOption" + i, name[i]);
+                    req += "(@idHebergement, @idOption" + i + "),";
+                }
+                req = req.TrimEnd(',');
+                ajoutOption.CommandText = "insert into options_by_hebergement(idHebergement, idOption) values" + req;
+                if (ajoutOption.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Modification effectuée !");
+                }
+                else
+                {
+                    MessageBox.Show("Un problème est apparu veuillez recommencer");
+                }
+                _bdd.Close();
+            }
+            else
+            {
+                MessageBox.Show("Modification effectuée !");
+            }
+        }
+
     }
 }
