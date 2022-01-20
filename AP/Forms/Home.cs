@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Threading;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using AP.Model;
@@ -48,7 +41,7 @@ namespace AP.Forms
             BtnAccueil.BackColor = Color.FromArgb(32, 178, 170);
 
             LabelUserName.Text = Utilisateur.Nom + " " + Utilisateur.Prenom;
-            LabelMembreDepuis.Text = "Membre depuis " + Utilisateur.DateAcceptRGPD.ToString("dd-MM-yyyy");
+            LabelMembreDepuis.Text = "Membre depuis " + Utilisateur.DateAcceptRGPD.ToShortDateString();
 
             openChildForm(new FormAccueil(utilisateur));
         }

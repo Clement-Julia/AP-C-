@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AP.Model;
 
@@ -33,7 +26,7 @@ namespace AP.Forms
             {
                 ajoutResponse.Text = "Modifier";
                 text.Text = _response.Reponse;
-                this._responseHebergement = new ResponseHebergement(_response, _modifHebergement, _utilisateur);
+                this._responseHebergement = new ResponseHebergement(_response, _utilisateur);
                 _modifHebergement.flow_avis.Controls.Add(_responseHebergement);
             }
             else
@@ -52,7 +45,7 @@ namespace AP.Forms
                     else
                     {
                         MessageBox.Show("Ajout réussi !");
-                        this._responseHebergement = new ResponseHebergement(_response, _modifHebergement, _utilisateur);
+                        this._responseHebergement = new ResponseHebergement(_response, _utilisateur);
                         _modifHebergement.flow_avis.Controls.Add(_responseHebergement);
                         ajoutResponse.Text = "Modifier";
                         supprimerResponse.Show();
@@ -82,7 +75,7 @@ namespace AP.Forms
             MessageBox.Show(_response.SuppressionResponse(_response));
             _response = new Response();
             _modifHebergement.flow_avis.Controls.Remove(_responseHebergement);
-            this._responseHebergement = new ResponseHebergement(_response, _modifHebergement, _utilisateur);
+            this._responseHebergement = new ResponseHebergement(_response, _utilisateur);
             ajoutResponse.Text = "Ajouter";
             supprimerResponse.Hide();
         }

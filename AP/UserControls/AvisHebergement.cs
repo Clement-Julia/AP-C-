@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AP.Model;
 
@@ -33,7 +27,7 @@ namespace AP.Forms
             nom.Text = user.Nom + " " + user.Prenom;
             rating.Text = avis.Note.ToString();
             commentaire.Text = avis.Commentaire;
-            labelDate.Text = "Le " + avis.Date.ToString("dd-MM-yyyy");
+            labelDate.Text = "Le " + avis.Date.ToShortDateString();
 
             _response = new Response(avis.IdAvis);
 
