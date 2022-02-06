@@ -13,12 +13,11 @@ namespace AP.UserControls
             InitializeComponent();
             this._reservationHebergement = reservationHebergement;
             Ville Ville = _reservationHebergement.GetVilleInfos();
-            Hebergement Hebergement = new Hebergement(_reservationHebergement.IdHebergement);
 
             labelIdReservation.Text = _reservationHebergement.IdReservationHebergement.ToString();
             labelPeriode.Text = "Du " + _reservationHebergement.DateDebut.ToString("dd-MM-yyyy") + " au " + _reservationHebergement.DateFin.ToString("dd-MM-yyyy");
             labelVille.Text = Ville.Libelle;
-            labelHebergement.Text = Hebergement.Libelle;
+            labelHebergement.Text = _reservationHebergement.Hebergement.Libelle;
             labelGains.Text = _reservationHebergement.Prix.ToString() + " €";
 
             if (colorTrueOrFalse)

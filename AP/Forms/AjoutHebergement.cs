@@ -304,16 +304,16 @@ namespace AP.Forms
                 int idRegion = Region.GetIdRegionByNomRegion(nomRegion);
 
                 Boolean result = false;
-                AdminValidHebergement adminValidHebergement = new AdminValidHebergement();
+                Hebergement Hebergement = new Hebergement();
                 bool villeExiste = Ville.IsThisTownExist(_commune);
                 if (!villeExiste)
                 {
                     _latVille = coordonnees.features[0].geometry.coordinates[1];
                     _longVille = coordonnees.features[0].geometry.coordinates[0];
-                    result = adminValidHebergement.InsertAdminValidHebergement(nomHebergement, description, ville, _cp.ToString(), _adresse, latitude, longitude, prix, this._utilisateur.IdUtilisateur, idRegion, _latVille, _longVille);
+                    result = Hebergement.AddHebergement(nomHebergement, description, ville, _cp.ToString(), _adresse, latitude, longitude, prix, this._utilisateur.IdUtilisateur, idRegion, _latVille, _longVille);
                 } else
                 {
-                    result = adminValidHebergement.InsertAdminValidHebergement(nomHebergement, description, ville, _cp.ToString(), _adresse, latitude, longitude, prix, this._utilisateur.IdUtilisateur, idRegion);
+                    result = Hebergement.AddHebergement(nomHebergement, description, ville, _cp.ToString(), _adresse, latitude, longitude, prix, this._utilisateur.IdUtilisateur, idRegion);
                 }
 
 

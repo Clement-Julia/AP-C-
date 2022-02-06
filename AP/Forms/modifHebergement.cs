@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using AP.Forms;
 using AP.Services;
+using AP.UserControls;
 
 namespace AP
 {
@@ -46,7 +47,7 @@ namespace AP
             for(int i = 0; i < allVilles.Count; i++)
             {
                 items.Add(new ComboboxItemDto { Text = allVilles[i].Libelle, Value = allVilles[i].IdVille });
-                if (allVilles[i].IdVille == _hebergement.IdVille)
+                if (allVilles[i].IdVille == _hebergement.Ville.IdVille)
                 {
                     index = i;
                     nomVille = allVilles[i].Libelle;
@@ -81,6 +82,15 @@ namespace AP
                 flow_avis.Controls.Add(customControl);
             }
 
+            //Initialisation menu images
+            AddPicture customPicture = new AddPicture(flow_picture, _hebergement);
+            customPicture.AutoScroll = true;
+            tab_images.Controls.Add(customPicture);
+            tab_images.Tag = customPicture;
+            customPicture.Dock = DockStyle.Bottom;
+            customPicture.BringToFront();
+            customPicture.Show();
+
             //Vérification et avertissement si impossibilité de modifiation
             open = hebergement.GetStatusHebergement(_hebergement.IdHebergement);
         }
@@ -99,7 +109,7 @@ namespace AP
             {
                 _hebergement.Libelle = name.Text;
                 _hebergement.Description = description.Text;
-                _hebergement.IdVille = Convert.ToInt32(idVilleComboBox);
+                _hebergement.Ville.IdVille = Convert.ToInt32(idVilleComboBox);
                 try
                 {
                     _hebergement.Latitude = Convert.ToDouble(latitude.Text);

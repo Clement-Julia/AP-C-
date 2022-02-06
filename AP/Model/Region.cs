@@ -22,6 +22,9 @@ namespace AP.Model
         private string _description { get; set; }
         public string Description { get { return _description; } set { _description = value; } }
 
+        private List<Ville> _listVille;
+        public List<Ville> ListVille { get { return _listVille; } set { _listVille = value; } }
+
         public Region(int idRegion = 0)
         {
             if (idRegion != 0)
@@ -41,10 +44,29 @@ namespace AP.Model
                     if (!reader.IsDBNull(reader.GetOrdinal("description"))) { this.Description = reader.GetString(5); } else { this.Description = ""; }
                 }
                 _bdd.Close();
+
+                _bdd.Open();
+                _listVille = new List<Ville>();
+                query = _bdd.CreateCommand();
+                query.Parameters.AddWithValue("@IdRegion", idRegion);
+                query.CommandText = "SELECT idVille, villes.libelle, villes.code_postal, villes.latitude, villes.longitude, villes.idRegion, villes.description, villes.uuid, regions.libelle, regions.latitude, regions.longitude, regions.lv_zoom, regions.description as descriptionRegion FROM villes INNER JOIN regions USING(idRegion) WHERE idRegion = @IdRegion";
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    string description;
+                    string uuid;
+                    if (!reader.IsDBNull(reader.GetOrdinal("description"))) { description = reader.GetString(6); } else { description = ""; }
+                    if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(7); } else { uuid = ""; }
+                    Region region = new Region(reader.GetInt32(5), reader.GetString(8), reader.GetFloat(9), reader.GetFloat(10), reader.GetInt32(11), reader.GetString(12));
+                    Ville Ville = new Ville(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetFloat(4), description, uuid, region);
+                    _listVille.Add(Ville);
+                }
+                _bdd.Close();
+                
             }
         }
 
-        public void InitialiserRegion(int IdRegion, string libelle, float latitude, float longitude, int lvZoom, string description)
+        public Region(int IdRegion, string libelle, float latitude, float longitude, int lvZoom, string description)
         {
             this.IdRegion = IdRegion;
             this.Libelle = libelle;
@@ -69,24 +91,6 @@ namespace AP.Model
             _bdd.Close();
 
             return idRegion;
-        }
-
-        public List<Region> GetAllRegions()
-        {
-            List<Region> ListRegions = new List<Region>();
-            _bdd.Open();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT * FROM regions";
-            MySqlDataReader reader = query.ExecuteReader();
-            while (reader.Read())
-            {
-                Region Region = new Region();
-                Region.InitialiserRegion(reader.GetInt32(0), reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3), reader.GetInt32(4), reader.GetString(5));
-                ListRegions.Add(Region);
-            }
-            _bdd.Close();
-
-            return ListRegions;
         }
 
     }

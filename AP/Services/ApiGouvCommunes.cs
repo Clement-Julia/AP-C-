@@ -1,5 +1,6 @@
 ﻿using AP.dtos;
 using AP.Model;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -17,9 +18,20 @@ namespace AP.Services
 
         public ApiGouvCommunes()
         {
-            Region Region = new Region();
-            _listRegions = Region.GetAllRegions();
-            foreach(Region region in _listRegions)
+            _listRegions = new List<Region>();
+
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT * FROM regions";
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                Region Region = new Region(reader.GetInt32(0), reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3), reader.GetInt32(4), reader.GetString(5));
+                _listRegions.Add(Region);
+            }
+            _bdd.Close();
+
+            foreach (Region region in _listRegions)
             {
                 _nosRegionsString.Add(region.Libelle);
             }

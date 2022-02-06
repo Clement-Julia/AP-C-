@@ -290,3 +290,4 @@ C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.csproj.CoreCompileInp
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.csproj.CopyComplete
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.exe
 C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.pdb
+C:\Users\mrtre\source\repos\AP-application\AP\obj\Debug\AP.UserControls.AddPicture.resources

@@ -56,12 +56,14 @@ namespace AP
             this.tab_images = new System.Windows.Forms.TabPage();
             this.retour = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.flow_picture = new System.Windows.Forms.FlowLayoutPanel();
             this.tab_all.SuspendLayout();
             this.tab_généraux.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tab_options.SuspendLayout();
             this.tab_avis.SuspendLayout();
+            this.tab_images.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab_all
@@ -351,7 +353,8 @@ namespace AP
             // 
             // tab_images
             // 
-            this.tab_images.BackColor = System.Drawing.Color.White;
+            this.tab_images.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.tab_images.Controls.Add(this.flow_picture);
             this.tab_images.Location = new System.Drawing.Point(4, 22);
             this.tab_images.Margin = new System.Windows.Forms.Padding(2);
             this.tab_images.Name = "tab_images";
@@ -377,9 +380,19 @@ namespace AP
             this.retour.UseVisualStyleBackColor = false;
             this.retour.Click += new System.EventHandler(this.retour_Click);
             // 
-            // folderBrowserDialog1
+            // flow_picture
             // 
-            //
+            this.flow_picture.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flow_picture.AutoScroll = true;
+            this.flow_picture.BackColor = System.Drawing.Color.White;
+            this.flow_picture.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flow_picture.Location = new System.Drawing.Point(3, 3);
+            this.flow_picture.Margin = new System.Windows.Forms.Padding(2);
+            this.flow_picture.Name = "flow_picture";
+            this.flow_picture.Size = new System.Drawing.Size(465, 377);
+            this.flow_picture.TabIndex = 19;
+            this.flow_picture.WrapContents = false;
+            // 
             // modifHebergement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,6 +414,7 @@ namespace AP
             this.panel2.PerformLayout();
             this.tab_options.ResumeLayout(false);
             this.tab_avis.ResumeLayout(false);
+            this.tab_images.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -433,6 +447,7 @@ namespace AP
         private System.Windows.Forms.Label labellong;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.FlowLayoutPanel flow_picture;
     }
 }
 

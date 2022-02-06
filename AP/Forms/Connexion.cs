@@ -30,7 +30,7 @@ namespace AP.Forms
 
                 Utilisateur utilisateur = new Utilisateur(Email);
 
-                if(utilisateur.IdRole != 3 || utilisateur.IdRole == 1)
+                if(utilisateur.Role.IdRole != 3 || utilisateur.Role.IdRole == 1)
                 {
                     if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
                     {

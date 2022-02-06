@@ -29,7 +29,7 @@ namespace AP.Forms
             labelTitreHebergement.Text = _hebergement.Libelle;
 
             // Remplissage Infos Hébergement
-            Ville Ville = new Ville(_hebergement.IdVille);
+            Ville Ville = new Ville(_hebergement.Ville.IdVille);
             labelDescription.Text = _hebergement.Description;
             labelDescriptionPrix.Text = "Prix : " + _hebergement.Prix.ToString() + " € / nuit";
             labelDescriptionAdresse.Text = "Adresse : " + _hebergement.Adresse + " \n" + Ville.CodePostal + " " + Ville.Libelle;
@@ -58,13 +58,12 @@ namespace AP.Forms
 
 
             // Infos panel réservation en cours
-            if (_reservationEnCours.IdHebergement != 0)
+            if (_reservationEnCours.IdReservationHebergement != 0)
             {
                 panelPasDeReservEnCours.Hide();
-                Utilisateur utilisateur = new Utilisateur(_reservationEnCours.IdUtilisateur);
 
                 labelReservEnCoursPeriode.Text = "Du " + _reservationEnCours.DateDebut.ToString("dd-MM-yyyy") + " au " + _reservationEnCours.DateFin.ToString("dd-MM-yyyy");
-                labelReservEnCoursUsername.Text = utilisateur.Nom + " " + utilisateur.Prenom;
+                labelReservEnCoursUsername.Text = _reservationEnCours.Utilisateur.Nom + " " + _reservationEnCours.Utilisateur.Prenom;
                 labelReservEnCoursCodeReserv.Text = _reservationEnCours.CodeReservation;
                 labelReservEnCoursPrix.Text = _reservationEnCours.Prix.ToString() + " €";
             }
@@ -76,28 +75,28 @@ namespace AP.Forms
             // Infos réservation à venir
             for(int i = 0; i < _reservationHebergements.Count; i++)
             {
-                Utilisateur utilisateur = new Utilisateur(_reservationHebergements[i].IdUtilisateur);
+                // Utilisateur utilisateur = new Utilisateur(_reservationHebergements[i].IdUtilisateur);
                 // Le modulo permet d'alterner le troisième paramètre qui défini la couleur de fond de la ligne
                 if(i%2 == 0)
                 {
-                    flowLayoutPanelReservAVenir.Controls.Add(new LigneReservationHebergement(_reservationHebergements[i], utilisateur, false));
+                    flowLayoutPanelReservAVenir.Controls.Add(new LigneReservationHebergement(_reservationHebergements[i], _reservationHebergements[i].Utilisateur, false));
                 } else
                 {
-                    flowLayoutPanelReservAVenir.Controls.Add(new LigneReservationHebergement(_reservationHebergements[i], utilisateur, true));
+                    flowLayoutPanelReservAVenir.Controls.Add(new LigneReservationHebergement(_reservationHebergements[i], _reservationHebergements[i].Utilisateur, true));
                 }
             }
 
             // Infos Avis
             for (int i = 0; i < _hebergement.ListAvis.Count; i++)
             {
-                Utilisateur User = new Utilisateur(_hebergement.ListAvis[i].IdUtilisateur);
+                // Utilisateur User = new Utilisateur(_hebergement.ListAvis[i].IdUtilisateur);
                 if (i % 2 == 0)
                 {
-                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(_hebergement.ListAvis[i], User, false));
+                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(_hebergement.ListAvis[i], _hebergement.Utilisateur, false));
                 }
                 else
                 {
-                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(_hebergement.ListAvis[i], User, true));
+                    flowLayoutPanelAvis.Controls.Add(new LigneAvis(_hebergement.ListAvis[i], _hebergement.Utilisateur, true));
                 }
             }
 

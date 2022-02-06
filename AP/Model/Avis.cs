@@ -19,11 +19,11 @@ namespace AP.Model
         private string _commentaire;
         public string Commentaire { get { return _commentaire; } set { _commentaire = value; } }
 
-        private int _idUtilisateur;
-        public int IdUtilisateur { get { return _idUtilisateur; } set { _idUtilisateur = value; } }
+        private Utilisateur _utilisateur { get; set; }
+        public Utilisateur Utilisateur { get { return _utilisateur; } set { _utilisateur = value; } }
 
-        private int _idHebergements;
-        public int IdHebergement { get { return _idHebergements; } set { _idHebergements = value; } }
+        private Hebergement _hebergement { get; set; }
+        public Hebergement Hebergement { get { return _hebergement; } set { _hebergement = value; } }
 
         public Avis(int IdAvis = 0)
         {
@@ -34,45 +34,58 @@ namespace AP.Model
                 query.CommandText = "SELECT * FROM avis WHERE idAvis = @idAvis";
                 query.Parameters.AddWithValue("@idAvis", IdAvis);
                 MySqlDataReader reader = query.ExecuteReader();
+                int idUtilisateur = 0;
+                int idHebergement = 0;
                 while (reader.Read())
                 {
                     this.IdAvis = reader.GetInt32(0);
                     this.Date = reader.GetDateTime(1);
                     this.Note = reader.GetInt32(2);
                     this.Commentaire = reader.GetString(3);
-                    this.IdUtilisateur = reader.GetInt32(4);
-                    this.IdHebergement = reader.GetInt32(5);
+                    idUtilisateur = reader.GetInt32(4);
+                    idHebergement = reader.GetInt32(5);
+                }
+                _bdd.Close();
+
+                _bdd.Open();
+                this.Utilisateur = new Utilisateur();
+                query.CommandText = "SELECT utilisateurs.*, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
+                query.Parameters.AddWithValue("@idUtilisateur", idUtilisateur);
+                while (reader.Read())
+                {
+                    Role Role = new Role(reader.GetInt32(10), reader.GetString(11));
+                    this.Utilisateur = new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(6), reader.GetDateTime(7), reader.GetDateTime(8), Role);
+                }
+                _bdd.Close();
+                
+                _bdd.Open();
+                this.Hebergement = new Hebergement();
+                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.* FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
+                query.Parameters.AddWithValue("@idHebergement", idHebergement);
+                while (reader.Read())
+                {
+                    string uuid = "";
+                    if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(8); } else { uuid = ""; }
+
+                    Region Region = new Region(reader.GetInt32(19), reader.GetString(20), reader.GetFloat(21), reader.GetFloat(22), reader.GetInt32(23), reader.GetString(24));
+                    Ville Ville = new Ville(reader.GetInt32(12), reader.GetString(13), reader.GetString(14), reader.GetFloat(15), reader.GetFloat(16), reader.GetString(18), reader.GetString(18), Region);
+                    Role Role = new Role(reader.GetInt32(35), reader.GetString(36));
+                    Utilisateur Utilisateur = new Utilisateur(reader.GetInt32(25), reader.GetString(26), reader.GetString(27), reader.GetString(28), reader.GetString(29), reader.GetBoolean(31), reader.GetDateTime(32), reader.GetDateTime(33), Role);
+
+                    this.Hebergement = new Hebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDouble(5), reader.GetDouble(6), reader.GetDecimal(7), uuid, reader.GetDateTime(10), reader.GetBoolean(11), Ville, Utilisateur);
                 }
                 _bdd.Close();
             }
         }
 
-        public void InitialisationAvis(int id, DateTime date, int note, string commentaire, int idUtilisateur, int idHebergement)
+        public Avis(int id, DateTime date, int note, string commentaire, Utilisateur utilisateur, Hebergement hebergement)
         {
             this.IdAvis = id;
             this.Date = date;
             this.Note = note;
             this.Commentaire = commentaire;
-            this.IdUtilisateur = idUtilisateur;
-            this.IdHebergement = idHebergement;
-        }
-
-        public List<Avis> GetAllAvisHebergement(int id)
-        {
-            _bdd.Open();
-            List<Avis> Avis = new List<Avis>();
-            MySqlCommand query = _bdd.CreateCommand();
-            query.Parameters.AddWithValue("@idHebergement", id);
-            query.CommandText = "SELECT idAvis, date, note, commentaire, idUtilisateur, idHebergement FROM avis inner JOIN utilisateurs using (idutilisateur) where idHebergement = @idHebergement";
-            MySqlDataReader reader = query.ExecuteReader();
-            while (reader.Read())
-            {
-                Avis Avi = new Avis();
-                Avi.InitialisationAvis(reader.GetInt32(0), reader.GetDateTime(1), reader.GetInt32(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5));
-                Avis.Add(Avi);
-            }
-            _bdd.Close();
-            return Avis;
+            this.Utilisateur = utilisateur;
+            this.Hebergement = hebergement;
         }
 
     }

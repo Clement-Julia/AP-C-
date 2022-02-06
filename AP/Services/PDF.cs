@@ -88,7 +88,7 @@ namespace AP.Services
                         this._gains += _reservationHebergements[i].Prix;
 
                         Ville Ville = _reservationHebergements[i].GetVilleInfos();
-                        Hebergement Hebergement = new Hebergement(_reservationHebergements[i].IdHebergement);
+                        // Hebergement Hebergement = new Hebergement(_reservationHebergements[i].Hebergement.IdHebergement);
 
                         Style style = new Style();
                         if(i%2 == 0) { style = styleCellWhite; } else { style = styleCellGray; }
@@ -102,7 +102,7 @@ namespace AP.Services
                         _cell = new Cell(1,2).Add(new Paragraph(Ville.Libelle));
                         _cell.SetBorder(Border.NO_BORDER);
                         _table.AddCell(_cell.AddStyle(style));
-                        _cell = new Cell(1,2).Add(new Paragraph(Hebergement.Libelle));
+                        _cell = new Cell(1,2).Add(new Paragraph(_reservationHebergements[i].Hebergement.Libelle));
                         _cell.SetBorder(Border.NO_BORDER);
                         _table.AddCell(_cell.AddStyle(style));
                         _cell = new Cell(1,1).Add(new Paragraph($"{_reservationHebergements[i].Prix.ToString()} €"));

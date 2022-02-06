@@ -21,9 +21,6 @@ namespace AP.Model
         private string _prenom;
         public string Prenom { get { return _prenom; } set { _prenom = value; } }
 
-        private int _idRole;
-        public int IdRole { get { return _idRole; } set { _idRole = value; } }
-
         private bool _acceptRGPD;
         public bool AcceptRGPD { get { return _acceptRGPD; } set { _acceptRGPD = value; } }
 
@@ -32,6 +29,9 @@ namespace AP.Model
 
         private DateTime _dateOfBirth;
         public DateTime DateOfBirth { get { return _dateOfBirth; } set { _dateOfBirth = value; } }
+
+        private Role _role;
+        public Role Role { get { return _role; } set { _role = value; } }
 
         private List<Hebergement> _listHebergements = new List<Hebergement>();
 
@@ -43,7 +43,7 @@ namespace AP.Model
             {
                 _bdd.Open();
                 MySqlCommand query = _bdd.CreateCommand();
-                query.CommandText = "SELECT * FROM utilisateurs WHERE idUtilisateur = @idUtilisateur";
+                query.CommandText = "SELECT utilisateurs.*, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
                 query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
@@ -53,7 +53,7 @@ namespace AP.Model
                     this.Mdp = reader.GetString(2);
                     this.Nom = reader.GetString(3);
                     this.Prenom = reader.GetString(4);
-                    this.IdRole = reader.GetInt32(5);
+                    this.Role = new Role(reader.GetInt32(10), reader.GetString(11));
                     this.AcceptRGPD = reader.GetBoolean(6);
                     this.DateAcceptRGPD = reader.GetDateTime(7);
                     this.DateOfBirth = reader.GetDateTime(8);
@@ -71,6 +71,7 @@ namespace AP.Model
             query.CommandText = "SELECT * FROM utilisateurs WHERE email = @email";
             query.Parameters.AddWithValue("@email", email);
             MySqlDataReader reader = query.ExecuteReader();
+            int idRole = 0;
             while (reader.Read())
             {
                 this.IdUtilisateur = reader.GetInt32(0);
@@ -78,14 +79,29 @@ namespace AP.Model
                 this.Mdp = reader.GetString(2);
                 this.Nom = reader.GetString(3);
                 this.Prenom = reader.GetString(4);
-                this.IdRole = reader.GetInt32(5);
+                idRole = reader.GetInt32(5);
                 this.AcceptRGPD = reader.GetBoolean(6);
                 this.DateAcceptRGPD = reader.GetDateTime(7);
                 this.DateOfBirth = reader.GetDateTime(8);
             }
             _bdd.Close();
 
+            this.Role = new Role(idRole);
+
             GetAllHebergements();
+        }
+
+        public Utilisateur(int idUtilisateur, string email, string mdp, string nom, string prenom, Boolean acceptRGPD, DateTime dateAcceptRGPD, DateTime DoB, Role role)
+        {
+            this.IdUtilisateur = idUtilisateur;
+            this.Email = email;
+            this.Mdp = mdp;
+            this.Nom = nom;
+            this.Prenom = prenom;
+            this.AcceptRGPD = acceptRGPD;
+            this.DateAcceptRGPD = dateAcceptRGPD;
+            this.DateOfBirth = DoB;
+            this.Role = role;
         }
 
         public bool Inscription(string email, string mdp, string nom, string prenom, bool acceptRGPD, DateTime DoB)
@@ -116,18 +132,23 @@ namespace AP.Model
 
         public List<Hebergement> GetAllHebergements()
         {
-            _listHebergements.Clear();
-
+            _listHebergements = new List<Hebergement>();
+            List<int> idHebergements = new List<int>();
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT * FROM hebergement WHERE idUtilisateur = @idUtilisateur";
+            query.CommandText = "SELECT idHebergement FROM hebergement WHERE idUtilisateur = @idUtilisateur AND actif = 1";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                _listHebergements.Add(new Hebergement(reader.GetInt32(0)));
+                idHebergements.Add(reader.GetInt32(0));
             }
             _bdd.Close();
+
+            foreach(int idHebergement in idHebergements)
+            {
+                _listHebergements.Add(new Hebergement(idHebergement));
+            }
 
             return _listHebergements;
         }
@@ -225,15 +246,26 @@ namespace AP.Model
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT reservations_hebergement.* FROM hebergement INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND dateFin BETWEEN @date1 AND @date2";
+            query.CommandText = "SELECT hebergement.*, villes.*, regions.*, u2.*, ru2.*, reservations_hebergement.*, u1.*, ru1.*, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN utilisateurs u1 ON u1.idUtilisateur = reservations_hebergement.idUtilisateur INNER JOIN roles ru1 ON u1.idRole = ru1.idRole INNER JOIN utilisateurs u2 ON u2.idUtilisateur = hebergement.idUtilisateur INNER JOIN roles ru2 ON u2.idRole = ru2.idRole INNER JOIN regions USING(idRegion) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE hebergement.idUtilisateur = @idUtilisateur AND is_building = 0 AND dateFin BETWEEN @date1 AND @date2";
             query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
-            query.Parameters.AddWithValue("@date1", one.ToString("yyyy-MM-dd"));
-            query.Parameters.AddWithValue("@date2", two.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@date1", one);
+            query.Parameters.AddWithValue("@date2", two);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                ReservationHebergement reservationHebergement = new ReservationHebergement();
-                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                string uuid = "";
+                string descriptionVille = "";
+                if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(8); } else { uuid = ""; }
+                if (!reader.IsDBNull(reader.GetOrdinal("descriptionVille"))) { descriptionVille = reader.GetString(8); } else { descriptionVille = ""; }
+
+                Region Region = new Region(reader.GetInt32(20), reader.GetString(21), reader.GetFloat(22), reader.GetFloat(23), reader.GetInt32(24), reader.GetString(25));
+                Ville Ville = new Ville(reader.GetInt32(12), reader.GetString(13), reader.GetString(14), reader.GetFloat(15), reader.GetFloat(16), descriptionVille, reader.GetString(19), Region);
+                Role RoleProprietaire = new Role(reader.GetInt32(36), reader.GetString(37));
+                Utilisateur ProprietaireHebergement = new Utilisateur(reader.GetInt32(26), reader.GetString(27), reader.GetString(28), reader.GetString(29), reader.GetString(30), reader.GetBoolean(32), reader.GetDateTime(33), reader.GetDateTime(34), RoleProprietaire);
+                Hebergement Hebergement = new Hebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDouble(5), reader.GetDouble(6), reader.GetDecimal(7), uuid, reader.GetDateTime(10), reader.GetBoolean(11), Ville, ProprietaireHebergement);
+                Role RoleUtilisateurReservation = new Role(reader.GetInt32(57), reader.GetString(58));
+                Utilisateur UtilisateurReservation = new Utilisateur(reader.GetInt32(47), reader.GetString(48), reader.GetString(49), reader.GetString(50), reader.GetString(51), reader.GetBoolean(53), reader.GetDateTime(54), reader.GetDateTime(55), RoleUtilisateurReservation);
+                ReservationHebergement reservationHebergement = new ReservationHebergement(reader.GetInt32(38), reader.GetString(39), reader.GetDecimal(40), reader.GetDateTime(41), reader.GetDateTime(42), reader.GetInt32(43), reader.GetInt32(44), UtilisateurReservation, Hebergement);
                 reservationHebergements.Add(reservationHebergement);
             }
             _bdd.Close();

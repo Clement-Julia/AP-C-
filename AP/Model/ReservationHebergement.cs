@@ -27,11 +27,11 @@ namespace AP.Model
         private int _idVoyage { get; set; }
         public int IdVoyage { get { return _idVoyage; } set { _idVoyage = value; } }
 
-        private int _idUtilisateur { get; set; }
-        public int IdUtilisateur { get { return _idUtilisateur; } set { _idUtilisateur = value; } }
+        private Utilisateur _utilisateur { get; set; }
+        public Utilisateur Utilisateur { get { return _utilisateur; } set { _utilisateur = value; } }
 
-        private int _idHebergement { get; set; }
-        public int IdHebergement { get { return _idHebergement; } set { _idHebergement = value; } }
+        private Hebergement _hebergement { get; set; }
+        public Hebergement Hebergement { get { return _hebergement; } set { _hebergement = value; } }
 
         public ReservationHebergement(int idReservationHebergement = 0)
         {
@@ -42,6 +42,8 @@ namespace AP.Model
                 query.CommandText = "SELECT * FROM reservations_hebergement WHERE idReservationHebergement = @idReservationHebergement";
                 query.Parameters.AddWithValue("@idReservationHebergement", idReservationHebergement);
                 MySqlDataReader reader = query.ExecuteReader();
+                int idUtilisateur = 0;
+                int idHebergement = 0;
                 while (reader.Read())
                 {
                     this.IdReservationHebergement = reader.GetInt32(0);
@@ -51,14 +53,47 @@ namespace AP.Model
                     this.DateFin = reader.GetDateTime(4);
                     this.NbJours = reader.GetInt32(5);
                     this.IdVoyage = reader.GetInt32(6);
-                    this.IdUtilisateur = reader.GetInt32(7);
-                    this.IdHebergement = reader.GetInt32(8);
+                    idUtilisateur = reader.GetInt32(7);
+                    idHebergement = reader.GetInt32(8);
                 }
                 _bdd.Close();
+
+                _bdd.Open();
+                this.Utilisateur = new Utilisateur();
+                query.CommandText = "SELECT utilisateurs.*, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
+                query.Parameters.AddWithValue("@idUtilisateur", idUtilisateur);
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    Role Role = new Role(reader.GetInt32(10), reader.GetString(11));
+                    this.Utilisateur = new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(6), reader.GetDateTime(7), reader.GetDateTime(8), Role);
+                }
+                _bdd.Close();
+
+                _bdd.Open();
+                this.Hebergement = new Hebergement();
+                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.*, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
+                query.Parameters.AddWithValue("@idHebergement", idHebergement);
+                while (reader.Read())
+                {
+                    string uuid = "";
+                    string descriptionVille = "";
+                    if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(8); } else { uuid = ""; }
+                    if (!reader.IsDBNull(reader.GetOrdinal("descriptionVille"))) { descriptionVille = reader.GetString(18); } else { descriptionVille = ""; }
+
+                    Region Region = new Region(reader.GetInt32(20), reader.GetString(21), reader.GetFloat(22), reader.GetFloat(23), reader.GetInt32(24), reader.GetString(25));
+                    Ville Ville = new Ville(reader.GetInt32(12), reader.GetString(13), reader.GetString(14), reader.GetFloat(15), reader.GetFloat(16), descriptionVille, reader.GetString(19), Region);
+                    Role Role = new Role(reader.GetInt32(36), reader.GetString(37));
+                    Utilisateur Utilisateur = new Utilisateur(reader.GetInt32(26), reader.GetString(27), reader.GetString(28), reader.GetString(29), reader.GetString(30), reader.GetBoolean(32), reader.GetDateTime(33), reader.GetDateTime(34), Role);
+
+                    this.Hebergement = new Hebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDouble(5), reader.GetDouble(6), reader.GetDecimal(7), uuid, reader.GetDateTime(10), reader.GetBoolean(11), Ville, Utilisateur);
+                }
+                _bdd.Close();
+
             }
         }
 
-        public void InitialiserReservationHebergement(int idReservationHebergement, string codeReservation, decimal prix, DateTime dateDebut, DateTime dateFin, int nbJours, int idVoyage, int idUtilisateur, int idHebergement)
+        public ReservationHebergement(int idReservationHebergement, string codeReservation, decimal prix, DateTime dateDebut, DateTime dateFin, int nbJours, int idVoyage, Utilisateur utilisateur, Hebergement hebergement)
         {
             this.IdReservationHebergement = idReservationHebergement;
             this.CodeReservation = codeReservation;
@@ -67,24 +102,27 @@ namespace AP.Model
             this.DateFin = dateFin;
             this.NbJours = nbJours;
             this.IdVoyage = idVoyage;
-            this.IdUtilisateur = idUtilisateur;
-            this.IdHebergement = idHebergement;
+            this.Utilisateur = utilisateur;
+            this.Hebergement = hebergement;
         }
 
         public Ville GetVilleInfos()
         {
             Ville Ville = new Ville();
-            string descripton = "";
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT villes.* FROM hebergement INNER JOIN villes USING(idVille) WHERE idHebergement = @idHebergement";
-            query.Parameters.AddWithValue("@idHebergement", this.IdHebergement);
+            query.CommandText = "SELECT villes.*, regions.* FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
+            query.Parameters.AddWithValue("@idHebergement", this.Hebergement.IdHebergement);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { descripton = reader.GetString(0); } else { descripton = ""; }
-                Ville.InitialiserVille(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetFloat(4), reader.GetInt32(5), descripton, reader.GetString(7));
+                string description;
+                string uuid;
+                if (!reader.IsDBNull(reader.GetOrdinal("description"))) { description = reader.GetString(6); } else { description = ""; }
+                if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(7); } else { uuid = ""; }
+                Region region = new Region(reader.GetInt32(8), reader.GetString(9), reader.GetFloat(10), reader.GetFloat(11), reader.GetInt32(12), reader.GetString(13));
+                Ville = new Ville(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetFloat(4), description, uuid, region);
             }
             _bdd.Close();
 
@@ -96,13 +134,24 @@ namespace AP.Model
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT * FROM reservations_hebergement WHERE idHebergement = @idHebergement AND dateDebut > NOW() ORDER BY dateDebut";
+            query.CommandText = "SELECT hebergement.*, villes.*, regions.*, u2.*, ru2.*, reservations_hebergement.*, u1.*, ru1.*, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN utilisateurs u1 ON u1.idUtilisateur = reservations_hebergement.idUtilisateur INNER JOIN roles ru1 ON u1.idRole = ru1.idRole INNER JOIN utilisateurs u2 ON u2.idUtilisateur = hebergement.idUtilisateur INNER JOIN roles ru2 ON u2.idRole = ru2.idRole INNER JOIN regions USING(idRegion) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE idHebergement = @idHebergement AND dateDebut > NOW() ORDER BY dateDebut";
             query.Parameters.AddWithValue("@idHebergement", idHebergement);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                ReservationHebergement reservationHebergement = new ReservationHebergement();
-                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                string uuid = "";
+                string descriptionVille = "";
+                if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(8); } else { uuid = ""; }
+                if (!reader.IsDBNull(reader.GetOrdinal("descriptionVille"))) { descriptionVille = reader.GetString(18); } else { descriptionVille = ""; }
+
+                Region Region = new Region(reader.GetInt32(20), reader.GetString(21), reader.GetFloat(22), reader.GetFloat(23), reader.GetInt32(24), reader.GetString(25));
+                Ville Ville = new Ville(reader.GetInt32(12), reader.GetString(13), reader.GetString(14), reader.GetFloat(15), reader.GetFloat(16), descriptionVille, reader.GetString(19), Region);
+                Role RoleProprietaire = new Role(reader.GetInt32(36), reader.GetString(37));
+                Utilisateur ProprietaireHebergement = new Utilisateur(reader.GetInt32(26), reader.GetString(27), reader.GetString(28), reader.GetString(29), reader.GetString(30), reader.GetBoolean(32), reader.GetDateTime(33), reader.GetDateTime(34), RoleProprietaire);
+                Hebergement Hebergement = new Hebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDouble(5), reader.GetDouble(6), reader.GetDecimal(7), uuid, reader.GetDateTime(10), reader.GetBoolean(11), Ville, ProprietaireHebergement);
+                Role RoleUtilisateurReservation = new Role(reader.GetInt32(57), reader.GetString(58));
+                Utilisateur UtilisateurReservation = new Utilisateur(reader.GetInt32(47), reader.GetString(48), reader.GetString(49), reader.GetString(50), reader.GetString(51), reader.GetBoolean(53), reader.GetDateTime(54), reader.GetDateTime(55), RoleUtilisateurReservation);
+                ReservationHebergement reservationHebergement = new ReservationHebergement(reader.GetInt32(38), reader.GetString(39), reader.GetDecimal(40), reader.GetDateTime(41), reader.GetDateTime(42), reader.GetInt32(43), reader.GetInt32(44), UtilisateurReservation, Hebergement);
                 reservationHebergements.Add(reservationHebergement);
             }
             _bdd.Close();
@@ -116,12 +165,22 @@ namespace AP.Model
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT * FROM reservations_hebergement WHERE idHebergement = @idHebergement AND dateDebut < NOW() AND dateFin > NOW()";
+            query.CommandText = "SELECT hebergement.*, villes.*, regions.*, u2.*, ru2.*, reservations_hebergement.*, u1.*, ru1.* FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN utilisateurs u1 ON u1.idUtilisateur = reservations_hebergement.idUtilisateur INNER JOIN roles ru1 ON u1.idRole = ru1.idRole INNER JOIN utilisateurs u2 ON u2.idUtilisateur = hebergement.idUtilisateur INNER JOIN roles ru2 ON u2.idRole = ru2.idRole INNER JOIN regions USING(idRegion) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE idHebergement = @idHebergement AND dateDebut < NOW() AND dateFin > NOW()";
             query.Parameters.AddWithValue("@idHebergement", idHebergement);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {
-                reservationHebergement.InitialiserReservationHebergement(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
+                string uuid = "";
+                if (!reader.IsDBNull(reader.GetOrdinal("uuid"))) { uuid = reader.GetString(8); } else { uuid = ""; }
+
+                Region Region = new Region(reader.GetInt32(20), reader.GetString(21), reader.GetFloat(22), reader.GetFloat(23), reader.GetInt32(24), reader.GetString(25));
+                Ville Ville = new Ville(reader.GetInt32(12), reader.GetString(13), reader.GetString(14), reader.GetFloat(15), reader.GetFloat(16), reader.GetString(18), reader.GetString(19), Region);
+                Role RoleProprietaire = new Role(reader.GetInt32(36), reader.GetString(37));
+                Utilisateur ProprietaireHebergement = new Utilisateur(reader.GetInt32(26), reader.GetString(27), reader.GetString(28), reader.GetString(29), reader.GetString(30), reader.GetBoolean(32), reader.GetDateTime(33), reader.GetDateTime(34), RoleProprietaire);
+                Hebergement Hebergement = new Hebergement(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDouble(5), reader.GetDouble(6), reader.GetDecimal(7), uuid, reader.GetDateTime(10), reader.GetBoolean(11), Ville, ProprietaireHebergement);
+                Role RoleUtilisateurReservation = new Role(reader.GetInt32(57), reader.GetString(58));
+                Utilisateur UtilisateurReservation = new Utilisateur(reader.GetInt32(47), reader.GetString(48), reader.GetString(49), reader.GetString(50), reader.GetString(51), reader.GetBoolean(53), reader.GetDateTime(54), reader.GetDateTime(55), RoleUtilisateurReservation);
+                reservationHebergement = new ReservationHebergement(reader.GetInt32(38), reader.GetString(39), reader.GetDecimal(40), reader.GetDateTime(41), reader.GetDateTime(42), reader.GetInt32(43), reader.GetInt32(44), UtilisateurReservation, Hebergement);
 
             }
             _bdd.Close();

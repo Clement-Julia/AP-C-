@@ -22,7 +22,7 @@ namespace AP.Forms
             this.idHebergement = idHebergement;
             this._utilisateur = utilisateur;
 
-            Utilisateur user = new Utilisateur(avis.IdUtilisateur);
+            Utilisateur user = new Utilisateur(avis.Utilisateur.IdUtilisateur);
 
             nom.Text = user.Nom + " " + user.Prenom;
             rating.Text = avis.Note.ToString();

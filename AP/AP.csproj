@@ -256,7 +256,14 @@
     <Compile Include="Forms\Connexion.Designer.cs">
       <DependentUpon>Connexion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Role.cs" />
     <Compile Include="Model\Region.cs" />
+    <Compile Include="UserControls\AddPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddPicture.designer.cs">
+      <DependentUpon>AddPicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ControlResponse.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -293,7 +300,6 @@
     <Compile Include="Forms\Inscription.Designer.cs">
       <DependentUpon>Inscription.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\AdminValidHebergement.cs" />
     <Compile Include="Services\ApiGouvCommunes.cs" />
     <Compile Include="dtos\ComboboxItemDto.cs" />
     <Compile Include="Services\PDF.cs" />
@@ -388,6 +394,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\AjoutHebergement.resx">
       <DependentUpon>AjoutHebergement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AddPicture.resx">
+      <DependentUpon>AddPicture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AvisHebergement.resx">
       <DependentUpon>AvisHebergement.cs</DependentUpon>
