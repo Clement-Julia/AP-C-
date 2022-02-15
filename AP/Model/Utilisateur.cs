@@ -359,6 +359,24 @@ namespace AP.Model
             return desinscrit;
         }
 
+        public bool Unsubscribe()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            query.Parameters.AddWithValue("@desinscrit", 1);
+            query.CommandText = "UPDATE utilisateurs SET desinscrit = @desinscrit WHERE idUtilisateur = @idUtilisateur";
+            if (query.ExecuteNonQuery() > 0)
+            {
+                _bdd.Close();
+                return true;
+            }
+            else
+            {
+                _bdd.Close();
+                return false;
+            }
+        }
 
     }
 }

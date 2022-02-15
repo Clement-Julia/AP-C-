@@ -29,21 +29,26 @@ namespace AP.Forms
                 MotDePasse = TextBoxPassword.Text;
 
                 Utilisateur utilisateur = new Utilisateur(Email);
-
-                if((utilisateur.Role.IdRole != 3 || utilisateur.Role.IdRole == 1) && !utilisateur.IsThisUserIsUnsubscribe())
+                if (!utilisateur.IsThisUserIsUnsubscribe())
                 {
-                    if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
+                    if((utilisateur.Role.IdRole != 3 || utilisateur.Role.IdRole == 1))
                     {
-                        new Home(utilisateur).Show();
-                        this.Hide();
-                    }
-                    else
+                        if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
+                        {
+                            new Home(utilisateur).Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Veuillez vérifier vos informations de connexion", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    } else
                     {
-                        MessageBox.Show("Veuillez vérifier vos informations de connexion", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Il faut avoir le status de propriétaire afin de pouvoir se connecter à l'application", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 } else
                 {
-                    MessageBox.Show("Il faut avoir le status de propriétaire afin de pouvoir se connecter à l'application", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Votre compte a été suspendu à votre demande. Afin de modifier cela, veuillez contacter un administrateur de l'entreprise.", "Connexion échouée", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }

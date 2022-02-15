@@ -30,10 +30,13 @@ namespace AP.Forms
         private void btnDesinscription_Click(object sender, EventArgs e)
         {
             // Simulation de désinscription
-            DialogResult dresult = MessageBox.Show("Vous êtes sur le point de vous désinscrire du site, votre compte sera mis inactif et vos données seront conservées 30 jours. Après ce laps de temps, il serait impossible de récupérer votre compte. Nous conserverons néanmoins les avis que vous avez déjà postés. Êtes-vous sur de vouloir faire cela ?", "Attention", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult dresult = MessageBox.Show("Vous êtes sur le point de vous désinscrire du site, votre compte sera mis inactif et vos données seront conservées 30 jours. Après ce laps de temps, il serait impossible de récupérer votre compte. Nous conserverons néanmoins les avis que vous avez déjà postés. Êtes-vous sur de vouloir faire cela ? \nDe plus, si des réservations de vos hébergements étaient validés, elles seront annulées et les utilisateurs remboursés.", "Attention", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dresult == DialogResult.OK)
             {
-
+                _utilisateur.Unsubscribe();
+                _home.Close();
+                this.Close();
+                new Connexion().Show();
             }
         }
 
