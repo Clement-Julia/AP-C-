@@ -60,7 +60,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 this.Utilisateur = new Utilisateur();
-                query.CommandText = "SELECT utilisateurs.*, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
                 query.Parameters.AddWithValue("@idUtilisateur", idUtilisateur);
                 reader = query.ExecuteReader();
                 while (reader.Read())
@@ -72,7 +72,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 this.Hebergement = new Hebergement();
-                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.*, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
+                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
                 query.Parameters.AddWithValue("@idHebergement", idHebergement);
                 while (reader.Read())
                 {
@@ -134,7 +134,7 @@ namespace AP.Model
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT hebergement.*, villes.*, regions.*, u2.*, ru2.*, reservations_hebergement.*, u1.*, ru1.*, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN utilisateurs u1 ON u1.idUtilisateur = reservations_hebergement.idUtilisateur INNER JOIN roles ru1 ON u1.idRole = ru1.idRole INNER JOIN utilisateurs u2 ON u2.idUtilisateur = hebergement.idUtilisateur INNER JOIN roles ru2 ON u2.idRole = ru2.idRole INNER JOIN regions USING(idRegion) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE idHebergement = @idHebergement AND dateDebut > NOW() ORDER BY dateDebut";
+            query.CommandText = "SELECT hebergement.*, villes.*, regions.*, u2.idUtilisateur, u2.email, u2.mdp, u2.nom, u2.prenom, u2.idRole, u2.acceptRGPD, u2.dateAcceptRGPD, u2.DoB, u2.token, ru2.idRole, ru2.libelle, reservations_hebergement.*, u1.idUtilisateur, u1.email, u1.mdp, u1.nom, u1.prenom, u1.idRole, u1.acceptRGPD, u1.dateAcceptRGPD, u1.DoB, u1.token, ru1.idRole, ru1.libelle, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN utilisateurs u1 ON u1.idUtilisateur = reservations_hebergement.idUtilisateur INNER JOIN roles ru1 ON u1.idRole = ru1.idRole INNER JOIN utilisateurs u2 ON u2.idUtilisateur = hebergement.idUtilisateur INNER JOIN roles ru2 ON u2.idRole = ru2.idRole INNER JOIN regions USING(idRegion) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE idHebergement = @idHebergement AND dateDebut > NOW() ORDER BY dateDebut";
             query.Parameters.AddWithValue("@idHebergement", idHebergement);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
@@ -165,7 +165,7 @@ namespace AP.Model
 
             _bdd.Open();
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT hebergement.*, villes.*, regions.*, u2.*, ru2.*, reservations_hebergement.*, u1.*, ru1.* FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN utilisateurs u1 ON u1.idUtilisateur = reservations_hebergement.idUtilisateur INNER JOIN roles ru1 ON u1.idRole = ru1.idRole INNER JOIN utilisateurs u2 ON u2.idUtilisateur = hebergement.idUtilisateur INNER JOIN roles ru2 ON u2.idRole = ru2.idRole INNER JOIN regions USING(idRegion) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE idHebergement = @idHebergement AND dateDebut < NOW() AND dateFin > NOW()";
+            query.CommandText = "SELECT hebergement.*, villes.*, regions.*, u2.idUtilisateur, u2.email, u2.mdp, u2.nom, u2.prenom, u2.idRole, u2.acceptRGPD, u2.dateAcceptRGPD, u2.DoB, u2.token, ru2.idRole, ru2.libelle, reservations_hebergement.*, u1.idUtilisateur, u1.email, u1.mdp, u1.nom, u1.prenom, u1.idRole, u1.acceptRGPD, u1.dateAcceptRGPD, u1.DoB, u1.token, ru1.idRole, ru1.libelle FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN reservations_hebergement USING(idHebergement) INNER JOIN utilisateurs u1 ON u1.idUtilisateur = reservations_hebergement.idUtilisateur INNER JOIN roles ru1 ON u1.idRole = ru1.idRole INNER JOIN utilisateurs u2 ON u2.idUtilisateur = hebergement.idUtilisateur INNER JOIN roles ru2 ON u2.idRole = ru2.idRole INNER JOIN regions USING(idRegion) INNER JOIN reservations_voyages ON reservations_hebergement.idVoyage = reservations_voyages.idReservationVoyage WHERE idHebergement = @idHebergement AND dateDebut < NOW() AND dateFin > NOW()";
             query.Parameters.AddWithValue("@idHebergement", idHebergement);
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())

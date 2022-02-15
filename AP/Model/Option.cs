@@ -39,7 +39,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 _listHebergements = new List<Hebergement>();
-                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.*, roles.*, hebergement.uuid as test, options_by_hebergement.*, villes.description as descriptionVille FROM options_by_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN villes ON hebergement.idVille = villes.idVille INNER JOIN utilisateurs ON hebergement.idUtilisateur = utilisateurs.idUtilisateur INNER JOIN roles USING(idRole) INNER JOIN regions ON villes.idRegion = regions.idRegion WHERE options_by_hebergement.idOption = @idOption";
+                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.*, hebergement.uuid as test, options_by_hebergement.*, villes.description as descriptionVille FROM options_by_hebergement INNER JOIN hebergement USING(idHebergement) INNER JOIN villes ON hebergement.idVille = villes.idVille INNER JOIN utilisateurs ON hebergement.idUtilisateur = utilisateurs.idUtilisateur INNER JOIN roles USING(idRole) INNER JOIN regions ON villes.idRegion = regions.idRegion WHERE options_by_hebergement.idOption = @idOption";
                 reader = query.ExecuteReader(); 
                 while (reader.Read())
                 {

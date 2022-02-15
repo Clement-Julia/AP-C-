@@ -43,7 +43,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 this.Utilisateur = new Utilisateur();
-                query.CommandText = "SELECT utilisateurs.*, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
                 query.Parameters.AddWithValue("@idUtilisateur", idUtilisateur);
                 reader = query.ExecuteReader();
                 while (reader.Read())
@@ -78,7 +78,7 @@ namespace AP.Model
             {
                 _bdd.Close();
                 _bdd.Open();
-                query.CommandText = "SELECT utilisateurs.*, roles.*, avis_response.* FROM avis_response INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) WHERE idAvis = @idAvis";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.*, avis_response.* FROM avis_response INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) WHERE idAvis = @idAvis";
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
                 {

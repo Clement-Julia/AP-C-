@@ -49,7 +49,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 this.Utilisateur = new Utilisateur();
-                query.CommandText = "SELECT utilisateurs.*, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
                 query.Parameters.AddWithValue("@idUtilisateur", idUtilisateur);
                 while (reader.Read())
                 {
@@ -60,7 +60,7 @@ namespace AP.Model
                 
                 _bdd.Open();
                 this.Hebergement = new Hebergement();
-                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.* FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
+                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
                 query.Parameters.AddWithValue("@idHebergement", idHebergement);
                 while (reader.Read())
                 {
