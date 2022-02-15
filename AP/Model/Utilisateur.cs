@@ -342,6 +342,23 @@ namespace AP.Model
             }
         }
 
+        public bool IsThisUserIsUnsubscribe()
+        {
+            _bdd.Open();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT desinscrit FROM utilisateurs WHERE idUtilisateur = @idUtilisateur";
+            query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+            MySqlDataReader reader = query.ExecuteReader();
+            bool desinscrit = false;
+            while (reader.Read())
+            {
+                desinscrit  = reader.GetBoolean(0);
+            }
+            _bdd.Close();
+
+            return desinscrit;
+        }
+
 
     }
 }
