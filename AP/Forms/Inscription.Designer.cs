@@ -298,6 +298,7 @@ namespace AP.Forms
             // 
             // pictureBoxRGPD
             // 
+            this.pictureBoxRGPD.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxRGPD.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxRGPD.Image")));
             this.pictureBoxRGPD.Location = new System.Drawing.Point(247, 523);
             this.pictureBoxRGPD.Name = "pictureBoxRGPD";
