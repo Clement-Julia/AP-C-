@@ -54,9 +54,14 @@ namespace AP
             this.tab_avis = new System.Windows.Forms.TabPage();
             this.flow_avis = new System.Windows.Forms.FlowLayoutPanel();
             this.tab_images = new System.Windows.Forms.TabPage();
+            this.flow_picture = new System.Windows.Forms.FlowLayoutPanel();
             this.retour = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.flow_picture = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelLoader = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tab_all.SuspendLayout();
             this.tab_généraux.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,6 +69,9 @@ namespace AP
             this.tab_options.SuspendLayout();
             this.tab_avis.SuspendLayout();
             this.tab_images.SuspendLayout();
+            this.panelLoader.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tab_all
@@ -363,6 +371,19 @@ namespace AP
             this.tab_images.TabIndex = 3;
             this.tab_images.Text = "Images";
             // 
+            // flow_picture
+            // 
+            this.flow_picture.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flow_picture.AutoScroll = true;
+            this.flow_picture.BackColor = System.Drawing.Color.White;
+            this.flow_picture.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flow_picture.Location = new System.Drawing.Point(3, 3);
+            this.flow_picture.Margin = new System.Windows.Forms.Padding(2);
+            this.flow_picture.Name = "flow_picture";
+            this.flow_picture.Size = new System.Drawing.Size(465, 377);
+            this.flow_picture.TabIndex = 19;
+            this.flow_picture.WrapContents = false;
+            // 
             // retour
             // 
             this.retour.BackColor = System.Drawing.Color.LightSeaGreen;
@@ -380,18 +401,57 @@ namespace AP
             this.retour.UseVisualStyleBackColor = false;
             this.retour.Click += new System.EventHandler(this.retour_Click);
             // 
-            // flow_picture
+            // panelLoader
             // 
-            this.flow_picture.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flow_picture.AutoScroll = true;
-            this.flow_picture.BackColor = System.Drawing.Color.White;
-            this.flow_picture.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flow_picture.Location = new System.Drawing.Point(3, 3);
-            this.flow_picture.Margin = new System.Windows.Forms.Padding(2);
-            this.flow_picture.Name = "flow_picture";
-            this.flow_picture.Size = new System.Drawing.Size(465, 377);
-            this.flow_picture.TabIndex = 19;
-            this.flow_picture.WrapContents = false;
+            this.panelLoader.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelLoader.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panelLoader.Controls.Add(this.panel3);
+            this.panelLoader.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.panelLoader.Location = new System.Drawing.Point(270, 165);
+            this.panelLoader.Name = "panelLoader";
+            this.panelLoader.Size = new System.Drawing.Size(319, 189);
+            this.panelLoader.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(313, 182);
+            this.panel3.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(76, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(171, 20);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Veuillez patienter svp...";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(65, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(182, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Chargement des images";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(87, 54);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(140, 121);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // modifHebergement
             // 
@@ -399,6 +459,7 @@ namespace AP
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(750, 540);
+            this.Controls.Add(this.panelLoader);
             this.Controls.Add(this.tab_all);
             this.Controls.Add(this.retour);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -415,6 +476,10 @@ namespace AP
             this.tab_options.ResumeLayout(false);
             this.tab_avis.ResumeLayout(false);
             this.tab_images.ResumeLayout(false);
+            this.panelLoader.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -448,6 +513,11 @@ namespace AP
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Panel panel2;
         public System.Windows.Forms.FlowLayoutPanel flow_picture;
+        private System.Windows.Forms.Panel panelLoader;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

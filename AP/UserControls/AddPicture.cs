@@ -18,16 +18,18 @@ namespace AP.UserControls
     public partial class AddPicture : UserControl
     {
         FlowLayoutPanel _parent;
+        Panel _panelLoader;
         Hebergement _hebergement;
         List<PictureBox> allPictures = new List<PictureBox>();
         List<PictureBox> banniere = new List<PictureBox>();
         List<String> path = new List<String>();
 
-        public AddPicture(FlowLayoutPanel flow_picture, Hebergement hebergement)
+        public AddPicture(FlowLayoutPanel flow_picture, Hebergement hebergement, Panel Loader)
         {
             InitializeComponent();
             _parent = flow_picture;
             _hebergement = hebergement;
+            _panelLoader = Loader;
             FileDialog.Filter = "Image Files (JPG,PNG,JPEG)|*.JPG;*.PNG;*.JPEG";
         }
 
@@ -111,8 +113,13 @@ namespace AP.UserControls
             _parent.Controls.Remove(pictureClicked);
         }
 
-        private void formPicture_Click(object sender, EventArgs e)
+        private async void formPicture_Click(object sender, EventArgs e)
         {
+
+            // On affiche le panel du loader
+            _panelLoader.Visible = true;
+            _panelLoader.BringToFront();
+
             string Uri = "ftp://ipssisq-loocalacool_ovh-41552@ftpcloud.cluster024.hosting.ovh.net:21/assets/src/tuuid/";
             bool exist = false;
 
@@ -161,19 +168,24 @@ namespace AP.UserControls
                             string ext = Path.GetExtension(element.ImageLocation);
                             // Choix de l'emplacement du fichier ainsi que de son nom
                             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(Uri + _hebergement.Uuid + "/banniere"+ext);
+                            request.UseBinary = true;
                             request.Method = WebRequestMethods.Ftp.UploadFile;
 
                             // Connexion ftp
                             request.Credentials = new NetworkCredential("ipssisq-loocalacool_ovh-41552", "Ipssi2022loocalacool");
 
-                            // Envoie de l'image et fermeture du serveur pour ne pas passer en timeout
-                            FileStream fileStream = File.Open(element.ImageLocation, FileMode.Open, FileAccess.Read);
+                            byte[] fileContents = File.ReadAllBytes(element.ImageLocation);
+
+                            request.ContentLength = fileContents.Length;
+
                             Stream requestStream = request.GetRequestStream();
+                            requestStream.Write(fileContents, 0, fileContents.Length);
                             requestStream.Close();
 
                             // Suppression de la PictureBox dans le parent
                             _parent.Controls.Remove(element);
                             allPictures.Remove(element);
+
                         }
                     }
 
@@ -191,9 +203,12 @@ namespace AP.UserControls
                             // Connexion ftp
                             request.Credentials = new NetworkCredential("ipssisq-loocalacool_ovh-41552", "Ipssi2022loocalacool");
 
-                            // Envoie de l'image et fermeture du serveur pour ne pas passer en timeout
-                            FileStream fileStream = File.Open(element.ImageLocation, FileMode.Open, FileAccess.Read);
+                            byte[] fileContents = File.ReadAllBytes(element.ImageLocation);
+
+                            request.ContentLength = fileContents.Length;
+
                             Stream requestStream = request.GetRequestStream();
+                            requestStream.Write(fileContents, 0, fileContents.Length);
                             requestStream.Close();
 
                             // Suppression de la PictureBox dans le parent
@@ -214,6 +229,9 @@ namespace AP.UserControls
             {
                 MessageBox.Show("Une demande a déjà été faite attendez son acceptation ou demandez son annulation en écrivant un email à l'adresse suivante : loocalacool@service-support.fr");
             }
+
+            // On cache le panel du loader
+            _panelLoader.Visible = false;
         }
     }
 }

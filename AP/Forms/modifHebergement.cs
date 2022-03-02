@@ -28,6 +28,9 @@ namespace AP
             this._hebergementsCustumControl = hebergementsCustumControl;
             this._hebergement = new Hebergement(hebergement.IdHebergement);
 
+            // On cache le loader
+            panelLoader.Visible = false;
+
             //Initialisation des valeurs de tab généraux
             name.Text = _hebergement.Libelle;
             description.Text = _hebergement.Description;
@@ -83,7 +86,7 @@ namespace AP
             }
 
             //Initialisation menu images
-            AddPicture customPicture = new AddPicture(flow_picture, _hebergement);
+            AddPicture customPicture = new AddPicture(flow_picture, _hebergement, panelLoader);
             customPicture.AutoScroll = true;
             tab_images.Controls.Add(customPicture);
             tab_images.Tag = customPicture;
@@ -193,6 +196,5 @@ namespace AP
         {
             this.Close();
         }
-
     }
 }
