@@ -57,7 +57,7 @@ namespace AP.Model
                 // On initialise l'objet hebergement avec les deux objets utilisateurs et ville (qui eux mêmes contiennent region / role)
                 _bdd.Open();
                 MySqlCommand query = _bdd.CreateCommand();
-                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.*, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
+                query.CommandText = "SELECT hebergement.idHebergement, hebergement.libelle, hebergement.adresse, hebergement.description, hebergement.idVille, hebergement.latitude, hebergement.longitude, hebergement.prix, hebergement.uuid, hebergement.idUtilisateur, hebergement.dateEnregistrement, hebergement.actif , villes.idVille, villes.libelle, villes.code_postal, villes.latitude, villes.longitude, villes.idRegion, villes.description, villes.uuid, regions.idRegion, regions.libelle, regions.latitude, regions.longitude, regions.lv_zoom, regions.description, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.idRole, roles.libelle, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
                 query.Parameters.AddWithValue("@idHebergement", IdHebergement);
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
@@ -87,7 +87,7 @@ namespace AP.Model
 
                 // On initialise les avis
                 _bdd.Open();
-                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.*, avis.* FROM avis INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) WHERE idHebergement = @idHebergement";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.idRole, roles.libelle, avis.idAvis, avis.date, avis.note, avis.commentaire, avis.idUtilisateur, avis.idHebergement FROM avis INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) WHERE idHebergement = @idHebergement";
                 reader = query.ExecuteReader();
                 while (reader.Read())
                 {

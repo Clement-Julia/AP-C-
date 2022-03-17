@@ -31,7 +31,7 @@ namespace AP.Forms
                 Utilisateur utilisateur = new Utilisateur(Email);
                 if (!utilisateur.IsThisUserIsUnsubscribe())
                 {
-                    if((utilisateur.Role.IdRole != 3 || utilisateur.Role.IdRole == 1))
+                    if((utilisateur.Role.IdRole != 3 || utilisateur.Role.IdRole == 2))
                     {
                         if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
                         {

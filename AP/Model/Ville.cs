@@ -67,7 +67,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 _listHebergements = new List<Hebergement>();
-                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.*, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) INNER JOIN roles USING(idRole) WHERE idVille = @idVille";
+                query.CommandText = "SELECT hebergement.idHebergement, hebergement.libelle, hebergement.adresse, hebergement.description, hebergement.idVille, hebergement.latitude, hebergement.longitude, hebergement.prix, hebergement.uuid, hebergement.idUtilisateur, hebergement.dateEnregistrement, hebergement.actif , villes.idVille, villes.libelle, villes.code_postal, villes.latitude, villes.longitude, villes.idRegion, villes.description, villes.uuid, regions.idRegion, regions.libelle, regions.latitude, regions.longitude, regions.lv_zoom, regions.description, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.idRole, roles.libelle, villes.description as descriptionVille FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) INNER JOIN roles USING(idRole) WHERE idVille = @idVille";
                 reader = query.ExecuteReader();
                 while (reader.Read())
                 {
@@ -108,7 +108,7 @@ namespace AP.Model
             List<Ville> Villes = new List<Ville>();
 
             MySqlCommand query = _bdd.CreateCommand();
-            query.CommandText = "SELECT villes.*, regions.*, villes.description as descriptionVille FROM villes INNER JOIN regions USING(idRegion)";
+            query.CommandText = "SELECT villes.idVille, villes.libelle, villes.code_postal, villes.latitude, villes.longitude, villes.idRegion, villes.description, villes.uuid, regions.idRegion, regions.libelle, regions.latitude, regions.longitude, regions.lv_zoom, regions.description, villes.description as descriptionVille FROM villes INNER JOIN regions USING(idRegion)";
             MySqlDataReader reader = query.ExecuteReader();
             while (reader.Read())
             {

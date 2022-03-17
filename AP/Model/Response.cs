@@ -43,7 +43,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 this.Utilisateur = new Utilisateur();
-                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.idRole, roles.libelle FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
                 query.Parameters.AddWithValue("@idUtilisateur", idUtilisateur);
                 reader = query.ExecuteReader();
                 while (reader.Read())
@@ -78,13 +78,13 @@ namespace AP.Model
             {
                 _bdd.Close();
                 _bdd.Open();
-                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.*, avis_response.* FROM avis_response INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) WHERE idAvis = @idAvis";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.idRole, roles.libelle, avis_response.* FROM avis_response INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN roles USING(idRole) WHERE idAvis = @idAvis";
                 MySqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
                 {
                     Role Role = new Role(reader.GetInt32(10), reader.GetString(11));
                     Utilisateur Utilisateur = new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(6), reader.GetDateTime(7), reader.GetDateTime(8), Role);
-                    Response = new Response(reader.GetInt32(12), reader.GetInt32(13), reader.GetString(14), reader.GetDateTime(15), Utilisateur);
+                    Response = new Response(reader.GetInt32(12), reader.GetInt32(13), reader.GetString(15), reader.GetDateTime(16), Utilisateur);
                 }
                 _bdd.Close();
 

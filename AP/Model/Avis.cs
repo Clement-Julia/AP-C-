@@ -49,7 +49,7 @@ namespace AP.Model
 
                 _bdd.Open();
                 this.Utilisateur = new Utilisateur();
-                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.* FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
+                query.CommandText = "SELECT utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token, roles.idRole, roles.libelle FROM utilisateurs INNER JOIN roles USING(idRole) WHERE idUtilisateur = @idUtilisateur";
                 query.Parameters.AddWithValue("@idUtilisateur", idUtilisateur);
                 while (reader.Read())
                 {
@@ -60,7 +60,7 @@ namespace AP.Model
                 
                 _bdd.Open();
                 this.Hebergement = new Hebergement();
-                query.CommandText = "SELECT hebergement.*, villes.*, regions.*, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
+                query.CommandText = "SELECT hebergement.idHebergement, hebergement.libelle, hebergement.adresse, hebergement.description, hebergement.idVille, hebergement.latitude, hebergement.longitude, hebergement.prix, hebergement.uuid, hebergement.idUtilisateur, hebergement.dateEnregistrement, hebergement.actif , villes.idVille, villes.libelle, villes.code_postal, villes.latitude, villes.longitude, villes.idRegion, villes.description, villes.uuid, regions.idRegion, regions.libelle, regions.latitude, regions.longitude, regions.lv_zoom, regions.description, utilisateurs.idUtilisateur, utilisateurs.email, utilisateurs.mdp, utilisateurs.nom, utilisateurs.prenom, utilisateurs.idRole, utilisateurs.acceptRGPD, utilisateurs.dateAcceptRGPD, utilisateurs.DoB, utilisateurs.token FROM hebergement INNER JOIN villes USING(idVille) INNER JOIN utilisateurs USING(idUtilisateur) INNER JOIN regions USING(idRegion) WHERE idHebergement = @idHebergement";
                 query.Parameters.AddWithValue("@idHebergement", idHebergement);
                 while (reader.Read())
                 {
