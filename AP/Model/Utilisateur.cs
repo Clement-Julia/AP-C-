@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace AP.Model
 {
@@ -298,20 +300,29 @@ namespace AP.Model
 
             if (OldMotDePasse != null && BCrypt.Net.BCrypt.Verify(OldMotDePasse, mdp))
             {
-                _bdd.Open();
-                query = _bdd.CreateCommand();
-                query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
-                query.Parameters.AddWithValue("@mdp", BCrypt.Net.BCrypt.HashPassword(NewMotDePasse));
-                query.CommandText = "UPDATE utilisateurs SET mdp = @mdp WHERE idUtilisateur = @idUtilisateur";
+                Regex rgx = new Regex(@"^(?=.{ 12, }$)(?=.*[a - z])(?=.*[A - Z])(?=.*[0 - 9])(?=.*\W).*$");
 
-                if (query.ExecuteNonQuery() > 0)
+                if (rgx.IsMatch(NewMotDePasse))
                 {
-                    _bdd.Close();
-                    return true;
-                }
-                else
+                    _bdd.Open();
+                    query = _bdd.CreateCommand();
+                    query.Parameters.AddWithValue("@idUtilisateur", IdUtilisateur);
+                    query.Parameters.AddWithValue("@mdp", BCrypt.Net.BCrypt.HashPassword(NewMotDePasse));
+                    query.CommandText = "UPDATE utilisateurs SET mdp = @mdp WHERE idUtilisateur = @idUtilisateur";
+
+                    if (query.ExecuteNonQuery() > 0)
+                    {
+                        _bdd.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        _bdd.Close();
+                        return false;
+                    }
+                } else
                 {
-                    _bdd.Close();
+                    MessageBox.Show("Le nouveau mot de passe doit contenir un minimum de 12 caractères, 1 chiffre, 1 caractère spécial, une minuscule, 1 majuscule");
                     return false;
                 }
             } else
