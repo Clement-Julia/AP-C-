@@ -15,8 +15,8 @@ namespace AP.UserControls
             InitializeComponent();
             this._avis = avis;
             this._utilisateur = utilisateur;
-            labelNom.Text = _utilisateur.Nom;
-            labelPrenom.Text = _utilisateur.Prenom;
+            labelNom.Text = _avis.Utilisateur.Nom;
+            labelPrenom.Text = _avis.Utilisateur.Prenom;
             labelDate.Text = _avis.Date.ToString("dd-MM-yyyy");
             labelCommentaire.Text = _avis.Commentaire;
 

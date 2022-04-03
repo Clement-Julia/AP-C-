@@ -381,9 +381,9 @@ namespace AP.Model
 
             DateTime now = DateTime.Now;
             DateTime thisMounth = new DateTime(now.Year, now.Month, 1);
-            DateTime threeMounth = new DateTime(now.Year, now.AddMonths(-3).Month, 1);
-            DateTime sixMounth = new DateTime(now.Year, now.AddMonths(-6).Month, 1);
-            DateTime oneYear = new DateTime(now.AddYears(-1).Year, now.Month, 1);
+            DateTime threeMounth = DateTime.Today.AddMonths(-3);
+            DateTime sixMounth = DateTime.Today.AddMonths(-6);
+            DateTime oneYear = DateTime.Today.AddMonths(-12);
 
             int gainDuMois = 0;
             int gainDuTrimestre = 0;

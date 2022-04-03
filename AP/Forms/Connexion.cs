@@ -11,8 +11,6 @@ namespace AP.Forms
         public Connexion(Utilisateur utilisateur = null)
         {
             InitializeComponent();
-            TextBoxUsername.Text = "mrtreflestremy@outlook.com";
-            TextBoxPassword.Text = "Kdo%test89T";
             if (utilisateur != null)
                 TextBoxUsername.Text = utilisateur.Email;
         }
@@ -31,7 +29,7 @@ namespace AP.Forms
                 Utilisateur utilisateur = new Utilisateur(Email);
                 if (!utilisateur.IsThisUserIsUnsubscribe())
                 {
-                    if((utilisateur.Role.IdRole != 3 || utilisateur.Role.IdRole == 2))
+                    if((utilisateur.Role.IdRole != 3))
                     {
                         if(utilisateur.Mdp != null && BCrypt.Net.BCrypt.Verify(MotDePasse, utilisateur.Mdp))
                         {
