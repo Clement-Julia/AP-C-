@@ -423,5 +423,24 @@ namespace AP.Model
 
         }
 
+
+        // On récupère toutes les assoHebergementFormules d'un hébergement
+        public List<AssoHebergementFormule> GetFormules()
+        {
+            _bdd.Open();
+            List<AssoHebergementFormule> ListeAssoHebergementFormule = new List<AssoHebergementFormule>();
+            MySqlCommand query = _bdd.CreateCommand();
+            query.CommandText = "SELECT * FROM asso_hebergement_formule WHERE id_hebergement = @idHebergement";
+            query.Parameters.AddWithValue("@idHebergement", this.IdHebergement);
+            MySqlDataReader reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                AssoHebergementFormule Formule = new AssoHebergementFormule(reader.GetInt32(0), reader.GetInt32(1), reader.GetDecimal(2));
+                ListeAssoHebergementFormule.Add(Formule);
+            }
+            _bdd.Close();
+            return ListeAssoHebergementFormule;
+        }
+
     }
 }

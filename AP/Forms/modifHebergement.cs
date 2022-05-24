@@ -19,6 +19,8 @@ namespace AP
         private Hebergement _hebergement;
         private FormHebergements _formHebergements;
         private HebergementsCustumControl _hebergementsCustumControl;
+        private AssoHebergementFormule _assoHebergementFormule;
+        private List<AssoHebergementFormule> _listeAssoHebergementFormule;
 
         public modifHebergement(Hebergement hebergement, Utilisateur utilisateur, FormHebergements formHebergements, HebergementsCustumControl hebergementsCustumControl)
         {
@@ -27,6 +29,7 @@ namespace AP
             this._formHebergements = formHebergements;
             this._hebergementsCustumControl = hebergementsCustumControl;
             this._hebergement = new Hebergement(hebergement.IdHebergement);
+            this._assoHebergementFormule = new AssoHebergementFormule();
 
             // On cache le loader
             panelLoader.Visible = false;
@@ -83,6 +86,26 @@ namespace AP
             {
                 AvisHebergement customControl = new AvisHebergement(avis, this, _hebergement.IdHebergement, _utilisateur);
                 flow_avis.Controls.Add(customControl);
+                ControlExtension.Draggable(customControl, true);
+                //flow_avis.Draggable(customControl, true);
+            }
+
+            Formule Formule = new Formule();
+            _listeAssoHebergementFormule = _hebergement.GetFormules();
+            //Initialisation menu formules
+            foreach (Formule formule in Formule.GetFormules())
+            {
+                var check = _listeAssoHebergementFormule.Where(w => w.IdFormule == formule.IdFormule).FirstOrDefault();
+                if(check != null)
+                {
+                    UserControlFormule userControlFormule = new UserControlFormule(check.IdFormule, true, formule.Libelle, check.Prix);
+                    flowLayoutPanelFormules.Controls.Add(userControlFormule);
+                }
+                else
+                {
+                    UserControlFormule userControlFormule = new UserControlFormule(formule.IdFormule, false, formule.Libelle);
+                    flowLayoutPanelFormules.Controls.Add(userControlFormule);
+                }
             }
 
             //Initialisation menu images
@@ -195,6 +218,17 @@ namespace AP
         private void retour_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSauvegarderFormules_Click(object sender, EventArgs e)
+        {
+            List<AssoHebergementFormule> assoHebergementFormules = new List<AssoHebergementFormule>();
+            foreach(UserControlFormule userControlFormule in flowLayoutPanelFormules.Controls)
+            {
+                AssoHebergementFormule assoHebergementFormule = new AssoHebergementFormule(_hebergement.IdHebergement, userControlFormule.formuleId, userControlFormule.prixFormule);
+                assoHebergementFormules.Add(assoHebergementFormule);
+            }
+            _assoHebergementFormule.UpdateFormules(assoHebergementFormules, _hebergement.IdHebergement);
         }
     }
 }
